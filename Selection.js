@@ -19,8 +19,9 @@
 var scene = document.querySelector("a-scene");
 var cylinder = document.createElement("a-cylinder");
 var book = document.createElement('a-entity');
-book.setAttribute('fbx-model', 'path/to/Model/Book2.fbx');
-book.setAttribute('position', '1 1 1');
+book.setAttribute('gltf-model', '#Book2');
+book.setAttribute('color', '#FF9500');
+book.setAttribute('position', '1 4 1');
 scene.appendChild(book);
 cylinder.setAttribute("color", "#FF9500");
 cylinder.setAttribute("scale", "1 1 1");  
@@ -71,6 +72,30 @@ function render() {
       emissiveIntensity: 0
     });
     cylinder.setAttribute("animation", {
+      property: "scale",
+      to: "1 1 1",
+      dur: 200
+    });
+  });
+
+  book.addEventListener("mouseenter", function () {
+    book.setAttribute('material', {
+      emissive: '#FFFFFF',
+      emissiveIntensity: 1,
+    });
+    book.setAttribute("animation", {
+      property: "scale",
+      to: "1.1 1.1 1.1",
+      dur: 200
+    });
+  });
+
+  book.addEventListener("mouseleave", function () {
+    book.setAttribute('material', {
+      emissive: 'none',
+      emissiveIntensity: 0
+    });
+    book.setAttribute("animation", {
       property: "scale",
       to: "1 1 1",
       dur: 200
