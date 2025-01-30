@@ -1,21 +1,4 @@
-// document.querySelector("#myBox").addEventListener("click", function () {
-//   var box = document.querySelector("#myBox");
-//   box.setAttribute(
-//     "color",
-//     "#" + Math.floor(Math.random() * 16777215).toString(16)
-//   );
-// });
-
-// document
-//   .querySelector("#rightController")
-//   .addEventListener("triggerdown", function () {
-//     var s = document.querySelector("#mySphere");
-//     s.setAttribute(
-//       "color",
-//       "#" + Math.floor(Math.random() * 16777215).toString(16)
-//     );
-//   });
-
+// Description: This file contains the code for the selection of the objects in the scene.
 var scene = document.querySelector("a-scene");
 var cylinder = document.createElement("a-cylinder");
 var book = document.createElement('a-entity');
@@ -41,18 +24,9 @@ cylinder.appendChild(light);
 
 scene.appendChild(cylinder);
 
-var t = 0;
 function render() {
-  t += 0.01;
+  
   requestAnimationFrame(render);
-  // cylinder.setAttribute("position", "3 " + (Math.sin(t * 2) + 3) + " 0");
-
-  cylinder.addEventListener("click", function () {
-    cylinder.setAttribute(
-      "color",
-      "#" + Math.floor(Math.random() * 16777215).toString(16)
-    );
-  });
 
   cylinder.addEventListener("mouseenter", function () {
     cylinder.setAttribute('material', {
