@@ -22,6 +22,7 @@ cylinder.setAttribute("color", "#FF9500");
 cylinder.setAttribute("height", "2");
 cylinder.setAttribute("radius", "0.75");
 cylinder.setAttribute("position", "3 3 0");
+cylinder.setAttribute("class", "collidable");
 scene.appendChild(cylinder);
 
 var t = 0;
