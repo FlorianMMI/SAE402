@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-extras@6.1.1/dist/aframe-extras.loaders.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/imaya/zlib.js/bin/Inflate.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <a-asset-item id="classroom-model" src="./../classroom/model.obj"></a-asset-item>
+        <a-asset-item id="classroom-materials" src="./../classroom/materials.mtl"></a-asset-item>
+        <a-asset-item id="character-model" src="./../character/Santa Claus.glb"></a-asset-item>
+      </a-assets>
+    
+      <!-- Environnement -->
+      <a-entity obj-model="obj: #classroom-model; mtl: #classroom-materials"></a-entity>
+    
+      <!-- Entité du joueur (déplacement et caméra) -->
+      <a-entity id="player" position="0 -2 0" wasd-controls>
+        <!-- Corps du personnage (tourne uniquement sur Y) -->
+        <a-entity 
+          id="character-body"
+          gltf-model="#character-model" 
+          position="0 0 0"
+          scale="1 1 1"
+          rotation="0 180 0">
+        </a-entity>
+    
+        <!-- Caméra attachée au joueur -->
+        <a-entity 
+          id="camera"
+          camera 
+          position="0 1.6 0"
+          look-controls>
+        </a-entity>
+      </a-entity>
+    
+      <!-- Script pour synchroniser la tête avec la caméra -->
+      <script>
+        AFRAME.registerComponent('sync-head-movement', {
+          tick: function () {
+            const camera = document.querySelector('#camera');
+            const character = document.querySelector('#character-body');
+            const player = document.querySelector('#player');
+    
+            let camRotation = camera.getAttribute('rotation');
+    
+            // Le corps tourne seulement sur Y
+            player.setAttribute('rotation', `0 ${camRotation.y} 0`);
+    
+            // La tête suit complètement la caméra en X et Y
+            character.setAttribute('rotation', `${-camRotation.x} ${camRotation.y + 180} 0`);
+          }
+        });
+    
+        // Ajout du composant à la caméra
+        document.querySelector('#camera').setAttribute('sync-head-movement', '');
+      </script>
+    </a-scene>
+    
+  </body>
+</html>
