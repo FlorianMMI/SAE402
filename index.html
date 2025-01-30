@@ -1,0 +1,51 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple VR Scene</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+</head>
+
+<body>
+    <a-scene cursor="rayOrigin: mouse">
+        <a-box position="0 1.6 -4" color="#4CC3D9" scale="1 1 1" id="myBox" class="collidable"></a-box>
+        <a-sphere id="mySphere" position="2 1.6 -6" radius="0.5" color="#FF0000"></a-sphere>
+        <a-entity id="leftController" oculus-touch-controls="hand: left"></a-entity>
+        <a-entity id="rightController" oculus-touch-controls="hand: right">
+            <a-entity raycaster="showLine:true;objects: .collidable" cursor></a-entity>
+        </a-entity>
+        <script src="script.js"></script>
+    </a-scene>
+</body>
+
+</html> -->
+
+<!-- https://developer.mozilla.org/en-US/docs/Games/Techniques/3D_on_the_web/Building_up_a_basic_demo_with_A-Frame -->
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple VR Scene</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+</head>
+
+<body>
+    <a-scene cursor="rayOrigin: mouse">
+        <a-assets>
+            <a-asset-item id="Book2" src="Model/Book2.fbx"></a-asset-item>
+        </a-assets>
+        <a-light type="directional" color="#FFF" intensity="0.5" position="-1 1 2"></a-light>
+        <a-light type="ambient" color="#FFF"></a-light>
+        <a-camera position="0 1 4" cursor-visible="true" cursor-scale="2" cursor-color="#0095DD"
+            cursor-opacity="0.5"></a-camera>
+
+        <a-sky color="#000"></a-sky>
+        
+        <script src="Selection.js"></script>
+    </a-scene>
+</body>
+
+</html>
