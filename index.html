@@ -1,0 +1,83 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple VR Scene</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+</head>
+
+<body>
+    <a-scene cursor="rayOrigin: mouse">
+        <a-box position="0 1.6 -4" color="#4CC3D9" scale="1 1 1" id="myBox" class="collidable"></a-box>
+        <a-sphere id="mySphere" position="2 1.6 -6" radius="0.5" color="#FF0000"></a-sphere>
+        <a-entity id="leftController" oculus-touch-controls="hand: left"></a-entity>
+        <a-entity id="rightController" oculus-touch-controls="hand: right">
+            <a-entity raycaster="showLine:true;objects: .collidable" cursor></a-entity>
+        </a-entity>
+        <script src="script.js"></script>
+    </a-scene>
+</body>
+
+</html> -->
+
+<!-- https://developer.mozilla.org/en-US/docs/Games/Techniques/3D_on_the_web/Building_up_a_basic_demo_with_A-Frame -->
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple VR Scene</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
+    <!-- events -->
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+
+    <!-- intéractions avec les mains -->
+    <script src="https://unpkg.com/super-hands@^3.0.5/dist/super-hands.min.js"></script>
+
+    <!-- physiques -->
+    <script
+        src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.js"></script>
+
+</head>
+
+<body>
+    <a-scene physics="gravity: -9.8; restitution: 0.8">
+
+        <a-entity progressive-controls></a-entity>
+
+        <a-light type="directional" color="#FFF" intensity="0.5" position="-1 1 2"></a-light>
+        <a-light type="ambient" color="#FFF"></a-light>
+        <!-- <a-camera position="0 1 4" cursor-visible="true" cursor-scale="2" cursor-color="#0095DD" cursor-opacity="0.5"> -->
+        <a-camera position="0 1 4">
+            <a-entity cursor position="0 0 -1" geometry="primitive: sphere; radius: 0.005"
+                material="color: #202020; shader: flat">
+            </a-entity>
+        </a-camera>
+
+        <a-assets>
+            <img id="ground" src="assets/parquet.jpg">
+        </a-assets>
+        <a-sky color="#ADD8E6"></a-sky>
+        <a-plane src="#ground" scale="50 50 1" repeat="40 40 1" rotation="-90 0 0" static-body></a-plane>
+        <a-box position="-1 1.6 -5" animation="property: position; to: 1 8 -10; dur: 2000; easing: linear; loop: true"
+            class="collidable" color="tomato"></a-box>
+
+
+        <a-box position="0 4 0" color="tomato" grabbable></a-box>
+        <a-box position="0 3 0" class="collidable" color="tomato" dynamic-body="linearDamping: 0.05" grabbable></a-box>
+        <a-sphere position="-3 3 0" color="mediumseagreen" radius="0.5"
+            dynamic-body="linearDamping: 0.05; angularDamping: 0.03" grabbable></a-sphere>
+
+
+
+        <a-entity rotation="0 0 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000">
+            <a-sphere position="5 2 0" color="mediumseagreen"></a-sphere>
+        </a-entity>
+        <script src="script.js"></script>
+    </a-scene>
+</body>
+
+</html>
