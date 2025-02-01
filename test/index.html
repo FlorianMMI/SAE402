@@ -3,60 +3,53 @@
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-extras@6.1.1/dist/aframe-extras.loaders.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/imaya/zlib.js/bin/Inflate.min.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <script type="module" src="./index.js"></script>
   </head>
   <body>
-    <a-scene>
+    <!-- <a-scene>
       <a-assets>
         <a-asset-item id="classroom-model" src="./../classroom/model.obj"></a-asset-item>
         <a-asset-item id="classroom-materials" src="./../classroom/materials.mtl"></a-asset-item>
         <a-asset-item id="character-model" src="./../character/Santa Claus.glb"></a-asset-item>
       </a-assets>
     
-      <!-- Environnement -->
+
       <a-entity obj-model="obj: #classroom-model; mtl: #classroom-materials"></a-entity>
-    
-      <!-- Entité du joueur (déplacement et caméra) -->
-      <a-entity id="player" position="0 -2 0" wasd-controls>
-        <!-- Corps du personnage (tourne uniquement sur Y) -->
-        <a-entity 
-          id="character-body"
-          gltf-model="#character-model" 
-          position="0 0 0"
-          scale="1 1 1"
-          rotation="0 180 0">
-        </a-entity>
-    
-        <!-- Caméra attachée au joueur -->
+      <a-entity 
+      id="character-body"
+      gltf-model="#character-model" 
+      position="4 -1.6 -2"
+      scale="0.8 0.8 0.8"
+      rotation="0 -90 0">
+    </a-entity>
+
         <a-entity 
           id="camera"
           camera 
-          position="0 1.6 0"
-          look-controls>
+          position="0 -.2 0"
+          look-controls wasd-controls>
         </a-entity>
-      </a-entity>
-    
-      <!-- Script pour synchroniser la tête avec la caméra -->
-      <script>
-        AFRAME.registerComponent('sync-head-movement', {
-          tick: function () {
-            const camera = document.querySelector('#camera');
-            const character = document.querySelector('#character-body');
-            const player = document.querySelector('#player');
-    
-            let camRotation = camera.getAttribute('rotation');
-    
-            // Le corps tourne seulement sur Y
-            player.setAttribute('rotation', `0 ${camRotation.y} 0`);
-    
-            // La tête suit complètement la caméra en X et Y
-            character.setAttribute('rotation', `${-camRotation.x} ${camRotation.y + 180} 0`);
-          }
-        });
-    
-        // Ajout du composant à la caméra
-        document.querySelector('#camera').setAttribute('sync-head-movement', '');
-      </script>
-    </a-scene>
-    
+  
+    </a-scene> -->
+    <!-- Bouton Shop -->
+    <button id="shop-button" onclick="togglePopup()">Shop</button>
+
+    <!-- Pop-up Shop -->
+    <div id="shop-popup" style="display: none;">
+      <h2>Shop</h2>
+      <div id="character"></div>
+    </div>
+
+    <script>
+      function togglePopup() {
+      var popup = document.getElementById('shop-popup');
+      if (popup.style.display === 'none' || popup.style.display === '') {
+        popup.style.display = 'block';
+      } else {
+        popup.style.display = 'none';
+      }
+      }
+    </script>
   </body>
 </html>
