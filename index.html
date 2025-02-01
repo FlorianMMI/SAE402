@@ -59,33 +59,101 @@
 
         <a-assets>
             <img id="ground" src="assets/parquet.jpg">
+            <img id="grass" src="assets/grass.jpg">*
+
+            <a-asset-item id="tree-o" src="models/tree.obj"></a-asset-item>
+            <a-asset-item id="tree-m" src="models/tree.mtl"></a-asset-item>
+
+            <a-asset-item id="door-o" src="models/door.obj"></a-asset-item>
+            <a-asset-item id="door-m" src="models/door.mtl"></a-asset-item>
+
+            <a-asset-item id="fence-o" src="models/fence.obj"></a-asset-item>
+            <a-asset-item id="fence-m" src="models/fence.mtl"></a-asset-item>
         </a-assets>
+
+        <!-- SKY -->
+        <a-sky color="#ADD8E6"></a-sky>
+
+        <!-- GROUND -->
+        <a-plane src="#ground" scale="14 20 1" repeat="7 7 1" rotation="-90 0 0" static-body></a-plane>
+        <a-plane src="#grass" position="-20 0 0" scale="25 50 1" repeat="5 5 1" rotation="-90 0 0"
+            static-body></a-plane>
+
+        <!-- CEILING -->
         <a-assets>
             <img id="ceiling" src="assets/ceiling.jpg">
         </a-assets>
-        <a-sky color="#ADD8E6"></a-sky>
-        <a-plane src="#ground" scale="14 20 1" repeat="7 7 1" rotation="-90 0 0" static-body></a-plane>
-        <!-- Wall -->
+        <a-box src="#ceiling" position="0 4.5 0" scale="17.3 19 0.1" repeat="1.5 1.5 1" rotation="-90 0 0"
+            color="#DDDDDD" static-body></a-box>
+
+        <!-- WALL -->
+
+        <!-- Front Wall -->
         <a-box src="#wall" position="0 2.5 -10" scale="14 5 1" repeat="40 40 1" rotation="0 0 0" color="#d4bc96"
             static-body></a-box>
+        <!-- Back Wall -->
         <a-box src="#wall" position="0 2.5 10" scale="14 5 1" repeat="40 40 1" rotation="0 0 0" color="#d4bc96"
             static-body></a-box>
-        <a-box src="#wall" position="-7 2.5 0" scale="20 5 1" repeat="40 40 1" rotation="0 90 0" color="#d4bc96"
-            static-body></a-box>
+        <!-- Left Wall -->
+        <a-entity>
+            <!-- right -->
+            <a-box src="#wall" position="-7 2.5 -9" scale="3 5 1" repeat="40 40 1" rotation="0 90 0" color="#d4bc96"
+                static-body></a-box>
+            <!-- left -->
+            <a-box src="#wall" position="-7 2.5 9" scale="3 5 1" repeat="40 40 1" rotation="0 90 0" color="#d4bc96"
+                static-body></a-box>
+            <!-- middleleft -->
+            <a-box src="#wall" position="-7 2.5 -3" scale="3 5 1" repeat="40 40 1" rotation="0 90 0" color="#d4bc96"
+                static-body></a-box>
+            <!-- middleleft -->
+            <a-box src="#wall" position="-7 2.5 3" scale="3 5 1" repeat="40 40 1" rotation="0 90 0" color="#d4bc96"
+                static-body></a-box>
+            <!-- bottom -->
+            <a-box src="#wall" position="-7 0.5 0" scale="20 1 1" repeat="40 40 1" rotation="0 90 0" color="#d4bc96"
+                static-body></a-box>
+            <!-- top -->
+            <a-box src="#wall" position="-7 4.3 0" scale="20 1.5 1" repeat="40 40 1" rotation="0 90 0" color="#d4bc96"
+                static-body></a-box>
+            <!-- windows -->
+            <a-cylinder position="-6.5 3.65 0" radius="0.15" height="3.5" color="#885f32"
+                rotation="90 0 0"></a-cylinder>
+            <a-box position="-6.75 2.3 -1.55" scale="2.7 0.2 0.7" repeat="40 40 1" rotation="0 90 90" color="#885f32"
+                static-body></a-box>
+            <a-box position="-6.75 2.3 1.55" scale="2.7 0.2 0.7" repeat="40 40 1" rotation="0 90 90" color="#885f32"
+                static-body></a-box>
+            <a-box position="-6.75 2.3 0" scale="3 0.2 0.7" repeat="40 40 1" rotation="0 90 0" color="#885f32"
+                static-body></a-box>
+        </a-entity>
+
+
+
+
+        <!-- Right Wall -->
         <a-box src="#wall" position="7 2.5 0" scale="20 5 1" repeat="40 40 1" rotation="0 90 0" color="#d4bc96"
             static-body></a-box>
-        <!-- Top Wall -->
+
+        <!-- Top Wall line -->
+        <a-box position="0 4.4 -9.45" scale="14 0.2 0.2" repeat="40 40 1" rotation="-90 0 0" color="#885f32"
+            static-body></a-box>
+        <a-box position="0 4.4 9.45" scale="14 0.2 0.2" repeat="40 40 1" rotation="-90 0 0" color="#885f32"
+            static-body></a-box>
         <a-box position="-6.45 4.4 0" scale="20 0.2 0.2" repeat="40 40 1" rotation="0 90 0" color="#885f32"
             static-body></a-box>
         <a-box position="6.45 4.4 0" scale="20 0.2 0.2" repeat="40 40 1" rotation="0 90 0" color="#885f32"
             static-body></a-box>
-        <a-box position="0 4.4 9.45" scale="14 0.2 0.2" repeat="40 40 1" rotation="-90 0 0" color="#885f32"
-            static-body></a-box>
-        <a-box position="0 4.4 -9.45" scale="14 0.2 0.2" repeat="40 40 1" rotation="-90 0 0" color="#885f32"
-            static-body></a-box>
-        <!-- Ceiling -->
-        <a-box src="#ceiling" position="0 4.5 0" scale="17.3 19 0.1" repeat="1.5 1.5 1" rotation="-90 0 0"
-            color="#DDDDDD" static-body></a-box>
+
+
+        <!-- OBJECTS -->
+        <!-- Tree -->
+        <a-entity obj-model="obj: #tree-o; mtl: #tree-m" position="-20 2 0" scale="5 5 5" rotation="0 180 0"></a-entity>
+        <!-- Door -->
+        <a-entity obj-model="obj: #door-o; mtl: #door-m" position="6.35 0 -7" scale="3.5 3.5 3.5"
+            rotation="0 90 0"></a-entity>
+        <!-- Fence -->
+        <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-15 0 -20" scale="1.5 1.5 1.5"
+            rotation="0 0 0"></a-entity>
+        <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-15 0 -20" scale="1.5 1.5 1.5"
+            rotation="0 0 0"></a-entity>
 
 
         <a-box position="0 4 0" color="tomato" grabbable></a-box>
