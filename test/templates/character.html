@@ -1,16 +1,13 @@
 <div class="character">
-    <h1>{{name}}</h1>
-    <a-scene>
-      <a-assets>
-        <a-asset-item id="character-model-{{name}}" src="{{url}}"></a-asset-item>
-      </a-assets>
-      <a-entity   
-        id="character-body-{{name}}"
-        gltf-model="#character-model-{{name}}" 
-        position="{{position}}"
-        scale="{{scale}}"
-        rotation="0 0 0"
-        static-body>
-      </a-entity>
-    </a-scene>
+     <model-viewer id="character-model-{{name}}" class="character__model" src="{{url}}" alt="Un modèle 3D de {{name}}"
+     auto-rotate camera-controls ar>
+    </model-viewer>
+    <div class="character__content">
+      <div class="character__desc">
+        <h2 class="character__name">{{name}}</h2>
+        <h3 class="character__description">{{description}}</h3>
+      </div>
+      <h3 class="character__price">{{price}}</h3>
+    </div>
+    
 </div>

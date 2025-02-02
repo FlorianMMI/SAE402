@@ -24,5 +24,6 @@ V.renderCharacter = function(character){
 V.init = async function(){
     C.loadCharacter();
 }
+
 C.init();
 
