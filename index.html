@@ -12,10 +12,20 @@
         <a-assets>
             <a-asset-item id="notebook-materiaux" src="Model/Livre/book.mtl"></a-asset-item>
             <a-asset-item id="notebook-obj" src="Model/Livre/book.obj"></a-asset-item>
+            <a-asset-item id="loupe-obj" src="Model/Loupe/loupe.obj"></a-asset-item>
+            <a-asset-item id="loupe-materiaux" src="Model/Loupe/loupe.mtl"></a-asset-item>
+            <a-assetzd-item id="car" src="Model/Car.glb"></a-asset-item>
         </a-assets>
 
         <a-entity id = "book" obj-model="obj: #notebook-obj; mtl: #notebook-materiaux"
                   position="0 0 0"
+                  scale="0.5 0.5 0.5"
+                  rotation="0 45 0"
+                  class="collidable">
+        </a-entity>
+
+        <a-entity id="car" gltf-model="#car"
+                  position="0 0 -3"
                   scale="0.5 0.5 0.5"
                   rotation="0 45 0"
                   class="collidable">

@@ -1,7 +1,11 @@
 let data = [
   { voiture : [
       "Wheel", "Engine", "Body", "Headlight", "Windshield", "Door", "Seat", "Steering Wheel", "Pedal", "Rearview Mirror"
-  ]}
+  ],
+  book : [
+    "Page", "Cover", "Title", "Author", "Chapter", "Paragraph", "Word", "Sentence", "Punctuation", "Period"
+  ]
+}
 ]
 // import { data } from "./data.js";
 
@@ -53,6 +57,12 @@ cylinder.addEventListener("click", function () {
     content += "<li>" + item + "</li>";
   });
   content += "</ul>";
+ 
+  
+  content += "<button class = 'btn' onclick='closeMenu()'>I learn !</button>";
+  
+
+
   var style = document.createElement("style");
   style.innerHTML = `
     .titre {
@@ -63,18 +73,25 @@ cylinder.addEventListener("click", function () {
       color: #000;
       margin-bottom: 10px;
     }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #000;
+      color: #FFF;
+      border: none;
+      cursor: pointer;
+    }
   `;
+
   document.head.appendChild(style);
-  content += "<button onclick='closeMenu()'>I learn !</button>";
   menu.innerHTML = content;
-
-
-
   document.body.appendChild(menu);
 });
 
 function closeMenu() {
-  var menu = document.querySelector("div");
+  var menu = document.getElementById("menu");
   if (menu) {
     document.body.removeChild(menu);
   }
@@ -92,24 +109,114 @@ cylinder.addEventListener("mouseleave", function () {
   });
 });
 
-// Si tu veux aussi que l'effet fonctionne sur un livre
 var book = document.createElement("a-entity");
-book.setAttribute("gltf-model", "#Book2");
-book.setAttribute("position", "1 1.6 -4");
+var book = document.getElementById("book");
+book.setAttribute("position", "1 0 -4");
 scene.appendChild(book);
 
 book.addEventListener("mouseenter", function () {
   book.setAttribute("animation", {
     property: "scale",
-    to: "1.1 1.1 1.1",
+    to: "0.6 0.6 0.6",
     dur: 200
   });
+  var eyeIcon = document.createElement("a-entity");
+  eyeIcon.setAttribute("obj-model", "/Model/Loupe/Loupe.obj");
+  eyeIcon.id = "eye-icon";
+  eyeIcon.setAttribute("material", "src: url(/Model/Loupe/loupe.mtl)");
+  eyeIcon.setAttribute("position", "0 0.3 0");
+  book.appendChild(eyeIcon);
+});
+
+book.addEventListener("mouseleave", function () {
+  var eyeIcon = document.getElementById("eye-icon");
+  if (eyeIcon) {
+    book.removeChild(eyeIcon);
+  }
 });
 
 book.addEventListener("mouseleave", function () {
   book.setAttribute("animation", {
     property: "scale",
-    to: "1 1 1",
+    to: "0.5 0.5 0.5",
     dur: 200
   });
 });
+
+
+
+book.addEventListener("click", function () {
+  // Affiche un menu
+  var menu = document.createElement("div");
+  menu.id = "menu";
+  menu.style.width = "200px";
+  menu.style.textAlign = "left";
+  menu.style.position = "absolute";
+  menu.style.top = "50%";
+  menu.style.right = "1%";
+  menu.style.transform = "translate(-50%, -50%)";
+  menu.style.padding = "10px";
+  menu.style.backgroundColor = "#FFF";
+  menu.style.border = "1px solid #000";
+
+  // Ajoute les données de data.js au menu
+  var content = "<p class='titre'>Vocabulary</p><ul>";
+  data[0].book.forEach(function (item) {
+    content += "<li>" + item + "</li>";
+  });
+  content += "</ul>";
+ 
+  
+  content += "<button class = 'btn' onclick='closeMenu()'>I learn !</button>";
+  
+
+
+  var style = document.createElement("style");
+  style.innerHTML = `
+    .titre {
+      display : flex;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+      color: #000;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #000;
+      color: #FFF;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #555;
+    }
+  `;
+
+  document.head.appendChild(style);zd
+  menu.innerHTML = content;
+  document.body.appendChild(menu);
+});
+// Ajoute un bouton pour fermer le menu en VR
+var closeButton = document.createElement("a-box");
+closeButton.setAttribute("position", "0 0.1 0");
+closeButton.setAttribute("depth", "0.05");
+closeButton.setAttribute("height", "0.1");
+closeButton.setAttribute("width", "0.2");
+closeButton.setAttribute("color", "#FF0000");
+closeButton.setAttribute("class", "clickable");
+closeButton.setAttribute("text", "value: Close; color: #FFF; align: center;");
+
+closeButton.addEventListener("click", function () {
+  var menu = document.getElementById("menu");
+  if (menu) {
+    scene.removeChild(menu);
+  }
+});
+
+menu.appendChild(closeButton);
+scene.appendChild(menu);
