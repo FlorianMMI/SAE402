@@ -10,13 +10,20 @@
     position: fixed;
     bottom: 20px;
     right: 20px;
-    padding: 10px 20px;
-    background-color: #007bff;
+    padding: 1rem 1rem;
+    font-size: 1rem;
+    background-color: var(--clr-primary);
+    width: 6rem;
+    text-align: center;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     z-index: 20000;
+    transition:all 0.3s ease;
+  }
+  #shop-button:hover {
+    background-color: var(--clr-dark);
   }
 
   /* Style pour le pop-up */

@@ -4,19 +4,19 @@ let characters = [
     {
         url: "./../character/Santa Claus.glb",
         name: "Santa Claus",
-        price: "0.00",
+        price: "Free",
         description: "Festive",
     },
     {
         url: "./../character/Teacher.glb",
         name: "Teacher",
-        price: "0.00",
+        price: "Free",
         description: "Educator",
     },
     {
         url: "./../character/Doctor.glb",
         name: "Doctor",
-        price: "0.00",
+        price: "Free",
         description: "Healer",
     },
     {

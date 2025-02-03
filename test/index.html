@@ -10,21 +10,23 @@
     <script type="module" src="./index.js"></script>
   </head>
   <body>
-    <!-- <a-scene>
+    <a-scene>
       <a-assets>
         <a-asset-item id="classroom-model" src="./../classroom/model.obj"></a-asset-item>
         <a-asset-item id="classroom-materials" src="./../classroom/materials.mtl"></a-asset-item>
-        <a-asset-item id="character-model" src="./../character/Santa Claus.glb"></a-asset-item>
+        <a-asset-item id="character-model" src="./../character/Teacher.glb"></a-asset-item>
       </a-assets>
     
 
       <a-entity obj-model="obj: #classroom-model; mtl: #classroom-materials"></a-entity>
+      
       <a-entity 
       id="character-body"
       gltf-model="#character-model" 
       position="4 -1.6 -2"
-      scale="0.8 0.8 0.8"
-      rotation="0 -90 0">
+      rotation="0 -90 0"
+      geometry="primitive: box; height: 2; width: 1; depth: 1">
+      
     </a-entity>
 
         <a-entity 
@@ -34,7 +36,7 @@
           look-controls wasd-controls>
         </a-entity>
   
-    </a-scene> -->
+    </a-scene>
     <!-- Bouton Shop -->
     <button id="shop-button" onclick="togglePopup()">Shop</button>
 
