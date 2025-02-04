@@ -33,8 +33,10 @@
                     material="color: #202020; shader: flat">
                 </a-entity>
             </a-camera>
-            <a-entity oculus-touch-controls="hand: left" thumbstick-controls></a-entity>
-            <a-entity oculus-touch-controls="hand: right"></a-entity>
+            <a-entity id="leftController" oculus-touch-controls="hand: left" thumbstick-controls></a-entity>
+            <a-entity id="rightController" oculus-touch-controls="hand: right">
+                <a-entity raycaster="showLine:true;objects: .collidable" cursor></a-entity>
+            </a-entity>
         </a-entity>
 
         <a-assets>
@@ -280,14 +282,15 @@
             <a-box static-body position="0.67 0.83 -2" scale="1.3 0.05 1.53" color="#8B5A2B"></a-box>
         </a-entity>
 
-        <!-- Tiroir -->
-        <a-entity id="#drawer1" position="-2.6 0 -4.35" shadow="cast: true; receive: true" scale="1.1 1.3 1">
+        <!-- Drawer -->
+        <a-entity id="drawer1" position="-2.6 0 -4.35" shadow="cast: true; receive: true" scale="1.1 1.3 1">
             <a-box static-body position="0.08 0.26 -2.08" scale="0.05 0.32 1.5" color="#5D3A1A"></a-box>
             <a-box static-body position="1.2 0.26 -2.08" scale="0.05 0.32 1.5" color="#5D3A1A"></a-box>
             <a-box static-body position="0.64 0.26 -1.35" scale="1.14 0.32 0.05" color="#5D3A1A"></a-box>
             <a-box static-body position="0.64 0.26 -2.8" scale="1.235 0.35 0.05" color="#5D3A1A"></a-box>
+            <a-box static-body position="0.64 0.1 -2.08" scale="1.14 0.01 1.5" color="#5D3A1A"></a-box>
+            <a-sphere static-body position="0.64 0.26 -2.9" radius="0.08" color="#8B5A2B"></a-sphere>
         </a-entity>
-
 
 
 

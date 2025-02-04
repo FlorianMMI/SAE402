@@ -1,17 +1,51 @@
-var drawer1 = document.querySelector("#drawer1");
+function moveToPosition(object, targetPosition) {
+  var currentPosition = object.getAttribute("position");
+  var step = 0.01;
 
-function render() {
-  drawer1.addEventListener("click", function () {
-    drawer1.setAttribute(
-      "position",
-      "#" + Math.floor(Math.random() * 16777215).toString(16)
-    );
-  });
+  function animate() {
+    var dx = targetPosition.x - currentPosition.x;
+    var dy = targetPosition.y - currentPosition.y;
+    var dz = targetPosition.z - currentPosition.z;
 
-  drawer1.addEventListener("triggerdown", function () {
-    drawer1.setAttribute("position", "-2.6 0 -4.5");
-  });
+    var distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+    if (distance < step) {
+      object.setAttribute("position", targetPosition);
+      return;
+    }
+
+    currentPosition.x += (dx * step) / distance;
+    currentPosition.y += (dy * step) / distance;
+    currentPosition.z += (dz * step) / distance;
+
+    object.setAttribute("position", currentPosition);
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
 }
+
+document.querySelector("#drawer1").addEventListener("click", function () {
+  var drawer1 = document.querySelector("#drawer1");
+  if (
+    drawer1.getAttribute("position").x == -2.6 &&
+    drawer1.getAttribute("position").y == 0 &&
+    drawer1.getAttribute("position").z == -5
+  ) {
+    moveToPosition(drawer1, { x: -2.6, y: 0, z: -4.35 });
+  } else {
+    moveToPosition(drawer1, { x: -2.6, y: 0, z: -5 });
+  }
+});
+
+document
+  .querySelector("#rightController")
+  .addEventListener("triggerdown", function () {
+    var drawer1 = document.querySelector("#drawer1");
+    moveToPosition(drawer1, { x: -2.6, y: 0, z: -5 });
+  });
+
 // function checkCollision() {
 //   var camera = document.querySelector("[camera]");
 //   var cameraPosition = camera.getAttribute("position");
