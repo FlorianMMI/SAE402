@@ -2,7 +2,7 @@ let data = [
   { voiture : [
       "Wheel", "Engine", "Body", "Headlight", "Windshield", "Door", "Seat", "Steering Wheel", "Pedal", "Rearview Mirror"
   ],
-  book : [
+  bookdata : [
     "Page", "Cover", "Title", "Author", "Chapter", "Paragraph", "Word", "Sentence", "Punctuation", "Period"
   ]
 }
@@ -125,7 +125,16 @@ book.addEventListener("mouseenter", function () {
   eyeIcon.id = "eye-icon";
   eyeIcon.setAttribute("position", "0 0.5 0");
   
-  eyeIcon.setAttribute("rotation", "45 0 0"); // Incline l'icône de 45 degrés
+  var camera = document.querySelector("[camera]");
+  var cameraPosition = camera.getAttribute("position");
+  var bookPosition = book.getAttribute("position");
+
+  var dx = cameraPosition.x - bookPosition.x;
+  var dz = cameraPosition.z - bookPosition.z;
+
+  var rotationY = Math.atan2(dx, dz) * (180 / Math.PI) + 45;
+
+  eyeIcon.setAttribute("rotation", `45 ${rotationY} 0`); // Oriente l'icône vers la caméra
   book.appendChild(eyeIcon);
 });
 
@@ -144,65 +153,117 @@ book.addEventListener("mouseleave", function () {
   });
 });
 
+book.addEventListener("click", function () { 
+
+  var existingGui = scene.querySelector("a-gui-flex-container");
+  if (existingGui) {
+    existingGui.parentNode.removeChild(existingGui);
+  }
 
 
-book.addEventListener("click", function () {
+
   // Affiche un menu
-  var menu = document.createElement("div");
-  menu.id = "menu";
-  menu.style.width = "200px";
-  menu.style.textAlign = "left";
-  menu.style.position = "absolute";
-  menu.style.top = "50%";
-  menu.style.right = "1%";
-  menu.style.transform = "translate(-50%, -50%)";
-  menu.style.padding = "10px";
-  menu.style.backgroundColor = "#FFF";
-  menu.style.border = "1px solid #000";
+  var guiContainer = document.createElement("a-gui-flex-container");
+  guiContainer.setAttribute("layout", "type: box; margin: 0.05;");
+  guiContainer.setAttribute("flex-direction", "column");
+  guiContainer.setAttribute("justify-content", "center");
+  guiContainer.setAttribute("align-items", "center");
+  guiContainer.setAttribute("width", "1.5");
+  guiContainer.setAttribute("height", "auto");
+  guiContainer.setAttribute("position", "0 1.5 -2");
 
-  // Ajoute les données de data.js au menu
-  var content = "<p class='titre'>Vocabulary</p><ul>";
-  data[0].book.forEach(function (item) {
-    content += "<li>" + item + "</li>";
+  
+  var camera = document.querySelector("[camera]");
+  if (camera) {
+    var camPosition = camera.getAttribute("position");
+    var camRotation = camera.getAttribute("rotation");
+    var distance = 2; // distance from the camera
+    var rad = camRotation.y * Math.PI / 180;
+    var newX = camPosition.x - distance * Math.sin(rad);
+    var newZ = camPosition.z - distance * Math.cos(rad);
+    var newY = camPosition.y; // same vertical level as the camera
+    
+    guiContainer.setAttribute("position", `${newX} ${newY} ${newZ}`);
+    guiContainer.setAttribute("rotation", `0 ${camRotation.y} 0`);
+  }
+
+  var title = document.createElement("a-gui-label");
+  title.setAttribute("value", "Vocabulary");
+  title.setAttribute("width", "1.5");
+  title.setAttribute("height", "0.3");
+  guiContainer.appendChild(title);
+
+  data[0].bookdata.forEach(function(item) {
+    var button = document.createElement("a-gui-button");
+    button.setAttribute("value", item);
+    button.setAttribute("width", "1.5");
+    button.setAttribute("height", "0.2");
+    guiContainer.appendChild(button);
   });
-  content += "</ul>";
+
+  scene.appendChild(guiContainer);
+
+});
+
+
+
+
+// book.addEventListener("click", function () {
+//   // Affiche un menu
+//   var menu = document.createElement("div");
+//   menu.id = "menu";
+//   menu.style.width = "200px";
+//   menu.style.textAlign = "left";
+//   menu.style.position = "absolute";
+//   menu.style.top = "50%";
+//   menu.style.right = "1%";
+//   menu.style.transform = "translate(-50%, -50%)";
+//   menu.style.padding = "10px";
+//   menu.style.backgroundColor = "#FFF";
+//   menu.style.border = "1px solid #000";
+
+//   // Ajoute les données de data.js au menu
+//   var content = "<p class='titre'>Vocabulary</p><ul>";
+//   data[0].book.forEach(function (item) {
+//     content += "<li>" + item + "</li>";
+//   });
+//   content += "</ul>";
  
   
-  content += "<button class = 'btn' onclick='closeMenu()'>I learn !</button>";
+//   content += "<button class = 'btn' onclick='closeMenu()'>I learn !</button>";
   
 
 
-  var style = document.createElement("style");
-  style.innerHTML = `
-    .titre {
-      display : flex;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 18px;
-      color: #000;
-      margin-bottom: 10px;
-    }
+//   var style = document.createElement("style");
+//   style.innerHTML = `
+//     .titre {
+//       display : flex;
+//       justify-content: center;
+//       font-weight: bold;
+//       font-size: 18px;
+//       color: #000;
+//       margin-bottom: 10px;
+//     }
 
-    .btn {
-      display: block;
-      width: 100%;
-      padding: 10px;
-      background-color: #000;
-      color: #FFF;
-      border: none;
-      cursor: pointer;
-    }
+//     .btn {
+//       display: block;
+//       width: 100%;
+//       padding: 10px;
+//       background-color: #000;
+//       color: #FFF;
+//       border: none;
+//       cursor: pointer;
+//     }
 
-    .btn:hover {
-      background-color: #555;
-    }
-  `;
+//     .btn:hover {
+//       background-color: #555;
+//     }
+//   `;
 
-  document.head.appendChild(style);zd
-  menu.innerHTML = content;
-  document.body.appendChild(menu);
-});
+//   document.head.appendChild(style);
+//   menu.innerHTML = content;
+//   document.body.appendChild(menu);
+// });
 // Ajoute un bouton pour fermer le menu en VR
 
-menu.appendChild(closeButton);
-scene.appendChild(menu);
+// Removed VR closeButton code to prevent errors as "menu" is created within click events.
