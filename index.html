@@ -27,6 +27,8 @@
 
         <a-light type="ambient" color="#FFF" intensity="0.5"></a-light>
 
+        <div id="container"></div>
+
         <a-entity id="rig" movement-controls="speed:01">
             <a-camera wasd-controls look-controls="pointerLockEnabled: true;" position="0 2.3 4">
                 <a-entity cursor position="0 0 -0.01" geometry="primitive: sphere; radius: 0.00005"
@@ -57,6 +59,10 @@
 
             <a-asset-item id="deskchair-o" src="models/deskchair.obj"></a-asset-item>
             <a-asset-item id="deskchair-m" src="models/deskchair.mtl"></a-asset-item>
+
+            <a-asset-item id="glbtestmodel"
+                src="https://cdn.glitch.com/90a30469-f038-4054-be9c-fd1ec94a810d%2Fkitchentest.glb">
+            </a-asset-item>
         </a-assets>
 
         <!-- SKY -->
@@ -290,7 +296,32 @@
             <a-box static-body position="0.64 0.26 -2.8" scale="1.235 0.35 0.05" color="#5D3A1A"></a-box>
             <a-box static-body position="0.64 0.1 -2.08" scale="1.14 0.01 1.5" color="#5D3A1A"></a-box>
             <a-sphere static-body position="0.64 0.26 -2.9" radius="0.08" color="#8B5A2B"></a-sphere>
+            <a-box scale="0.11 0.1 0.11" position="0.7 0.26 -2.5" color="tomato"></a-box>
         </a-entity>
+
+        <a-entity id="drawer2" position="-2.6 0.5 -4.35" shadow="cast: true; receive: true" scale="1.1 1.3 1">
+            <a-box static-body position="0.08 0.26 -2.08" scale="0.05 0.32 1.5" color="#5D3A1A"></a-box>
+            <a-box static-body position="1.2 0.26 -2.08" scale="0.05 0.32 1.5" color="#5D3A1A"></a-box>
+            <a-box static-body position="0.64 0.26 -1.35" scale="1.14 0.32 0.05" color="#5D3A1A"></a-box>
+            <a-box static-body position="0.64 0.26 -2.8" scale="1.235 0.35 0.05" color="#5D3A1A"></a-box>
+            <a-box static-body position="0.64 0.1 -2.08" scale="1.14 0.01 1.5" color="#5D3A1A"></a-box>
+            <a-sphere static-body position="0.64 0.26 -2.9" radius="0.08" color="#8B5A2B"></a-sphere>
+        </a-entity>
+
+        <a-entity id="drawer3" position="-2.6 1 -4.35" shadow="cast: true; receive: true" scale="1.1 1.3 1">
+            <a-box static-body position="0.08 0.26 -2.08" scale="0.05 0.32 1.5" color="#5D3A1A"></a-box>
+            <a-box static-body position="1.2 0.26 -2.08" scale="0.05 0.32 1.5" color="#5D3A1A"></a-box>
+            <a-box static-body position="0.64 0.26 -1.35" scale="1.14 0.32 0.05" color="#5D3A1A"></a-box>
+            <a-box static-body position="0.64 0.26 -2.8" scale="1.235 0.35 0.05" color="#5D3A1A"></a-box>
+            <a-box static-body position="0.64 0.1 -2.08" scale="1.14 0.01 1.5" color="#5D3A1A"></a-box>
+            <a-sphere static-body position="0.64 0.26 -2.9" radius="0.08" color="#8B5A2B"></a-sphere>
+        </a-entity>
+
+        <a-entity id="glbtest" gltf-model="#glbtestmodel" position="0 1 -2" scale="10 10 10"
+            shadow="cast: true; receive: true" static-body>
+        </a-entity>
+
+
 
 
 
