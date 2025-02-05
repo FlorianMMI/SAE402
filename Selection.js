@@ -121,10 +121,11 @@ book.addEventListener("mouseenter", function () {
     dur: 200
   });
   var eyeIcon = document.createElement("a-entity");
-  eyeIcon.setAttribute("obj-model", "/Model/Loupe/Loupe.obj");
+  eyeIcon.setAttribute("obj-model", "obj: #loupe-obj; mtl: #loupe-materiaux");
   eyeIcon.id = "eye-icon";
-  eyeIcon.setAttribute("material", "src: url(/Model/Loupe/loupe.mtl)");
-  eyeIcon.setAttribute("position", "0 0.3 0");
+  eyeIcon.setAttribute("position", "0 0.5 0");
+  
+  eyeIcon.setAttribute("rotation", "45 0 0"); // Incline l'icône de 45 degrés
   book.appendChild(eyeIcon);
 });
 
@@ -202,21 +203,6 @@ book.addEventListener("click", function () {
   document.body.appendChild(menu);
 });
 // Ajoute un bouton pour fermer le menu en VR
-var closeButton = document.createElement("a-box");
-closeButton.setAttribute("position", "0 0.1 0");
-closeButton.setAttribute("depth", "0.05");
-closeButton.setAttribute("height", "0.1");
-closeButton.setAttribute("width", "0.2");
-closeButton.setAttribute("color", "#FF0000");
-closeButton.setAttribute("class", "clickable");
-closeButton.setAttribute("text", "value: Close; color: #FFF; align: center;");
-
-closeButton.addEventListener("click", function () {
-  var menu = document.getElementById("menu");
-  if (menu) {
-    scene.removeChild(menu);
-  }
-});
 
 menu.appendChild(closeButton);
 scene.appendChild(menu);
