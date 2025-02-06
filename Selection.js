@@ -41,6 +41,18 @@ let data = [
     "USB": "USB",
     "Port": "Port",
     "Cable": "Câble"
+  }]
+  , paintData : [{
+    "Brush": "Pinceau",
+    "Canvas": "Toile",
+    "Easel": "Chevalet",
+    "Palette": "Palette",
+    "Frame": "Cadre",
+    "Watercolor": "Aquarelle",
+    "Acrylic": "Acrylique",
+    "Oil": "Huile",
+    "Sketch": "Esquisse",
+    "Sculpture": "Sculpture"
   }
 ],
 }
@@ -280,6 +292,112 @@ book.addEventListener("click", function () {
   scene.appendChild(aBox);
 });
 
+
+// Création de l'entité peinture (paint)
+var paint = document.getElementById("paint-");
+scene.appendChild(paint);
+
+paint.addEventListener("mouseenter", function () {
+  paint.setAttribute("animation", {
+    property: "scale",
+    to: "0.11 0.11 0.11",
+    dur: 200
+  });
+  var brushIcon = document.createElement("a-entity");
+  brushIcon.setAttribute("obj-model", "obj: #loupe-obj; mtl: #loupe-materiaux");
+  brushIcon.id = "brush-icon";
+  brushIcon.setAttribute("position", "0 20 0");
+
+  var camera = document.querySelector("[camera]");
+  var cameraPosition = camera.getAttribute("position");
+  var paintPosition = paint.getAttribute("position");
+
+  var dx = cameraPosition.x - paintPosition.x;
+  var dz = cameraPosition.z - paintPosition.z;
+  var rotationY = Math.atan2(dx, dz) * (180 / Math.PI) + 45;
+  brushIcon.setAttribute("rotation", `45 ${rotationY} 0`);
+
+  paint.appendChild(brushIcon);
+});
+
+paint.addEventListener("mouseleave", function () {
+  var brushIcon = document.getElementById("brush-icon");
+  if (brushIcon) {
+    paint.removeChild(brushIcon);
+  }
+  paint.setAttribute("animation", {
+    property: "scale",
+    to: "0.1 0.1 0.1",
+    dur: 200
+  });
+});
+
+paint.addEventListener("click", function () {
+  const existingText = document.querySelector("#vocab");
+  const existingBox = document.querySelector("a-box");
+  const existingTitle = document.querySelector("#a-text-title");
+  if (existingText && existingBox && existingTitle) {
+    scene.removeChild(existingText);
+    scene.removeChild(existingBox);
+    scene.removeChild(existingTitle);
+  }
+
+  const cameraEl = document.querySelector("[camera]");
+  const camWorldPos = new THREE.Vector3();
+  cameraEl.object3D.getWorldPosition(camWorldPos);
+  const forwardDir = new THREE.Vector3();
+  cameraEl.object3D.getWorldDirection(forwardDir);
+
+  const offset = 1;
+  const textPosition = camWorldPos.clone().add(forwardDir.multiplyScalar(offset));
+
+  var camPosition = cameraEl.getAttribute("position");
+  var camRotation = cameraEl.getAttribute("rotation");
+  let dist = 2;
+  let rad = camRotation.y * (Math.PI / 180);
+  let newX = camPosition.x - dist * Math.sin(rad);
+  let newZ = camPosition.z - dist * Math.cos(rad);
+  let newY = camPosition.y;
+
+  const aText = document.createElement("a-text");
+  const textTitle = document.createElement("a-text");
+  textTitle.id = "a-text-title";
+  textTitle.setAttribute("value", "vocabulary");
+  textTitle.setAttribute("align", "center");
+  textTitle.setAttribute("color", "#FFD700");
+  textTitle.setAttribute("position", `${newX} ${newY + 0.7} ${newZ}`);
+  textTitle.setAttribute("rotation", `0 ${camRotation.y} 0`);
+  textTitle.setAttribute("scale", "0.7 0.7 0.7");
+  scene.appendChild(textTitle);
+
+  let paintObj = data[0].paintData[0];
+  let lines = [];
+  for (let key in paintObj) {
+    lines.push(key + " --> " + paintObj[key]);
+  }
+  aText.setAttribute("id", "vocab");
+  aText.setAttribute("value", lines.join("\n"));
+  aText.setAttribute("scale", "0.5 0.5 0.5");
+  aText.setAttribute("position", `${newX} ${newY - 0.2} ${newZ}`);
+  aText.setAttribute("align", "center");
+  aText.setAttribute("color", "#000");
+  aText.setAttribute("rotation", `0 ${camRotation.y} 0`);
+
+  const aBox = document.createElement("a-box");
+  aBox.setAttribute("scale", "0.7 0.7 0.7");
+  aBox.setAttribute("color", "#FFF");
+  aBox.setAttribute("width", "3");
+  aBox.setAttribute("height", "3");
+  aBox.setAttribute("depth", "0.001");
+  aBox.setAttribute("rotation", `0 ${camRotation.y} 0`);
+  const boxOffset = 0.1;
+  const boxX = newX - boxOffset * Math.sin(rad);
+  const boxZ = newZ - boxOffset * Math.cos(rad);
+  aBox.setAttribute("position", `${boxX} ${newY} ${boxZ}`);
+
+  scene.appendChild(aText);
+  scene.appendChild(aBox);
+});
 
 car = document.getElementById("car-");
 
