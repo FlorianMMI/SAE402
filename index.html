@@ -20,6 +20,8 @@
             <a-asset-item id="loupe-obj" src="Model/Loupe/loupe.obj"></a-asset-item>
             <a-asset-item id="loupe-materiaux" src="Model/Loupe/loupe.mtl"></a-asset-item>
             <a-asset-item id="car" src="Model/Car.glb"></a-asset-item>
+            <a-asset-item id = "computer" src="Model/Laptop.glb"></a-asset-item>
+
         </a-assets>
 
         <a-entity id="loupe" obj-model="obj: #loupe-obj; mtl: #loupe-materiaux"
@@ -39,6 +41,14 @@
         <a-entity id="car-" gltf-model="#car"
                   position="0 0 -3"
                   scale="0.5 0.5 0.5"
+                  rotation="0 45 0"
+                  class="collidable">
+        </a-entity>
+
+        <a-entity id="computer-" gltf-model="#computer"
+                  position="0 0 -5"
+
+                  scale="0.1 0.1 0.1"
                   rotation="0 45 0"
                   class="collidable">
         </a-entity>
