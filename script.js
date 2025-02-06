@@ -1,3 +1,38 @@
+AFRAME.registerComponent("thumbstick-move", {
+  init: function () {
+    let rig = document.getElementById("rig");
+    let camera = document.getElementById("camera");
+
+    this.el.addEventListener("thumbstickmoved", function (evt) {
+      let x = evt.detail.x; // Gauche/Droite
+      let y = evt.detail.y; // Avant/Arrière
+
+      if (Math.abs(x) < 0.1 && Math.abs(y) < 0.1) return; // Évite les petits mouvements parasites
+
+      let speed = 0.1; // Vitesse de déplacement augmentée
+
+      // Récupère la direction de la caméra
+      let direction = new THREE.Vector3();
+      camera.object3D.getWorldDirection(direction);
+      direction.y = 0; // Ignore la hauteur pour éviter le mouvement vertical
+      direction.normalize();
+
+      // Calcul du mouvement
+      let strafe = new THREE.Vector3()
+        .crossVectors(new THREE.Vector3(0, 1, 0), direction)
+        .multiplyScalar(x);
+      let move = direction.multiplyScalar(y); // On garde y sans inverser cette fois
+
+      let finalMove = new THREE.Vector3()
+        .addVectors(strafe, move)
+        .multiplyScalar(speed);
+
+      // Appliquer le mouvement
+      rig.object3D.position.add(finalMove);
+    });
+  },
+});
+
 function moveToPosition(object, targetPosition) {
   var currentPosition = object.getAttribute("position");
   var step = 0.01;
@@ -64,33 +99,3 @@ document.querySelector("#drawer3").addEventListener("click", function () {
     moveToPosition(drawer3, { x: -2.6, y: 1, z: -5 });
   }
 });
-var scene = document.querySelector("a-scene");
-
-// document
-//   .querySelector("#rightController")
-//   .addEventListener("triggerdown", function () {
-//     var drawer1 = document.querySelector("#drawer1");
-//     moveToPosition(drawer1, { x: -2.6, y: 0, z: -5 });
-//   });
-
-// function checkCollision() {
-//   var camera = document.querySelector("[camera]");
-//   var cameraPosition = camera.getAttribute("position");
-//   var cylinderPosition = cylinder.getAttribute("position");
-
-//   var dx = cameraPosition.x - cylinderPosition.x;
-//   var dy = cameraPosition.y - cylinderPosition.y;
-//   var dz = cameraPosition.z - cylinderPosition.z;
-
-//   var distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-//   if (distance < 1.5) {
-//     cylinder.setAttribute(
-//       "color",
-//       "#" + Math.floor(Math.random() * 16777215).toString(16)
-//     );
-//   }
-// }
-
-// setInterval(checkCollision, 100);
-// render();

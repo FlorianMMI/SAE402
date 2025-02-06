@@ -7,13 +7,6 @@
     <title>Class Trouble VR</title>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 
-    <!-- events -->
-    <!-- <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script> -->
-
-    <!-- intéractions avec les mains -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script> -->
-    <!-- <script src="https://unpkg.com/super-hands@^3.0.5/dist/super-hands.min.js"></script> -->
-
     <!-- physiques -->
     <script
         src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.js"></script>
@@ -29,15 +22,16 @@
 
         <div id="container"></div>
 
-        <a-entity id="rig" movement-controls="speed:01">
-            <a-camera wasd-controls look-controls="pointerLockEnabled: true;" position="0 2.3 4">
+        <a-entity id="rig" position="0 1 4">
+            <a-camera id="camera" wasd-controls look-controls="pointerLockEnabled: true;" position="0 2 4"
+                movement-controls="speed:01">
                 <a-entity cursor position="0 0 -0.01" geometry="primitive: sphere; radius: 0.00005"
                     material="color: #202020; shader: flat">
                 </a-entity>
             </a-camera>
-            <a-entity id="leftController" oculus-touch-controls="hand: left" thumbstick-controls></a-entity>
+            <a-entity id="leftController" oculus-touch-controls="hand: left" thumbstick-move></a-entity>
             <a-entity id="rightController" oculus-touch-controls="hand: right">
-                <a-entity raycaster="showLine:true;objects: .collidable" cursor></a-entity>
+                <a-entity raycaster="objects: .collidable" cursor></a-entity>
             </a-entity>
         </a-entity>
 
@@ -54,14 +48,7 @@
             <a-asset-item id="fence-o" src="models/fence.obj"></a-asset-item>
             <a-asset-item id="fence-m" src="models/fence.mtl"></a-asset-item>
 
-            <a-asset-item id="desk-o" src="models/desk.obj"></a-asset-item>
-            <a-asset-item id="desk-m" src="models/desk.mtl"></a-asset-item>
-
-            <a-asset-item id="deskchair-o" src="models/deskchair.obj"></a-asset-item>
-            <a-asset-item id="deskchair-m" src="models/deskchair.mtl"></a-asset-item>
-
-            <a-asset-item id="glbtestmodel"
-                src="https://cdn.glitch.com/90a30469-f038-4054-be9c-fd1ec94a810d%2Fkitchentest.glb">
+            <a-asset-item id="deskchair" src="models/deskchair.glb">
             </a-asset-item>
         </a-assets>
 
@@ -199,21 +186,6 @@
         <a-box position="-6.4 4.34 0" scale="19 0.2 0.2" rotation="0 90 0" color="#885f32" material="roughness: 1"
             static-body></a-box>
 
-        <!-- OBJECTS -->
-        <!-- Tree -->
-        <a-entity obj-model="obj: #tree-o; mtl: #tree-m" position="-20 2 0" scale="5 5 5" rotation="0 180 0"></a-entity>
-        <!-- Door -->
-        <a-entity obj-model="obj: #door-o; mtl: #door-m" position="6.35 0 -7" scale="3.5 3.5 3.5"
-            rotation="0 90 0"></a-entity>
-        <!-- Fence -->
-        <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-15 0 -20" scale="1.5 1.5 1.5"
-            rotation="0 0 0"></a-entity>
-        <!-- Desk Chair -->
-        <a-entity obj-model="obj: #deskchair-o; mtl: #deskchair-m" position="-3.5 0 -7" scale="4 4 4"
-            rotation="0 230 0"></a-entity>
-        <!-- <a-entity obj-model="obj: #desk-o; mtl: #desk-m" position="-1 0 -7.2" scale="4.5 4.5 4.5"
-                rotation="0 0 0"></a-entity> -->
-
 
         <!-- Tables -->
 
@@ -317,20 +289,32 @@
             <a-sphere static-body position="0.64 0.26 -2.9" radius="0.08" color="#8B5A2B"></a-sphere>
         </a-entity>
 
-        <a-entity id="glbtest" gltf-model="#glbtestmodel" position="0 1 -2" scale="10 10 10"
+
+        <!-- OBJECTS -->
+        <!-- Tree -->
+        <a-entity id="deskchairobject" gltf-model="#deskchair" position="-3.5 0 -7" scale="4 4 4" rotation="0 230 0"
             shadow="cast: true; receive: true" static-body>
         </a-entity>
+        <a-entity obj-model="obj: #tree-o; mtl: #tree-m" position="-20 2 0" scale="5 5 5" rotation="0 180 0"></a-entity>
+        <!-- Door -->
+        <a-entity obj-model="obj: #door-o; mtl: #door-m" position="6.35 0 -7" scale="3.5 3.5 3.5"
+            rotation="0 90 0"></a-entity>
+        <!-- Fence -->
+        <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-15 0 -20" scale="1.5 1.5 1.5"
+            rotation="0 0 0"></a-entity>
+
+
 
 
 
 
 
         <a-box shadow=" cast: true; receive: true" position="0 4 -2" color="tomato" dynamic-body="linearDamping: 0.05"
-            class="collidable" grabbable></a-box>
+            class="collidable"></a-box>
         <a-box shadow="cast: true; receive: true" position="0.2 3 -2.3" class="collidable" color="tomato"
-            dynamic-body="linearDamping: 0.5" grabbable></a-box>
+            dynamic-body="linearDamping: 0.5"></a-box>
         <a-sphere shadow="cast: true; receive: true" position="-3 3 -1" color="mediumseagreen" radius="0.5"
-            dynamic-body="linearDamping: 0.5; angularDamping: 0.3" grabbable></a-sphere>
+            dynamic-body="linearDamping: 0.5; angularDamping: 0.3"></a-sphere>
 
 
 
