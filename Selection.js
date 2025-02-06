@@ -1,9 +1,31 @@
 let data = [
   { voiture : [
-      "Wheel", "Engine", "Body", "Headlight", "Windshield", "Door", "Seat", "Steering Wheel", "Pedal", "Rearview Mirror"
+    {
+    "Wheel": "Roues",
+    "Engine": "Moteur",
+    "Body": "Carrosserie",
+    "Headlight": "Phare",
+    "Windshield": "Pare-brise",
+    "Door": "Porte",
+    "Seat": "Siège",
+    "Steering Wheel": "Volant",
+    "Pedal": "Pédale",
+    "Rearview Mirror": "Rétroviseur"
+  }
   ],
   bookdata : [
-    "Page", "Cover", "Title", "Author", "Chapter", "Paragraph", "Word", "Sentence", "Punctuation", "Period"
+   {
+    "Page": "Page",
+    "Cover": "Couverture",
+    "Title": "Titre",
+    "Author": "Auteur",
+    "Chapter": "Chapitre",
+    "Paragraph": "Paragraphe",
+    "Word": "Mot",
+    "Sentence": "Phrase",
+    "Punctuation": "Ponctuation",
+    "Period": "Point"
+  }
   ]
 }
 ]
@@ -11,7 +33,6 @@ let data = [
 
 var scene = document.querySelector("a-scene");
 
-var cylinder = document.getElementById("cylindre");
 
 // Création de la lumière
 var light = document.createElement("a-light");
@@ -20,97 +41,13 @@ light.setAttribute("color", "#FFFFFF");
 light.setAttribute("intensity", "1"); // Ajuste l'intensité pour éviter une trop forte luminosité
 light.setAttribute("distance", "3");
 light.setAttribute("position", "0 1 -2"); // Ajuste la position pour l'effet visuel
-cylinder.appendChild(light);
-
-scene.appendChild(cylinder);
-
-// Gestion du hover sur le cylindre
-cylinder.addEventListener("mouseenter", function () {
-  cylinder.setAttribute("material", {
-    emissive: "#FFFFFF",
-    emissiveIntensity: 0.3,
-  });
-  cylinder.setAttribute("animation", {
-    property: "scale",
-    to: "1.1 1.1 1.1",
-    dur: 200
-  });
-});
-
-cylinder.addEventListener("click", function () {
-  // Affiche un menu
-  var menu = document.createElement("div");
-  menu.id = "menu";
-  menu.style.width = "200px";
-  menu.style.textAlign = "left";
-  menu.style.position = "absolute";
-  menu.style.top = "50%";
-  menu.style.right = "1%";
-  menu.style.transform = "translate(-50%, -50%)";
-  menu.style.padding = "10px";
-  menu.style.backgroundColor = "#FFF";
-  menu.style.border = "1px solid #000";
-
-  // Ajoute les données de data.js au menu
-  var content = "<p class='titre'>Vocabulary</p><ul>";
-  data[0].voiture.forEach(function (item) {
-    content += "<li>" + item + "</li>";
-  });
-  content += "</ul>";
- 
-  
-  content += "<button class = 'btn' onclick='closeMenu()'>I learn !</button>";
-  
 
 
-  var style = document.createElement("style");
-  style.innerHTML = `
-    .titre {
-      display : flex;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 18px;
-      color: #000;
-      margin-bottom: 10px;
-    }
 
-    .btn {
-      display: block;
-      width: 100%;
-      padding: 10px;
-      background-color: #000;
-      color: #FFF;
-      border: none;
-      cursor: pointer;
-    }
-  `;
 
-  document.head.appendChild(style);
-  menu.innerHTML = content;
-  document.body.appendChild(menu);
-});
-
-function closeMenu() {
-  var menu = document.getElementById("menu");
-  if (menu) {
-    document.body.removeChild(menu);
-  }
-}
-
-cylinder.addEventListener("mouseleave", function () {
-  cylinder.setAttribute("material", {
-    emissive: "#000000", // Désactive la luisance
-    emissiveIntensity: 0
-  });
-  cylinder.setAttribute("animation", {
-    property: "scale",
-    to: "1 1 1",
-    dur: 200
-  });
-});
-
+// Création de l'entité livre (book)
 var book = document.createElement("a-entity");
-var book = document.getElementById("book");
+book = document.getElementById("book");
 book.setAttribute("position", "1 0 -4");
 scene.appendChild(book);
 
@@ -134,7 +71,7 @@ book.addEventListener("mouseenter", function () {
 
   var rotationY = Math.atan2(dx, dz) * (180 / Math.PI) + 45;
 
-  eyeIcon.setAttribute("rotation", `45 ${rotationY} 0`); // Oriente l'icône vers la caméra
+  eyeIcon.setAttribute("rotation", `45 ${rotationY} 0`);
   book.appendChild(eyeIcon);
 });
 
@@ -155,115 +92,180 @@ book.addEventListener("mouseleave", function () {
 
 book.addEventListener("click", function () { 
 
-  var existingGui = scene.querySelector("a-gui-flex-container");
-  if (existingGui) {
-    existingGui.parentNode.removeChild(existingGui);
+  const existingText = document.querySelector("#vocab");
+  const existingBox = document.querySelector("a-box");
+  const existingTitle = document.querySelector("#a-text-title");
+  if (existingText && existingBox && existingTitle) {
+    scene.removeChild(existingText);
+    scene.removeChild(existingBox);
+    scene.removeChild(existingTitle);
   }
 
+  const cameraEl = document.querySelector("[camera]");
+  const camWorldPos = new THREE.Vector3();
+  cameraEl.object3D.getWorldPosition(camWorldPos);
+  const forwardDir = new THREE.Vector3();
+  cameraEl.object3D.getWorldDirection(forwardDir);
 
+  const offset = 1;
+  const textPosition = camWorldPos.clone().add(forwardDir.multiplyScalar(offset));
 
-  // Affiche un menu
-  var guiContainer = document.createElement("a-gui-flex-container");
-  guiContainer.setAttribute("layout", "type: box; margin: 0.05;");
-  guiContainer.setAttribute("flex-direction", "column");
-  guiContainer.setAttribute("justify-content", "center");
-  guiContainer.setAttribute("align-items", "center");
-  guiContainer.setAttribute("width", "1.5");
-  guiContainer.setAttribute("height", "auto");
-  guiContainer.setAttribute("position", "0 1.5 -2");
-
+  var camPosition = cameraEl.getAttribute("position");
+  var camRotation = cameraEl.getAttribute("rotation");
+  let dist = 2;
+  let rad = camRotation.y * (Math.PI / 180);
+  let newX = camPosition.x - dist * Math.sin(rad);
+  let newZ = camPosition.z - dist * Math.cos(rad);
+  let newY = camPosition.y; 
   
-  var camera = document.querySelector("[camera]");
-  if (camera) {
-    var camPosition = camera.getAttribute("position");
-    var camRotation = camera.getAttribute("rotation");
-    var distance = 2; // distance from the camera
-    var rad = camRotation.y * Math.PI / 180;
-    var newX = camPosition.x - distance * Math.sin(rad);
-    var newZ = camPosition.z - distance * Math.cos(rad);
-    var newY = camPosition.y; // same vertical level as the camera
-    
-    guiContainer.setAttribute("position", `${newX} ${newY} ${newZ}`);
-    guiContainer.setAttribute("rotation", `0 ${camRotation.y} 0`);
+  const aText = document.createElement("a-text");
+  const textTitle = document.createElement("a-text");
+  textTitle.id = "a-text-title";
+  textTitle.setAttribute("value", "vocabulary");
+  textTitle.setAttribute("align", "center");
+  textTitle.setAttribute("color", "#FFD700");
+  textTitle.setAttribute("position", `${newX} ${newY + 0.7} ${newZ}`);
+  textTitle.setAttribute("rotation", `0 ${camRotation.y} 0`);
+  textTitle.setAttribute("scale", "0.7 0.7 0.7");
+  scene.appendChild(textTitle);
+
+  let bookObj = data[0].bookdata[0];
+  let lines = [];
+  for (let key in bookObj) {
+    lines.push(key + " --> " + bookObj[key]);
   }
+  aText.setAttribute("id", "vocab");
+  aText.setAttribute("value", lines.join("\n"));
+  aText.setAttribute("scale", "0.5 0.5 0.5");
+  aText.setAttribute("position", `${newX} ${newY - 0.2} ${newZ}`);
+  aText.setAttribute("align", "center");
+  aText.setAttribute("color", "#000");
+  aText.setAttribute("rotation", `0 ${camRotation.y} 0`);
 
-  var title = document.createElement("a-gui-label");
-  title.setAttribute("value", "Vocabulary");
-  title.setAttribute("width", "1.5");
-  title.setAttribute("height", "0.3");
-  guiContainer.appendChild(title);
-
-  data[0].bookdata.forEach(function(item) {
-    var button = document.createElement("a-gui-button");
-    button.setAttribute("value", item);
-    button.setAttribute("width", "1.5");
-    button.setAttribute("height", "0.2");
-    guiContainer.appendChild(button);
-  });
-
-  scene.appendChild(guiContainer);
-
+  const aBox = document.createElement("a-box");
+  aBox.setAttribute("scale", "0.7 0.7 0.7");
+  aBox.setAttribute("color", "#FFF");
+  aBox.setAttribute("width", "3");
+  aBox.setAttribute("height", "3");
+  aBox.setAttribute("depth", "0.001");
+  aBox.setAttribute("rotation", `0 ${camRotation.y} 0`);
+  const boxOffset = 0.1;
+  const boxX = newX - boxOffset * Math.sin(rad);
+  const boxZ = newZ - boxOffset * Math.cos(rad);
+  aBox.setAttribute("position", `${boxX} ${newY} ${boxZ}`);
+  
+  scene.appendChild(aText);
+  scene.appendChild(aBox);
 });
 
 
+car = document.getElementById("car-");
 
+console.log(car);
 
-// book.addEventListener("click", function () {
-//   // Affiche un menu
-//   var menu = document.createElement("div");
-//   menu.id = "menu";
-//   menu.style.width = "200px";
-//   menu.style.textAlign = "left";
-//   menu.style.position = "absolute";
-//   menu.style.top = "50%";
-//   menu.style.right = "1%";
-//   menu.style.transform = "translate(-50%, -50%)";
-//   menu.style.padding = "10px";
-//   menu.style.backgroundColor = "#FFF";
-//   menu.style.border = "1px solid #000";
+car.addEventListener("mouseenter", function () {
+  car.setAttribute("animation", {
+    property: "scale",
+    to: "0.6 0.6 0.6",
+    dur: 200
+  });
+  var carIcon = document.createElement("a-entity");
+  carIcon.setAttribute("obj-model", "obj: #loupe-obj; mtl: #loupe-materiaux");
+  carIcon.id = "car-icon";
+  carIcon.setAttribute("position", "0 0.5 0");
 
-//   // Ajoute les données de data.js au menu
-//   var content = "<p class='titre'>Vocabulary</p><ul>";
-//   data[0].book.forEach(function (item) {
-//     content += "<li>" + item + "</li>";
-//   });
-//   content += "</ul>";
- 
+  var camera = document.querySelector("[camera]");
+  var cameraPosition = camera.getAttribute("position");
+  var carPosition = car.getAttribute("position");
+
+  var dx = cameraPosition.x - carPosition.x;
+  var dz = cameraPosition.z - carPosition.z;
+
+  var rotationY = Math.atan2(dx, dz) * (180 / Math.PI) + 45;
+
+  carIcon.setAttribute("rotation", `45 ${rotationY} 0`);
+  car.appendChild(carIcon);
+});
+
+car.addEventListener("mouseleave", function () {
+  var carIcon = document.getElementById("car-icon");
+  if (carIcon) {
+    car.removeChild(carIcon);
+  }
+});
+
+car.addEventListener("mouseleave", function () {
+  car.setAttribute("animation", {
+    property: "scale",
+    to: "0.5 0.5 0.5",
+    dur: 200
+  });
+});
+
+car.addEventListener("click", function () {
+
+  const existingText = document.querySelector("#vocab");
+  const existingBox = document.querySelector("a-box");
+  const existingTitle = document.querySelector("#a-text-title");
+  if (existingText && existingBox && existingTitle) {
+    scene.removeChild(existingText);
+    scene.removeChild(existingBox);
+    scene.removeChild(existingTitle);
+  }
+
+  const cameraEl = document.querySelector("[camera]");
+  const camWorldPos = new THREE.Vector3();
+  cameraEl.object3D.getWorldPosition(camWorldPos);
+  const forwardDir = new THREE.Vector3();
+  cameraEl.object3D.getWorldDirection(forwardDir);
+
+  const offset = 1;
+  const textPosition = camWorldPos.clone().add(forwardDir.multiplyScalar(offset));
+
+  var camPosition = cameraEl.getAttribute("position");
+  var camRotation = cameraEl.getAttribute("rotation");
+  let dist = 2;
+  let rad = camRotation.y * (Math.PI / 180);
+  let newX = camPosition.x - dist * Math.sin(rad);
+  let newZ = camPosition.z - dist * Math.cos(rad);
+  let newY = camPosition.y; 
+
+  const aText = document.createElement("a-text");
+  const textTitle = document.createElement("a-text");
+  textTitle.id = "a-text-title";
+  textTitle.setAttribute("value", "vocabulary");
+  textTitle.setAttribute("align", "center");
+  textTitle.setAttribute("color", "#FFD700");
+  textTitle.setAttribute("position", `${newX} ${newY + 0.7} ${newZ}`);
+  textTitle.setAttribute("rotation", `0 ${camRotation.y} 0`);
+  textTitle.setAttribute("scale", "0.7 0.7 0.7");
+  scene.appendChild(textTitle);
+
+  let carObj = data[0].voiture[0];
+  let lines = [];
+  for (let key in carObj) {
+    lines.push(key + " --> " + carObj[key]);
+  }
+  aText.setAttribute("id", "vocab");
+  aText.setAttribute("value", lines.join("\n"));
+  aText.setAttribute("scale", "0.5 0.5 0.5");
+  aText.setAttribute("position", `${newX} ${newY - 0.2} ${newZ}`);
+  aText.setAttribute("align", "center");
+  aText.setAttribute("color", "#000");
+  aText.setAttribute("rotation", `0 ${camRotation.y} 0`);
+
+  const aBox = document.createElement("a-box");
+  aBox.setAttribute("scale", "0.7 0.7 0.7");
+  aBox.setAttribute("color", "#FFF");
+  aBox.setAttribute("width", "3");
+  aBox.setAttribute("height", "3");
+  aBox.setAttribute("depth", "0.001");
+  aBox.setAttribute("rotation", `0 ${camRotation.y} 0`);
+  const boxOffset = 0.1;
+  const boxX = newX - boxOffset * Math.sin(rad);
+  const boxZ = newZ - boxOffset * Math.cos(rad);
+  aBox.setAttribute("position", `${boxX} ${newY} ${boxZ}`);
   
-//   content += "<button class = 'btn' onclick='closeMenu()'>I learn !</button>";
-  
-
-
-//   var style = document.createElement("style");
-//   style.innerHTML = `
-//     .titre {
-//       display : flex;
-//       justify-content: center;
-//       font-weight: bold;
-//       font-size: 18px;
-//       color: #000;
-//       margin-bottom: 10px;
-//     }
-
-//     .btn {
-//       display: block;
-//       width: 100%;
-//       padding: 10px;
-//       background-color: #000;
-//       color: #FFF;
-//       border: none;
-//       cursor: pointer;
-//     }
-
-//     .btn:hover {
-//       background-color: #555;
-//     }
-//   `;
-
-//   document.head.appendChild(style);
-//   menu.innerHTML = content;
-//   document.body.appendChild(menu);
-// });
-// Ajoute un bouton pour fermer le menu en VR
-
-// Removed VR closeButton code to prevent errors as "menu" is created within click events.
+  scene.appendChild(aText);
+  scene.appendChild(aBox);
+});
