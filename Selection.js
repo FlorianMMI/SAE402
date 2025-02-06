@@ -1,5 +1,5 @@
 let data = [
-  { voiture : [
+  { car : [
     {
     "Wheel": "Roues",
     "Engine": "Moteur",
@@ -90,6 +90,8 @@ book.addEventListener("mouseleave", function () {
   });
 });
 
+
+
 book.addEventListener("click", function () { 
 
   const existingText = document.querySelector("#vocab");
@@ -144,6 +146,7 @@ book.addEventListener("click", function () {
 
   const aBox = document.createElement("a-box");
   aBox.setAttribute("scale", "0.7 0.7 0.7");
+  console.log('Ceci est une box ', aBox);
   aBox.setAttribute("color", "#FFF");
   aBox.setAttribute("width", "3");
   aBox.setAttribute("height", "3");
@@ -241,7 +244,7 @@ car.addEventListener("click", function () {
   textTitle.setAttribute("scale", "0.7 0.7 0.7");
   scene.appendChild(textTitle);
 
-  let carObj = data[0].voiture[0];
+  let carObj = data[0].car[0];
   let lines = [];
   for (let key in carObj) {
     lines.push(key + " --> " + carObj[key]);
