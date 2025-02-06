@@ -9,7 +9,7 @@ let data = [
     "Door": "Porte",
     "Seat": "Siège",
     "Steering Wheel": "Volant",
-    "Pedal": "Pédale",
+    "Pedal": "Pedale",
     "Rearview Mirror": "Rétroviseur"
   }
   ],
