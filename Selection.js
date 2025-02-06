@@ -99,12 +99,9 @@ computer.addEventListener("mouseleave", function () {
 
 computer.addEventListener("click", function () {
   const existingText = document.querySelector("#vocab");
-  const existingBox = document.querySelector("a-box");
-  const existingTitle = document.querySelector("#a-text-title");
-  if (existingText && existingBox && existingTitle) {
+  if (existingText) {
     scene.removeChild(existingText);
-    scene.removeChild(existingBox);
-    scene.removeChild(existingTitle);
+    
   }
 
   const cameraEl = document.querySelector("[camera]");
@@ -214,12 +211,10 @@ book.addEventListener("mouseleave", function () {
 book.addEventListener("click", function () { 
 
   const existingText = document.querySelector("#vocab");
-  const existingBox = document.querySelector("a-box");
-  const existingTitle = document.querySelector("#a-text-title");
-  if (existingText && existingBox && existingTitle) {
+  
+  if (existingText) {
     scene.removeChild(existingText);
-    scene.removeChild(existingBox);
-    scene.removeChild(existingTitle);
+    
   }
 
   const cameraEl = document.querySelector("[camera]");
@@ -327,12 +322,10 @@ car.addEventListener("mouseleave", function () {
 car.addEventListener("click", function () {
 
   const existingText = document.querySelector("#vocab");
-  const existingBox = document.querySelector("a-box");
-  const existingTitle = document.querySelector("#a-text-title");
-  if (existingText && existingBox && existingTitle) {
+  
+  if (existingText) {
     scene.removeChild(existingText);
-    scene.removeChild(existingBox);
-    scene.removeChild(existingTitle);
+    
   }
 
   const cameraEl = document.querySelector("[camera]");
