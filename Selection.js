@@ -64,7 +64,7 @@ var computer = document.getElementById("computer-");
 computer.addEventListener("mouseenter", function () {
   computer.setAttribute("animation", {
     property: "scale",
-    to: "0.05 0.05 0.05",
+    to: "0.07 0.07 0.07",
     dur: 200
   });
   var compIcon = document.createElement("a-entity");
@@ -92,79 +92,46 @@ computer.addEventListener("mouseleave", function () {
   }
   computer.setAttribute("animation", {
     property: "scale",
-    to: "0.1 0.1 0.1",
+    to: "0.05 0.05 0.05",
     dur: 200
   });
 });
 
 computer.addEventListener("click", function () {
-  const existingText = document.querySelector("#vocab");
+  const existingText = document.querySelector("#vocab-comp");
   if (existingText) {
     scene.removeChild(existingText);
     
   }
 
-  const cameraEl = document.querySelector("[camera]");
-  const camWorldPos = new THREE.Vector3();
-  cameraEl.object3D.getWorldPosition(camWorldPos);
-  const forwardDir = new THREE.Vector3();
-  cameraEl.object3D.getWorldDirection(forwardDir);
-
-  const offset = 1;
-  const textPosition = camWorldPos.clone().add(forwardDir.multiplyScalar(offset));
-
-  var camPosition = cameraEl.getAttribute("position");
-  var camRotation = cameraEl.getAttribute("rotation");
-  let dist = 2;
-  let rad = camRotation.y * (Math.PI / 180);
-  let newX = camPosition.x - dist * Math.sin(rad);
-  let newZ = camPosition.z - dist * Math.cos(rad);
-  let newY = camPosition.y; 
 
   const aText = document.createElement("a-text");
-  const textTitle = document.createElement("a-text");
-  textTitle.id = "a-text-title";
-  textTitle.setAttribute("value", "vocabulary");
-  textTitle.setAttribute("align", "center");
-  textTitle.setAttribute("color", "#FFD700");
-  textTitle.setAttribute("position", `${newX} ${newY + 0.7} ${newZ}`);
-  textTitle.setAttribute("rotation", `0 ${camRotation.y} 0`);
-  textTitle.setAttribute("scale", "0.7 0.7 0.7");
-  scene.appendChild(textTitle);
+  
 
   let computerObj = data[0].computerdata[0];
   let lines = [];
   for (let key in computerObj) {
     lines.push(key + " --> " + computerObj[key]);
   }
-  aText.setAttribute("id", "vocab");
+  aText.setAttribute("id", "vocab-comp");
   aText.setAttribute("value", lines.join("\n"));
   aText.setAttribute("scale", "0.5 0.5 0.5");
-  aText.setAttribute("position", `${newX} ${newY - 0.2} ${newZ}`);
+  aText.setAttribute("position", `2 2.3 -9.47`);
   aText.setAttribute("align", "center");
-  aText.setAttribute("color", "#000");
-  aText.setAttribute("rotation", `0 ${camRotation.y} 0`);
+  aText.setAttribute("color", "#FFF");
+  
 
-  const aBox = document.createElement("a-box");
-  aBox.setAttribute("scale", "0.7 0.7 0.7");
-  aBox.setAttribute("color", "#FFF");
-  aBox.setAttribute("width", "3");
-  aBox.setAttribute("height", "3");
-  aBox.setAttribute("depth", "0.001");
-  aBox.setAttribute("rotation", `0 ${camRotation.y} 0`);
-  const boxOffset = 0.1;
-  const boxX = newX - boxOffset * Math.sin(rad);
-  const boxZ = newZ - boxOffset * Math.cos(rad);
-  aBox.setAttribute("position", `${boxX} ${newY} ${boxZ}`);
+  
 
   scene.appendChild(aText);
-  scene.appendChild(aBox);
+  
 });
 
 // Création de l'entité livre (book)
 var book = document.createElement("a-entity");
 book = document.getElementById("book");
-book.setAttribute("position", "1 0 -4");
+book.setAttribute("position", "2.2 1.443 -3");
+drawer1 = document.getElementById("drawer1");
 scene.appendChild(book);
 
 book.addEventListener("mouseenter", function () {
@@ -217,33 +184,9 @@ book.addEventListener("click", function () {
     
   }
 
-  const cameraEl = document.querySelector("[camera]");
-  const camWorldPos = new THREE.Vector3();
-  cameraEl.object3D.getWorldPosition(camWorldPos);
-  const forwardDir = new THREE.Vector3();
-  cameraEl.object3D.getWorldDirection(forwardDir);
-
-  const offset = 1;
-  const textPosition = camWorldPos.clone().add(forwardDir.multiplyScalar(offset));
-
-  var camPosition = cameraEl.getAttribute("position");
-  var camRotation = cameraEl.getAttribute("rotation");
-  let dist = 2;
-  let rad = camRotation.y * (Math.PI / 180);
-  let newX = camPosition.x - dist * Math.sin(rad);
-  let newZ = camPosition.z - dist * Math.cos(rad);
-  let newY = camPosition.y; 
+ 
   
   const aText = document.createElement("a-text");
-  const textTitle = document.createElement("a-text");
-  textTitle.id = "a-text-title";
-  textTitle.setAttribute("value", "vocabulary");
-  textTitle.setAttribute("align", "center");
-  textTitle.setAttribute("color", "#FFD700");
-  textTitle.setAttribute("position", `${newX} ${newY + 0.7} ${newZ}`);
-  textTitle.setAttribute("rotation", `0 ${camRotation.y} 0`);
-  textTitle.setAttribute("scale", "0.7 0.7 0.7");
-  scene.appendChild(textTitle);
 
   let bookObj = data[0].bookdata[0];
   let lines = [];
@@ -253,26 +196,12 @@ book.addEventListener("click", function () {
   aText.setAttribute("id", "vocab");
   aText.setAttribute("value", lines.join("\n"));
   aText.setAttribute("scale", "0.5 0.5 0.5");
-  aText.setAttribute("position", `${newX} ${newY - 0.2} ${newZ}`);
+  aText.setAttribute("position", `0 2.3 -9.47`);
   aText.setAttribute("align", "center");
-  aText.setAttribute("color", "#000");
-  aText.setAttribute("rotation", `0 ${camRotation.y} 0`);
-
-  const aBox = document.createElement("a-box");
-  aBox.setAttribute("scale", "0.7 0.7 0.7");
-  console.log('Ceci est une box ', aBox);
-  aBox.setAttribute("color", "#FFF");
-  aBox.setAttribute("width", "3");
-  aBox.setAttribute("height", "3");
-  aBox.setAttribute("depth", "0.001");
-  aBox.setAttribute("rotation", `0 ${camRotation.y} 0`);
-  const boxOffset = 0.1;
-  const boxX = newX - boxOffset * Math.sin(rad);
-  const boxZ = newZ - boxOffset * Math.cos(rad);
-  aBox.setAttribute("position", `${boxX} ${newY} ${boxZ}`);
-  
+  aText.setAttribute("color", "#FFF");
+  aText.setAttribute("rotation", `0 0 0`);
   scene.appendChild(aText);
-  scene.appendChild(aBox);
+  
 });
 
 
@@ -361,7 +290,7 @@ car.addEventListener("click", function () {
   for (let key in carObj) {
     lines.push(key + " --> " + carObj[key]);
   }
-  aText.setAttribute("id", "vocab");
+  aText.setAttribute("id", "vocab"); 
   aText.setAttribute("value", lines.join("\n"));
   aText.setAttribute("scale", "0.5 0.5 0.5");
   aText.setAttribute("position", `${newX} ${newY - 0.2} ${newZ}`);

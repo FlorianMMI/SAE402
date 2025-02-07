@@ -72,6 +72,17 @@ document.querySelector("#drawer1").addEventListener("click", function () {
   } else {
     moveToPosition(drawer1, { x: -2.6, y: 0, z: -5 });
   }
+
+  var car = document.querySelector("#car-");;
+  if (
+    car.getAttribute("position").x == -1.9 &&
+    car.getAttribute("position").y == 0.26 &&
+    car.getAttribute("position").z == -7.5
+  ) {
+    moveToPosition(car, { x: -1.9, y: 0.26, z: -6.85 });
+  } else {
+    moveToPosition(car, { x: -1.9, y: 0.26, z: -7.5 });  
+  }
 });
 
 document.querySelector("#drawer2").addEventListener("click", function () {
