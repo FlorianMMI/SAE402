@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Class Trouble VR</title>
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-
-    <!-- physiques -->
-    <script
-        src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@master/dist/aframe-extras.min.js"></script> -->
-    <script src="https://unpkg.com/aframe-text-geometry-component@latest/dist/aframe-text-geometry-component.min.js"></script>
-
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Class Trouble VR</title>
+        <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    
+        <!-- physiques -->
+        <script
+            src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
+    
+    </head>
 
 <body>
     <a-scene physics="gravity: -9.8; restitution: 0.8">
@@ -38,13 +36,14 @@
         </a-entity>
 
         <a-assets>
+            <a-asset-item id="shelf" src="models/Wall Shelf.glb"></a-asset-item>
             <a-asset-item id="notebook-materiaux" src="models/Livre/book.mtl"></a-asset-item>
             <a-asset-item id="notebook-obj" src="models/Livre/book.obj"></a-asset-item>
             <a-asset-item id="loupe-obj" src="models/Loupe/loupe.obj"></a-asset-item>
             <a-asset-item id="loupe-materiaux" src="models/Loupe/loupe.mtl"></a-asset-item>
             <a-asset-item id="car" src="models/Car.glb"></a-asset-item>
             <a-asset-item id = "computer" src="models/Laptop.glb"></a-asset-item>
-            <a-asset-item id="character" src="models/teacher/Adventurer.glb"></a-asset-item> 
+            <a-asset-item id="character" src="models/teacher/Beach Character.glb"></a-asset-item> 
             <img id="ground" src="assets/parquet.jpg">
             <img id="grass" src="assets/grass.jpg">
 
@@ -57,6 +56,7 @@
             <a-asset-item id="fence-o" src="models/fence.obj"></a-asset-item>
             <a-asset-item id="fence-m" src="models/fence.mtl"></a-asset-item>
 
+            <a-asset-item id="table-shop" src="models/Table.glb"></a-asset-item>
             
             <a-asset-item id="Court-o" src="models/character/BasketBallCourt.obj"></a-asset-item>
             <a-asset-item id="Court-m" src="models/character/BasketBallCourt.mtl"></a-asset-item>
@@ -73,6 +73,9 @@
             <a-asset-item id="ball" src="models/character/Basketball.glb"></a-asset-item>
 
             <a-asset-item id="deskchair" src="models/deskchair.glb">
+
+            <a-asset-item id="Snorlax" src="models/Low Poly Snorlax.glb"></a-asset-item>
+            <a-asset-item id="Market" src="models/Market Stand.glb"></a-asset-item>
             </a-asset-item>
         </a-assets>
 
@@ -213,58 +216,58 @@
 
         <!-- Tables -->
 
-        <a-entity position="2.5 0 -1" shadow="cast: true; receive: true">
-            <a-box static-body position="0 1.3 -2" scale="3 0.1 1.8" color="#8B5A2B"></a-box>
-            <a-box static-body position="0 1.18361 -2" scale="2.68 0.14 1.53" color="#8B5A2B"></a-box>
-            <a-box static-body position="-1.33 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A"></a-box>
-            <a-box static-body position="1.335 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A"></a-box>
-            <a-box static-body position="-1.33 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A"></a-box>
-            <a-box static-body position="1.335 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A"></a-box>
+        <a-entity position="2.5 0 -1" shadow="cast: true; receive: true" id="table">
+            <a-box static-body position="0 1.3 -2" scale="3 0.1 1.8" color="#8B5A2B" id="table-top"></a-box>
+            <a-box static-body position="0 1.18361 -2" scale="2.68 0.14 1.53" color="#8B5A2B" id="table-top"></a-box>
+            <a-box static-body position="-1.33 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A"  id="table-bot"></a-box>
+            <a-box static-body position="1.335 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
+            <a-box static-body position="-1.33 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
+            <a-box static-body position="1.335 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
         </a-entity>
 
-        <a-entity position="-2.5 0 -1" shadow="cast: true; receive: true">
-            <a-box static-body position="0 1.3 -2" scale="3 0.1 1.8" color="#8B5A2B"></a-box>
-            <a-box static-body position="0 1.18361 -2" scale="2.68 0.14 1.53" color="#8B5A2B"></a-box>
-            <a-box static-body position="-1.33 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A"></a-box>
-            <a-box static-body position="1.335 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A"></a-box>
-            <a-box static-body position="-1.33 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A"></a-box>
-            <a-box static-body position="1.335 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A"></a-box>
+        <a-entity position="-2.5 0 -1" shadow="cast: true; receive: true" id="table">
+            <a-box static-body position="0 1.3 -2" scale="3 0.1 1.8" color="#8B5A2B" id="table-top"></a-box>
+            <a-box static-body position="0 1.18361 -2" scale="2.68 0.14 1.53" color="#8B5A2B" id="table-top"></a-box>
+            <a-box static-body position="-1.33 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
+            <a-box static-body position="1.335 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
+            <a-box static-body position="-1.33 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
+            <a-box static-body position="1.335 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
         </a-entity>
 
-        <a-entity position="2.5 0 3" shadow="cast: true; receive: true">
-            <a-box static-body position="0 1.3 -2" scale="3 0.1 1.8" color="#8B5A2B"></a-box>
-            <a-box static-body position="0 1.18361 -2" scale="2.68 0.14 1.53" color="#8B5A2B"></a-box>
-            <a-box static-body position="-1.33 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A"></a-box>
-            <a-box static-body position="1.335 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A"></a-box>
-            <a-box static-body position="-1.33 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A"></a-box>
-            <a-box static-body position="1.335 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A"></a-box>
+        <a-entity position="2.5 0 3" shadow="cast: true; receive: true" id="table">
+            <a-box static-body position="0 1.3 -2" scale="3 0.1 1.8" color="#8B5A2B" id="table-top"></a-box>
+            <a-box static-body position="0 1.18361 -2" scale="2.68 0.14 1.53" color="#8B5A2B" id="table-top"></a-box>
+            <a-box static-body position="-1.33 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
+            <a-box static-body position="1.335 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
+            <a-box static-body position="-1.33 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
+            <a-box static-body position="1.335 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
         </a-entity>
 
-        <a-entity position="-2.5 0 3" shadow="cast: true; receive: true">
-            <a-box static-body position="0 1.3 -2" scale="3 0.1 1.8" color="#8B5A2B"></a-box>
-            <a-box static-body position="0 1.18361 -2" scale="2.68 0.14 1.53" color="#8B5A2B"></a-box>
-            <a-box static-body position="-1.33 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A"></a-box>
-            <a-box static-body position="1.335 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A"></a-box>
-            <a-box static-body position="-1.33 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A"></a-box>
-            <a-box static-body position="1.335 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A"></a-box>
+        <a-entity position="-2.5 0 3" shadow="cast: true; receive: true" id="table">
+            <a-box static-body position="0 1.3 -2" scale="3 0.1 1.8" color="#8B5A2B" id="table-top"></a-box>
+            <a-box static-body position="0 1.18361 -2" scale="2.68 0.14 1.53" color="#8B5A2B" id="table-top"></a-box>
+            <a-box static-body position="-1.33 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
+            <a-box static-body position="1.335 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
+            <a-box static-body position="-1.33 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
+            <a-box static-body position="1.335 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
         </a-entity>
 
-        <a-entity position="2.5 0 7" shadow="cast: true; receive: true">
-            <a-box static-body position="0 1.3 -2" scale="3 0.1 1.8" color="#8B5A2B"></a-box>
-            <a-box static-body position="0 1.18361 -2" scale="2.68 0.14 1.53" color="#8B5A2B"></a-box>
-            <a-box static-body position="-1.33 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A"></a-box>
-            <a-box static-body position="1.335 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A"></a-box>
-            <a-box static-body position="-1.33 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A"></a-box>
-            <a-box static-body position="1.335 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A"></a-box>
+        <a-entity position="2.5 0 7" shadow="cast: true; receive: true" id="table">
+            <a-box static-body position="0 1.3 -2" scale="3 0.1 1.8" color="#8B5A2B" id="table-top"></a-box>
+            <a-box static-body position="0 1.18361 -2" scale="2.68 0.14 1.53" color="#8B5A2B" id="table-top"></a-box>
+            <a-box static-body position="-1.33 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
+            <a-box static-body position="1.335 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
+            <a-box static-body position="-1.33 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
+            <a-box static-body position="1.335 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
         </a-entity>
 
-        <a-entity position="-2.5 0 7" shadow="cast: true; receive: true">
-            <a-box static-body position="0 1.3 -2" scale="3 0.1 1.8" color="#8B5A2B"></a-box>
-            <a-box static-body position="0 1.18361 -2" scale="2.68 0.14 1.53" color="#8B5A2B"></a-box>
-            <a-box static-body position="-1.33 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A"></a-box>
-            <a-box static-body position="1.335 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A"></a-box>
-            <a-box static-body position="-1.33 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A"></a-box>
-            <a-box static-body position="1.335 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A"></a-box>
+        <a-entity position="-2.5 0 7" shadow="cast: true; receive: true" id="table">
+            <a-box static-body position="0 1.3 -2" scale="3 0.1 1.8" color="#8B5A2B" id="table-top"></a-box>
+            <a-box static-body position="0 1.18361 -2" scale="2.68 0.14 1.53" color="#8B5A2B" id="table-top"></a-box>
+            <a-box static-body position="-1.33 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
+            <a-box static-body position="1.335 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
+            <a-box static-body position="-1.33 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
+            <a-box static-body position="1.335 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
         </a-entity>
 
         <!-- Desk -->
@@ -343,6 +346,25 @@
         </a-entity>
 
 
+        <a-entity id="Market" gltf-model="#Market"
+                position="5.25 0 8.25"
+                scale="3 4 2"
+                rotation="0 -45 0"
+                class="collidable">
+        </a-entity>
+
+        <a-entity id="shelf" gltf-model="#shelf"
+                position="2 2.5 9"
+                scale="1 1 1.25"
+                rotation="0 90 0"
+                class="collidable">
+        </a-entity>
+        <a-entity id="shelf" gltf-model="#shelf"
+            position="2 1 9"
+            scale="1 1 1.25"
+            rotation="0 90 0"
+            class="collidable">
+        </a-entity>
         <!-- OBJECTS -->
         <!-- Tree -->
         <a-entity id="deskchairobject" gltf-model="#deskchair" position="-3.5 0 -7" scale="4 4 4" rotation="0 230 0"

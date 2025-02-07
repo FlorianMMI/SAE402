@@ -3,6 +3,11 @@ AFRAME.registerComponent("thumbstick-move", {
     let rig = document.getElementById("rig");
     let camera = document.getElementById("camera");
 
+    if (!rig || !camera) {
+      console.error("Rig or Camera element not found");
+      return;
+    }
+
     this.el.addEventListener("thumbstickmoved", function (evt) {
       let x = evt.detail.x; // Gauche/Droite
       let y = evt.detail.y; // Avant/Arrière
@@ -100,22 +105,201 @@ document.querySelector("#drawer3").addEventListener("click", function () {
   }
 });
 
-let renderCharacter = function (){
+let renderCharacter = function () {
+  let animations = ["Punch_Right", "Punch_Left", "Kick_Right", "Kick_Left"];
+  let emote=["Roll", "Death","Gun_Shoot"]
+
   let ascene = document.querySelector('a-scene');
   let acharacter = document.createElement('a-entity');
-  // let character = document.getElementById('character');
   acharacter.setAttribute('gltf-model', '#character');
   acharacter.setAttribute('scale', '1.75 1.75 1.75');
   acharacter.setAttribute('position', '-2 0 -8');
   acharacter.setAttribute('id', 'characters');
-  acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Wave; loop: repeat; timeScale: 1');
+  acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Idle; loop: repeat; timeScale: 1');
   ascene.appendChild(acharacter);
 
   acharacter.addEventListener("click", function () {
-      console.log("click");
-      let anim = acharacter.getAttribute('animation-mixer');
-      console.log(anim);
-      acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Death; loop: repeat; timeScale: 1');
-    });
+    console.log("click");
+    acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Walk; loop: repeat; timeScale: 1');
+    acharacter.setAttribute('rotation', '0 90 0');
+    acharacter.setAttribute('animation', 'property: position; to: 0 0 -8; dur: 1000; easing: linear');
+
+    setTimeout(function () {
+      acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Run; loop: repeat; timeScale: 1');
+      acharacter.setAttribute('rotation', '0 0 0');
+      acharacter.setAttribute('animation', 'property: position; to: 0 0 1; dur: 2000; easing: linear');
+
+      setTimeout(function () {
+        acharacter.setAttribute('rotation', '0 90 0');
+        let randomAnimation = animations[Math.floor(Math.random() * animations.length)];
+        acharacter.setAttribute('animation-mixer', `clip: CharacterArmature|${randomAnimation}; loop: once; timeScale: 1`);
+
+        setTimeout(function () {
+          acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Run_Back; loop: repeat; timeScale: 1');
+          acharacter.setAttribute('animation', 'property: position; to: 0 0 -4; dur: 2000; easing: linear');
+          acharacter.setAttribute('rotation', '0 0 0');
+
+          setTimeout(function () {
+            let randomEmote = emote[Math.floor(Math.random() * emote.length)];
+            acharacter.setAttribute('animation-mixer', `clip: CharacterArmature|${randomEmote}; loop: once; timeScale: 1`); 
+            
+            acharacter.setAttribute('animation', 'property: position; to: 0 0 -8; dur: 2000; easing: linear');
+            acharacter.setAttribute('rotation', '0 35 0');
+
+            setTimeout(function () {
+              acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Walk; loop: repeat; timeScale: 1');
+              acharacter.setAttribute('animation', 'property: position; to: -2 0 -8; dur: 1000; easing: linear');
+              acharacter.setAttribute('rotation', '0 -90 0');
+
+              setTimeout(function () {
+                acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Idle; loop: repeat; timeScale: 1');
+                acharacter.setAttribute('rotation', '0 0 0');
+              }, 1000);
+            }, 2000);
+          }, 1000);
+        }, 1000);
+      }, 2000);
+    }, 1000);
+  });
 };
+let characters = [
+  {
+      url: "models/teacher/Astronaut.glb",
+      name: "Astronaut",
+      price: "10",
+      description: "Space traveler",
+  },
+  {
+      url: "models/teacher/Beach Character.glb",
+      name: "Beach Character",
+      price: "0",
+      description: "Chill guy",
+  },
+  {
+      url: "models/teacher/Business Man.glb",
+      name: "Business Man",
+      price: "8",
+      description: "Rich guy",
+  },
+  {
+      url: "models/teacher/Casual Character.glb",
+      name: "Casual",
+      price: "3",
+      description: "Casual Character",
+  },
+  {
+      url: "models/teacher/King.glb",
+      name: "King",
+      price: "1",
+      description: "King",
+  },
+  {
+      url: "models/teacher/Punk.glb",
+      name: "Punk",
+      price: "2",
+      description: "Punk",
+  },
+  {
+      url: "models/teacher/Swat.glb",
+      name: "Swat",
+      price: "4",
+      description: "Swat",
+  },
+  {
+      url: "models/teacher/Worker.glb",
+      name: "Worker",
+      price: "5",
+      description: "Worker",
+  },
+];
+
+let colors = [
+  { normal: "#FF0000", dark: "#8B0000" }, // Red
+  { normal: "#00FF00", dark: "#006400" }, // Green
+  { normal: "#0000FF", dark: "#00008B" }, // Blue
+  { normal: "#FFFF00", dark: "#CCCC00" }, // Yellow
+  { normal: "#FFA500", dark: "#FF8C00" }, // Orange
+  { normal: "#800080", dark: "#4B0082" }, // Purple
+  { normal: "#00FFFF", dark: "#008B8B" }, // Cyan
+  { normal: "#FFC0CB", dark: "#FF69B4" }, // Pink
+  { normal: "#A52A2A", dark: "#8B0000" }, // Brown
+  { normal: "#808080", dark: "#696969" }  // Gray
+];
+let renderMarket = function () {
+  let ascene = document.querySelector('a-scene');
+  let amarket = document.createElement('a-entity');
+  amarket.setAttribute('gltf-model', '#Snorlax');
+  amarket.setAttribute('scale', '3 3 1.5');
+  amarket.setAttribute('position', '5.5 .8 8.5');
+  amarket.setAttribute('rotation', '0 35 0');
+  amarket.setAttribute('id', 'Snorlax');
+  ascene.appendChild(amarket);
+
+    let atable = document.createElement('a-entity');
+  atable.setAttribute('gltf-model', '#table-shop');
+  atable.setAttribute('scale', '.5 .5 .5');
+  atable.setAttribute('position', '5.5 1 8');
+  atable.setAttribute('rotation', '0 35 0');
+  atable.setAttribute('id', 'Table-shop');
+  ascene.appendChild(atable);
+
+  atable.addEventListener("click", function () {
+    console.log("click");
+    let otherboxes = document.querySelectorAll("#character-list");
+    if (otherboxes) {
+      otherboxes.forEach((box) => {
+        box.parentNode.removeChild(box);
+      });
+    }
+    colors.forEach((color, index) => {
+      const aBox = document.createElement("a-box");
+      aBox.setAttribute("color", color.normal);
+      aBox.setAttribute("width", ".5");
+      aBox.setAttribute("height", ".5");
+      aBox.setAttribute("depth", ".5");
+      aBox.setAttribute("rotation", `0 0 0`);
+      aBox.setAttribute("id", `box-color`);
+      aBox.setAttribute("position", `${3 - (index % 5) * .5} ${3.1 - Math.floor(index / 5) * 1.5} 9`);
+      ascene.appendChild(aBox);
+      aBox.addEventListener("click", function () {
+        console.log(`Clicked on ${color.normal}`);
+        let tabletops = document.querySelectorAll("#table-top");
+        tabletops.forEach((tabletop) => {
+          tabletop.setAttribute("color", color.normal);
+        });
+        let tablebottoms = document.querySelectorAll("#table-bot");
+        tablebottoms.forEach((tablebottom) => {
+          tablebottom.setAttribute("color", color.dark);
+        });
+      });
+
+    });
+  });
+
+
+  amarket.addEventListener("click", function () {
+    console.log("click");
+    let otherboxes = document.querySelectorAll("#box-color");
+    if (otherboxes) {
+      otherboxes.forEach((box) => {
+        box.parentNode.removeChild(box);
+      });
+    }
+    characters.forEach((character, index) => {
+      const characterEntity = document.createElement("a-entity");
+      characterEntity.setAttribute("gltf-model", character.url);
+      characterEntity.setAttribute("scale", "0.5 0.5 0.5");
+      characterEntity.setAttribute("position", `${3 - (index % 5) * .5} ${2.85 - Math.floor(index / 5) * 1.5} 9`);
+      characterEntity.setAttribute("rotation", "0 180 0");
+      characterEntity.setAttribute("id", `character-list`);
+      ascene.appendChild(characterEntity);
+      characterEntity.addEventListener("click", function () {
+      console.log(`Clicked on ${character.name}`);
+      let characters = document.getElementById("characters");
+      characters.setAttribute("gltf-model", character.url);
+      });
+    });
+  });
+}
+renderMarket();
 renderCharacter ();
