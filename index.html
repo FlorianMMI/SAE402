@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Class Trouble VR</title>
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
 
     <!-- physiques -->
     <script
         src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@master/dist/aframe-extras.min.js"></script> -->
 
 </head>
 
@@ -18,13 +19,13 @@
 
         <a-entity progressive-controls></a-entity>
 
-        <a-light type="ambient" color="#FFF" intensity="0.5"></a-light>
+        <a-light type="ambient" color="#FFF" intensity="1"></a-light>
 
         <div id="container"></div>
 
         <a-entity id="rig" position="0 1 4">
-            <a-camera id="camera" wasd-controls look-controls="pointerLockEnabled: true;" position="0 2 4"
-                movement-controls="speed:01">
+            <a-camera id="camera" wasd-controls="acceleration: 15" look-controls="pointerLockEnabled: true;"
+                position="0 1.5 4" movement-controls="speed:01">
                 <a-entity cursor position="0 0 -0.01" geometry="primitive: sphere; radius: 0.00005"
                     material="color: #202020; shader: flat">
                 </a-entity>
@@ -33,6 +34,7 @@
             <a-entity id="rightController" oculus-touch-controls="hand: right">
                 <a-entity raycaster="objects: .collidable" cursor></a-entity>
             </a-entity>
+            <!-- <a-box></a-box> -->
         </a-entity>
 
         <a-assets>
@@ -75,34 +77,28 @@
         <a-box src="#ceiling" shadow="cast: true; receive: true" position="1.15 4.5 0" scale="17.2 19 0.1"
             repeat="1.5 1.5 1" rotation="-90 0 0" color="#DDDDDD" material="shader: flat" static-body></a-box>
         <!-- lights -->
+        <a-light type="point" color="#FFF" position="0 4.35 0" scale="1 1 2"
+            light="intensity: 0.35; castShadow: true; shadowRadius: 30"></a-light>
         <!-- right back -->
         <a-box position="1.70 4.4 3.5" material="shader: flat" shadow="cast: true; receive: true" scale="0.5 0.05 2.8"
             rotation="0 0 0" color="#fff" static-body></a-box>
         <a-box position="2.30 4.4 3.5" material="shader: flat" shadow="cast: true; receive: true" scale="0.5 0.05 2.8"
             rotation="0 0 0" color="#fff" static-body></a-box>
-        <a-light type="point" color="#FFF" position="2 4.35 3.5" scale="1 1 2"
-            light="intensity: 0.35; castShadow: true; shadowRadius: 30"></a-light>
         <!-- right front -->
         <a-box position="1.70 4.4 -3.5" material="shader: flat" shadow="cast: true; receive: true" scale="0.5 0.05 2.8"
             rotation="0 0 0" color="#fff" static-body></a-box>
         <a-box position="2.30 4.4 -3.5" material="shader: flat" shadow="cast: true; receive: true" scale="0.5 0.05 2.8"
             rotation="0 0 0" color="#fff" static-body></a-box>
-        <a-light type="point" color="#FFF" position="2 4.35 -3.5" scale="1 1 2"
-            light="intensity: 0.35; castShadow: true; shadowRadius: 30"></a-light>
         <!-- left back -->
         <a-box position="-1.70 4.4 3.5" material="shader: flat" shadow="cast: true; receive: true" scale="0.5 0.05 2.8"
             rotation="0 0 0" color="#fff" static-body></a-box>
         <a-box position="-2.30 4.4 3.5" material="shader: flat" shadow="cast: true; receive: true" scale="0.5 0.05 2.8"
             rotation="0 0 0" color="#fff" static-body></a-box>
-        <a-light type="point" color="#FFF" position="-2 4.35 3.5" scale="1 1 2"
-            light="intensity: 0.35; castShadow: true; shadowRadius: 30"></a-light>
         <!-- left front -->
         <a-box position="-1.70 4.4 -3.5" material="shader: flat" shadow="cast: true; receive: true" scale="0.5 0.05 2.8"
             rotation="0 0 0" color="#fff" static-body></a-box>
         <a-box position="-2.30 4.4 -3.5" material="shader: flat" shadow="cast: true; receive: true" scale="0.5 0.05 2.8"
             rotation="0 0 0" color="#fff" static-body></a-box>
-        <a-light type="point" color="#FFF" position="-2 4.35 -3.5" scale="1 1 2"
-            light="intensity: 0.35; castShadow: true; shadowRadius: 30"></a-light>
 
 
 
@@ -303,15 +299,22 @@
         <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-15 0 -20" scale="1.5 1.5 1.5"
             rotation="0 0 0"></a-entity>
 
+        <!-- Board -->
+        <a-box static-body position="0 2.7 -9.49" scale="6 2.5 0.01" color="#093e2e"></a-box>
+        <a-box static-body position="-3 2.7 -9.455" scale="0.1 2.5 0.05" color="#885f32"></a-box>
+        <a-box static-body position="3 2.7 -9.455" scale="0.1 2.5 0.05" color="#885f32"></a-box>
+        <a-box static-body position="0 4 -9.455" scale="6.1 0.1 0.05" color="#885f32"></a-box>
+        <a-box static-body position="0 1.4 -9.455" scale="6.1 0.1 0.05" color="#885f32"></a-box>
 
 
 
 
 
 
-        <a-box shadow=" cast: true; receive: true" position="0 4 -2" color="tomato" dynamic-body="linearDamping: 0.05"
-            class="collidable"></a-box>
-        <a-box shadow="cast: true; receive: true" position="0.2 3 -2.3" class="collidable" color="tomato"
+
+        <a-box shadow=" cast: true; receive: true" position="0 4 -2" color="tomato"
+            dynamic-body="linearDamping: 0.05"></a-box>
+        <a-box shadow="cast: true; receive: true" position="0.2 3 -2.3" color="tomato"
             dynamic-body="linearDamping: 0.5"></a-box>
         <a-sphere shadow="cast: true; receive: true" position="-3 3 -1" color="mediumseagreen" radius="0.5"
             dynamic-body="linearDamping: 0.5; angularDamping: 0.3"></a-sphere>
