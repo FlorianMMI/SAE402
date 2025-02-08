@@ -10,34 +10,21 @@
     <!-- physiques -->
     <script
         src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.4/dist/aframe-extras.min.js"></script>
+    <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
 
 </head>
 
 <body>
-    <a-scene physics="gravity: -9.8; restitution: 0.8">
+    <a-scene physics="gravity: -9.8; restitution: 0.8" inspector-plugin-recast>
 
         <a-entity progressive-controls></a-entity>
 
         <a-light type="ambient" color="#FFF" intensity="1"></a-light>
 
-        <div id="container"></div>
-
-        <a-entity id="rig" position="0 1 4">
-            <a-camera id="camera" wasd-controls="acceleration: 15" look-controls="pointerLockEnabled: true;"
-                position="0 1.5 4" movement-controls="speed:01">
-                <a-entity cursor position="0 0 -0.01" geometry="primitive: sphere; radius: 0.00005"
-                    material="color: #202020; shader: flat">
-                </a-entity>
-            </a-camera>
-            <a-entity id="leftController" oculus-touch-controls="hand: left" thumbstick-move></a-entity>
-            <a-entity id="rightController" oculus-touch-controls="hand: right">
-                <a-entity raycaster="objects: .collidable" cursor></a-entity>
-            </a-entity>
-            <!-- <a-box></a-box> -->
-        </a-entity>
-
         <a-assets>
+            <a-asset-item id="navmesh" src="models/navmesh.glb"></a-asset-item>
+
             <img id="ground" src="assets/parquet.jpg">
             <img id="grass" src="assets/grass.jpg">
 
@@ -57,6 +44,23 @@
 
             <a-asset-item id="chair" src="models/chair.glb"></a-asset-item>
         </a-assets>
+
+        <!-- NavMesh -->
+        <a-entity id="navmesh-entity" nav-mesh visible="false" position="0 0 0" gltf-model="#navmesh"></a-entity>
+
+        <a-entity id="rig" position="0 1 4" movement-controls="constrainToNavMesh: true; speed: 0.05">
+            <a-camera id="camera" wasd-controls="acceleration: 15" look-controls="pointerLockEnabled: true;"
+                position="0 1.5 4">
+                <a-entity cursor position="0 0 -0.01" geometry="primitive: sphere; radius: 0.00005"
+                    material="color: #202020; shader: flat">
+                </a-entity>
+            </a-camera>
+            <a-entity id="leftController" oculus-touch-controls="hand: left" thumbstick-move></a-entity>
+            <a-entity id="rightController" oculus-touch-controls="hand: right">
+                <a-entity raycaster="objects: .collidable" cursor></a-entity>
+            </a-entity>
+            <!-- <a-box></a-box> -->
+        </a-entity>
 
         <!-- SKY -->
         <a-sky color="#ADD8E6"></a-sky>
@@ -119,24 +123,20 @@
         <a-box position="7 2.5 0" shadow="cast: true; receive: true" scale="20 5 1" rotation="0 90 0" color="#d4bc96"
             material="roughness: 1" static-body></a-box>
         <!-- Left Wall -->
-        <!-- right -->
-        <a-box position="-7 2.5 -9" shadow="cast: true; receive: true" scale="3 5 1" rotation="0 90 0" color="#d4bc96"
-            static-body></a-box>
-        <!-- left -->
-        <a-box position="-7 2.5 9" shadow="cast: true; receive: true" scale="3 5 1" rotation="0 90 0" color="#d4bc96"
-            static-body></a-box>
-        <!-- middleleft -->
-        <a-box position="-7 2.5 -3" shadow="cast: true; receive: true" scale="3 5 1" rotation="0 90 0" color="#d4bc96"
-            static-body></a-box>
-        <!-- middleleft -->
-        <a-box position="-7 2.5 3" shadow="cast: true; receive: true" scale="3 5 1" rotation="0 90 0" color="#d4bc96"
-            static-body></a-box>
-        <!-- bottom -->
-        <a-box position="-7 0.5 0" shadow="cast: true; receive: true" scale="20 1 1" rotation="0 90 0" color="#d4bc96"
-            static-body></a-box>
-        <!-- top -->
-        <a-box position="-7 4.3 0" shadow="cast: true; receive: true" scale="20 1.5 1" repeat="40 40 1"
-            rotation="0 90 0" color="#d4bc96" static-body></a-box>
+        <a-entity shadow="cast: true; receive: true" static-body>
+            <!-- right -->
+            <a-box position="-7 2.5 -9" scale="3 5 1" rotation="0 90 0" color="#d4bc96"></a-box>
+            <!-- left -->
+            <a-box position="-7 2.5 9" scale="3 5 1" rotation="0 90 0" color="#d4bc96"></a-box>
+            <!-- middleleft -->
+            <a-box position="-7 2.5 -3" scale="3 5 1" rotation="0 90 0" color="#d4bc96"></a-box>
+            <!-- middleleft -->
+            <a-box position="-7 2.5 3" scale="3 5 1" rotation="0 90 0" color="#d4bc96"></a-box>
+            <!-- bottom -->
+            <a-box position="-7 0.5 0" scale="20 1 1" rotation="0 90 0" color="#d4bc96"></a-box>
+            <!-- top -->
+            <a-box position="-7 4.3 0" scale="20 1.5 1" repeat="40 40 1" rotation="0 90 0" color="#d4bc96"></a-box>
+        </a-entity>
 
         <!-- Windows -->
         <!-- center -->
@@ -314,7 +314,7 @@
         </a-entity>
 
         <!-- Chairs -->
-        <a-entity gltf-model="#chair" position="-1.8 0.45 -1.7" scale="0.1 0.08 0.1" rotation="0 180 0"
+        <a-entity gltf-model="#chair" position="-1.8 1 -1.7" scale="0.1 0.08 0.1" rotation="0 180 0"
             shadow="receive: true" dynamic-body>
         </a-entity>
         <a-entity gltf-model="#chair" position="-3.2 0.45 -1.7" scale="0.1 0.08 0.1" rotation="0 180 0"
