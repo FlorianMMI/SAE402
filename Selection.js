@@ -274,3 +274,5 @@ car.addEventListener("click", function () {
 
   scene.appendChild(aText);
 });
+
+
