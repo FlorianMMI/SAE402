@@ -25,21 +25,34 @@ let data = [
     "Mouse": "Souris",
     "Webcam": "Webcam",
   }
+
+],
+paintData : [
+  {
+    "Canvas": "Toile",
+    "Brush": "Pinceau",
+    "Palette": "Palette",
+    "Easel": "Chevalet",
+  }
 ],
 }
 ]
-// import { data } from "./data.js";
+
+
+
 
 var scene = document.querySelector("a-scene");
 
+let cpt_obj = 0;
 
-// Création de la lumière
-var light = document.createElement("a-light");
-light.setAttribute("type", "point");
-light.setAttribute("color", "#FFFFFF");
-light.setAttribute("intensity", "1"); // Ajuste l'intensité pour éviter une trop forte luminosité
-light.setAttribute("distance", "3");
-light.setAttribute("position", "0 1 -2"); // Ajuste la position pour l'effet visuel
+const counterText = document.createElement("a-text");
+counterText.setAttribute("id", "counter-text");
+counterText.setAttribute("value", "Objet " + cpt_obj +"/4");
+counterText.setAttribute("position", "1.2 2.1 -9.47");
+counterText.setAttribute("scale", "0.5 0.5 0.5");
+scene.appendChild(counterText);
+
+
 
 
 var computer = document.getElementById("computer-");
@@ -81,11 +94,19 @@ computer.addEventListener("mouseleave", function () {
 });
 
 computer.addEventListener("click", function () {
+  
   const existingText = document.querySelector("#vocab-comp");
   if (existingText) {
     scene.removeChild(existingText);
+    cpt_obj--;
     
   }
+
+
+  cpt_obj++;
+  isFound();
+
+  counterText.setAttribute("value", "Objet " + cpt_obj +"/4");
 
 
   const aText = document.createElement("a-text");
@@ -165,10 +186,17 @@ book.addEventListener("click", function () {
 
   const existingText = document.querySelector("#vocab-book");
   
+  
+
   if (existingText) {
     scene.removeChild(existingText);
+    cpt_obj--;
     
   }
+
+  cpt_obj++;
+  isFound();
+  counterText.setAttribute("value", "Objet " + cpt_obj +"/4");
 
  
   
@@ -191,6 +219,86 @@ book.addEventListener("click", function () {
   aText.setAttribute("rotation", `0 0 0`);
   scene.appendChild(aText);
   
+});
+
+
+// Création de l'entité peinture (paint)
+var paint = document.getElementById("paint-");
+scene.appendChild(paint);
+
+paint.addEventListener("mouseenter", function () {
+  paint.setAttribute("animation", {
+    property: "scale",
+    to: "0.11 0.11 0.11",
+    dur: 200
+  });
+  var brushIcon = document.createElement("a-entity");
+  brushIcon.setAttribute("obj-model", "obj: #loupe-obj; mtl: #loupe-materiaux");
+  brushIcon.id = "brush-icon";
+  brushIcon.setAttribute("position", "0 5 -5");
+  brushIcon.setAttribute("scale", "5 5 5");
+
+  var camera = document.querySelector("[camera]");
+  var cameraPosition = camera.getAttribute("position");
+  var paintPosition = paint.getAttribute("position");
+
+  var dx = cameraPosition.x - paintPosition.x;
+  var dz = cameraPosition.z - paintPosition.z;
+  var rotationY = Math.atan2(dx, dz) * (180 / Math.PI) + 45;
+  brushIcon.setAttribute("rotation", `45 ${rotationY} 0`);
+
+  paint.appendChild(brushIcon);
+});
+
+paint.addEventListener("mouseleave", function () {
+  var brushIcon = document.getElementById("brush-icon");
+  if (brushIcon) {
+    paint.removeChild(brushIcon);
+  }
+  paint.setAttribute("animation", {
+    property: "scale",
+    to: "0.1 0.1 0.1",
+    dur: 200
+  });
+});
+
+paint.addEventListener("click", function () {
+
+  
+  const existingText = document.querySelector("#vocab-paint");
+  
+  if (existingText) {
+    scene.removeChild(existingText);
+    cpt_obj--;
+    
+  }
+
+  cpt_obj++;
+  isFound();
+  counterText.setAttribute("value", "Objet " + cpt_obj +"/4");
+
+  const aText = document.createElement("a-text");
+
+
+  let paintObj = data[0].paintData[0];
+  let lines = [];
+  for (let key in paintObj) {
+    lines.push(key + " --> " + paintObj[key]);
+  }
+  aText.setAttribute("id", "vocab-paint");
+  aText.setAttribute("value", lines.join("\n"));
+  aText.setAttribute("scale", "0.5 0.5 0.5");
+  aText.setAttribute("position", `-2.5 2.1 -9.47`);
+  aText.setAttribute("align", "left");
+  aText.setAttribute("font", "./assets/font/Gloria-msdf.json");
+  aText.setAttribute("font-image", "./assets/font/Gloria-msdf.png");
+  aText.setAttribute("negate", "false");
+  aText.setAttribute("color", "#FFF");
+  aText.setAttribute("rotation", `0 0 0`);
+
+
+  scene.appendChild(aText);
+
 });
 
 
@@ -240,12 +348,19 @@ car.addEventListener("mouseleave", function () {
 car.addEventListener("click", function () {
   console.log("click");
 
+  
+
   const existingText = document.querySelector("#vocab-car");
   
   if (existingText) {
     scene.removeChild(existingText);
+    cpt_obj--;
     
   }
+
+  cpt_obj++;
+  isFound();
+  counterText.setAttribute("value", "Objet " + cpt_obj +"/4");
 
 
 
@@ -263,8 +378,8 @@ car.addEventListener("click", function () {
   aText.setAttribute("id", "vocab-car"); 
   aText.setAttribute("value", lines.join("\n"));
   aText.setAttribute("scale", "0.5 0.5 0.5");
-  aText.setAttribute("position", `-1.97 3 -9.47`);
-  aText.setAttribute("align", "center");
+  aText.setAttribute("position", `-2.5 3 -9.47`);
+  aText.setAttribute("align", "left");
   aText.setAttribute("font", "./assets/font/Gloria-msdf.json");
   aText.setAttribute("font-image", "./assets/font/Gloria-msdf.png");
   aText.setAttribute("negate", "false");  
@@ -276,3 +391,21 @@ car.addEventListener("click", function () {
 });
 
 
+
+
+
+
+
+function isFound() {
+  if (cpt_obj == 4) {
+    const foundText = document.createElement("a-text");
+    foundText.setAttribute("id", "found-text");
+    foundText.setAttribute("value", "Passez au test");
+    foundText.setAttribute("position", "1.2 3 -9.47");
+    foundText.setAttribute("scale", "0.5 0.5 0.5"); 
+    foundText.setAttribute("font", "./assets/font/Gloria-msdf.json");
+    foundText.setAttribute("font-image", "./assets/font/Gloria-msdf.png");
+    foundText.setAttribute("negate", "false");
+    scene.appendChild(foundText);
+  }
+}

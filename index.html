@@ -46,6 +46,7 @@
             <a-asset-item id="car" src="models/Car.glb"></a-asset-item>
             <a-asset-item id = "computer" src="models/Laptop.glb"></a-asset-item>
             <a-asset-item id="character" src="models/teacher/Adventurer.glb"></a-asset-item> 
+            <a-asset-item id = "paint" src="models/Paint.glb"></a-asset-item>
             <img id="ground" src="assets/parquet.jpg">
             <img id="grass" src="assets/grass.jpg">
 
@@ -129,6 +130,7 @@
             light="intensity: 0.35; castShadow: true; shadowRadius: 30"></a-light>
 
 
+        
 
 
 
@@ -330,6 +332,12 @@
                 class="collidable">
         </a-entity>
 
+        <a-entity id="paint-" gltf-model="#paint"
+                position="6.47 1.443 -3"
+                scale="0.1 0.1 0.1"
+                rotation="0 90 0"
+                class="collidable">
+        </a-entity>
         
 
         <a-entity id="computer-" gltf-model="#computer"
