@@ -1,4 +1,4 @@
-// déplacement avec joystick
+// Joystick
 AFRAME.registerComponent("thumbstick-move", {
   init: function () {
     let rig = document.getElementById("rig");
@@ -30,8 +30,6 @@ AFRAME.registerComponent("thumbstick-move", {
     });
   },
 });
-
-// collisions
 
 function moveToPosition(object, targetPosition) {
   var currentPosition = object.getAttribute("position");

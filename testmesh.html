@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Trouble VR</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+
+    <!-- physiques -->
+    <script
+        src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.4/dist/aframe-extras.min.js"></script>
+    <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
+
+</head>
+
+<body>
+    <a-scene inspector-plugin-recast>
+        <!-- sol -->
+        <a-plane position="-0.02" scale="13 19 0.04" rotation="-90 0 0" color="blue"></a-plane>
+        <!-- tables -->
+        <a-box position="2.5 1.3 -3" scale="3 0.1 1.8" color="#8B5A2B"></a-box>
+        <a-box position="-2.5 1.3 -3" scale="3 0.1 1.8" color="#8B5A2B"></a-box>
+        <a-box position="2.5 1.3 1" scale="3 0.1 1.8" color="#8B5A2B"></a-box>
+        <a-box position="-2.5 1.3 1" scale="3 0.1 1.8" color="#8B5A2B"></a-box>
+        <a-box position="2.5 1.3 5" scale="3 0.1 1.8" color="#8B5A2B"></a-box>
+        <a-box position="-2.5 1.3 5" scale="3 0.1 1.8" color="#8B5A2B"></a-box>
+        <!-- bureau -->
+        <a-box static-body position="-2.6 1.3 -6.35" scale="3 0.15 1.8" color="#8B5A2B"></a-box>
+        <!-- bibliotheque -->
+        <a-box static-body position="6.1 1.3 0" scale="1.2 0.15 3.4" color="#8B5A2B"></a-box>
+    </a-scene>
+</body>
+
+</html>
