@@ -11,12 +11,13 @@
             src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
         <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.4/dist/aframe-extras.min.js"></script>
-        <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
+        <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script> 
+        <link rel="stylesheet" href="./style.css">
     
     </head>
 
 <body>
-    <a-scene physics="gravity: -9.8; restitution: 0.8" inspector-plugin-recast>
+    <a-scene physics="gravity: -9.8; restitution: 0.8" inspector-plugin-recast loading-screen="dotsColor: white; backgroundColor: #093e2e">
 
         <a-entity progressive-controls></a-entity>
 
