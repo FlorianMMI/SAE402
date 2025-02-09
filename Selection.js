@@ -427,9 +427,7 @@ function isFound() {
       console.log("found");
       ["vocab-comp", "vocab-book", "vocab-paint", "vocab-car"].forEach(function(id) {
         var el = document.getElementById(id);
-        if (el) {
           scene.removeChild(el);
-        }
       });
     });
 
