@@ -305,7 +305,7 @@ let renderCharacter = function () {
     ascene.removeChild(box4);
     ascene.removeChild(box5);
     ascene.removeChild(aText);
-    }, 5000);
+    }, 3000);
   };
 renderMarket();
 renderCharacter ();

@@ -6,25 +6,26 @@
         <title>Class Trouble VR</title>
         <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
     
-        <!-- physiques -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script> -->
+
+        <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.4/dist/aframe-extras.min.js"></script>
+        <script
+        src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.3.7/dist/aframe-environment-component.min.js"></script>
         <script
             src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.4/dist/aframe-extras.min.js"></script>
-        <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script> 
         <link rel="stylesheet" href="./style.css">
     
     </head>
 
 <body>
-    <a-scene physics="gravity: -9.8; restitution: 0.8" inspector-plugin-recast loading-screen="dotsColor: white; backgroundColor: #093e2e">
+    <a-scene physics="gravity: -9.8; restitution: 0.8" loading-screen="dotsColor: white; backgroundColor: #093e2e">
 
         <a-entity progressive-controls></a-entity>
 
         <a-light type="ambient" color="#FFF" intensity="1"></a-light>
 
         <a-assets>
-            <a-asset-item id="navmesh" src="models/navmesh.glb"></a-asset-item>
+            <a-asset-item id="navmesh" src="models/navmesh.gltf"></a-asset-item>
             <a-asset-item id="shelf" src="models/Wall Shelf.glb"></a-asset-item>
             <a-asset-item id="notebook-materiaux" src="models/Livre/book.mtl"></a-asset-item>
             <a-asset-item id="notebook-obj" src="models/Livre/book.obj"></a-asset-item>
@@ -75,21 +76,24 @@
             </a-asset-item>
         </a-assets>
 
-        <a-entity id="navmesh-entity" nav-mesh visible="false" position="0 0 0" gltf-model="#navmesh"></a-entity>
+        <a-entity progressive-controls></a-entity>
 
-        <a-entity id="rig" position="0 1 4" movement-controls="constrainToNavMesh: true; speed: 0.05">
-            <a-camera id="camera" wasd-controls="acceleration: 15" look-controls="pointerLockEnabled: true;"
-                position="0 1.5 4">
+        <a-entity id="rig" movement-controls="constrainToNavMesh: true;
+                                   controls: checkpoint, gamepad, trackpad, keyboard, nipple;" position="0 1 0">
+            <a-entity camera position="0 1.5 0" look-controls="pointerLockEnabled: true">
                 <a-entity cursor position="0 0 -0.01" geometry="primitive: sphere; radius: 0.00005"
                     material="color: #202020; shader: flat">
                 </a-entity>
-            </a-camera>
+            </a-entity>
             <a-entity id="leftController" oculus-touch-controls="hand: left" thumbstick-move></a-entity>
             <a-entity id="rightController" oculus-touch-controls="hand: right">
                 <a-entity raycaster="objects: .collidable" cursor></a-entity>
             </a-entity>
-            <!-- <a-box></a-box> -->
         </a-entity>
+
+
+        <!-- NavMesh -->
+        <a-entity nav-mesh normal-material visible="false" position="0 1 0" gltf-model="#navmesh"></a-entity>
 
         <!-- SKY -->
         <a-sky color="#ADD8E6"></a-sky>

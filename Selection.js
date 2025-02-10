@@ -23,7 +23,7 @@ let data = [
     "Screen": "Ecran",
     "Keyboard": "Clavier",
     "Mouse": "Souris",
-    "Webcam": "Webcam",
+    "Webcam": "Caméra",
   }
 
 ],
