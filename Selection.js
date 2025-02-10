@@ -398,6 +398,8 @@ car.addEventListener("click", function () {
 
 
 
+let found = document.getElementById("found-text");
+// Moved the event listener inside isFound so that found-text exists when attaching it.
 function isFound() {
   if (cpt_obj == 4) {
     const foundText = document.createElement("a-text");
@@ -414,7 +416,9 @@ function isFound() {
       console.log("found");
       ["vocab-comp", "vocab-book", "vocab-paint", "vocab-car"].forEach(function(id) {
         var el = document.getElementById(id);
-        scene.removeChild(el);
+        if (el) {
+          scene.removeChild(el);
+        }
       });
     });
 
