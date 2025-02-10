@@ -137,14 +137,14 @@ computer.addEventListener("click", function () {
 // Création de l'entité livre (book)
 var book = document.createElement("a-entity");
 book = document.getElementById("book");
-book.setAttribute("position", "2.2 1.443 -3");
+book.setAttribute("position", "5.950 2.00 0.650");
 drawer1 = document.getElementById("drawer1");
 scene.appendChild(book);
 
 book.addEventListener("mouseenter", function () {
   book.setAttribute("animation", {
     property: "scale",
-    to: "0.6 0.6 0.6",
+    to: "0.4 0.4 0.4",
     dur: 200
   });
   var eyeIcon = document.createElement("a-entity");
@@ -175,7 +175,7 @@ book.addEventListener("mouseleave", function () {
 book.addEventListener("mouseleave", function () {
   book.setAttribute("animation", {
     property: "scale",
-    to: "0.5 0.5 0.5",
+    to: "0.3 0.3 0.3",
     dur: 200
   });
 });
@@ -391,21 +391,39 @@ car.addEventListener("click", function () {
 });
 
 
+// Removed duplicate isFound() definition; only the version with the click event listener is kept.
 
-
-
-
-
+let found = document.getElementById("found-text");
+// Moved the event listener inside isFound so that found-text exists when attaching it.
 function isFound() {
   if (cpt_obj == 4) {
     const foundText = document.createElement("a-text");
     foundText.setAttribute("id", "found-text");
-    foundText.setAttribute("value", "Passez au test");
-    foundText.setAttribute("position", "1.2 3 -9.47");
+    foundText.setAttribute("value", "Proceed to the test");
+    foundText.setAttribute("position", "1.2 2.5 -9.47");
     foundText.setAttribute("scale", "0.5 0.5 0.5"); 
     foundText.setAttribute("font", "./assets/font/Gloria-msdf.json");
     foundText.setAttribute("font-image", "./assets/font/Gloria-msdf.png");
     foundText.setAttribute("negate", "false");
+    const testBox = document.createElement("a-box");
+    testBox.setAttribute("id", "test-button");
+    testBox.setAttribute("visible", "false");
+    testBox.setAttribute("position", "1.2 2.5 -9.47");
+    testBox.setAttribute("width", "2");
+    testBox.setAttribute("height", "0.5");
+
+    foundText.setAttribute("class", "clickable");
+    testBox.addEventListener("click", function () {
+      console.log("found");
+      ["vocab-comp", "vocab-book", "vocab-paint", "vocab-car"].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) {
+        scene.removeChild(el);
+      }
+      });
+    });
+
+    scene.appendChild(testBox);
     scene.appendChild(foundText);
   }
 }
