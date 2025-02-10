@@ -47,9 +47,12 @@ let cpt_obj = 0;
 
 const counterText = document.createElement("a-text");
 counterText.setAttribute("id", "counter-text");
-counterText.setAttribute("value", "Objet " + cpt_obj +"/4");
-counterText.setAttribute("position", "1.2 2.1 -9.47");
+counterText.setAttribute("value", "Object " + cpt_obj +"/4");
+counterText.setAttribute("position", "1.2 3.2 -9.47");
 counterText.setAttribute("scale", "0.5 0.5 0.5");
+counterText.setAttribute("font", "./assets/font/Gloria-msdf.json");
+counterText.setAttribute("font-image", "./assets/font/Gloria-msdf.png");
+counterText.setAttribute("negate", "false");
 scene.appendChild(counterText);
 
 
@@ -360,7 +363,7 @@ car.addEventListener("click", function () {
 
   cpt_obj++;
   isFound();
-  counterText.setAttribute("value", "Objet " + cpt_obj +"/4");
+  counterText.setAttribute("value", "Object " + cpt_obj +"/4");
 
 
 
@@ -406,6 +409,31 @@ function isFound() {
     foundText.setAttribute("font", "./assets/font/Gloria-msdf.json");
     foundText.setAttribute("font-image", "./assets/font/Gloria-msdf.png");
     foundText.setAttribute("negate", "false");
+    scene.appendChild(foundText);
+  }
+}
+
+let found = document.getElementById("found-text");
+// Moved the event listener inside isFound so that found-text exists when attaching it.
+function isFound() {
+  if (cpt_obj == 4) {
+    const foundText = document.createElement("a-text");
+    foundText.setAttribute("id", "found-text");
+    foundText.setAttribute("value", "Proceed to the test");
+    foundText.setAttribute("position", "1.2 3 -9.47");
+    foundText.setAttribute("scale", "0.5 0.5 0.5"); 
+    foundText.setAttribute("font", "./assets/font/Gloria-msdf.json");
+    foundText.setAttribute("font-image", "./assets/font/Gloria-msdf.png");
+    foundText.setAttribute("negate", "false");
+
+    foundText.addEventListener("click", function () {
+      console.log("found");
+      ["vocab-comp", "vocab-book", "vocab-paint", "vocab-car"].forEach(function(id) {
+        var el = document.getElementById(id);
+          scene.removeChild(el);
+      });
+    });
+
     scene.appendChild(foundText);
   }
 }
