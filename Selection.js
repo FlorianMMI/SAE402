@@ -23,7 +23,7 @@ let data = [
     "Screen": "Ecran",
     "Keyboard": "Clavier",
     "Mouse": "Souris",
-    "Webcam": "Webcam",
+    "Webcam": "Camera",
   }
 
 ],
@@ -398,23 +398,6 @@ car.addEventListener("click", function () {
 
 
 
-
-function isFound() {
-  if (cpt_obj == 4) {
-    const foundText = document.createElement("a-text");
-    foundText.setAttribute("id", "found-text");
-    foundText.setAttribute("value", "Passez au test");
-    foundText.setAttribute("position", "1.2 3 -9.47");
-    foundText.setAttribute("scale", "0.5 0.5 0.5"); 
-    foundText.setAttribute("font", "./assets/font/Gloria-msdf.json");
-    foundText.setAttribute("font-image", "./assets/font/Gloria-msdf.png");
-    foundText.setAttribute("negate", "false");
-    scene.appendChild(foundText);
-  }
-}
-
-let found = document.getElementById("found-text");
-// Moved the event listener inside isFound so that found-text exists when attaching it.
 function isFound() {
   if (cpt_obj == 4) {
     const foundText = document.createElement("a-text");
@@ -426,11 +409,12 @@ function isFound() {
     foundText.setAttribute("font-image", "./assets/font/Gloria-msdf.png");
     foundText.setAttribute("negate", "false");
 
+    foundText.setAttribute("class", "clickable");
     foundText.addEventListener("click", function () {
       console.log("found");
       ["vocab-comp", "vocab-book", "vocab-paint", "vocab-car"].forEach(function(id) {
         var el = document.getElementById(id);
-          scene.removeChild(el);
+        scene.removeChild(el);
       });
     });
 
