@@ -94,9 +94,29 @@ AFRAME.registerComponent("click-grab", {
         isGrabbed = true;
         el.setAttribute("dynamic-body", "mass: 0");
         window.addEventListener("mousemove", updatePosition);
+        launcher.setAttribute("static-body", "");
       });
 
       rightController.addEventListener("triggerup", function () {
+        if (isGrabbed) {
+          isGrabbed = false;
+          el.setAttribute("dynamic-body", "mass: 1");
+          window.removeEventListener("mousemove", updatePosition);
+          setTimeout(() => {
+            launcher.removeAttribute("static-body");
+          }, 100);
+        }
+      });
+    }
+    let leftController = document.querySelector("#leftController");
+    if (leftController) {
+      leftController.addEventListener("triggerdown", function () {
+        isGrabbed = true;
+        el.setAttribute("dynamic-body", "mass: 0");
+        window.addEventListener("mousemove", updatePosition);
+      });
+
+      leftController.addEventListener("triggerup", function () {
         if (isGrabbed) {
           isGrabbed = false;
           el.setAttribute("dynamic-body", "mass: 1");
@@ -107,35 +127,7 @@ AFRAME.registerComponent("click-grab", {
   },
 });
 
-//
-
-function moveToPosition(object, targetPosition) {
-  var currentPosition = object.getAttribute("position");
-  var step = 0.01;
-
-  function animate() {
-    var dx = targetPosition.x - currentPosition.x;
-    var dy = targetPosition.y - currentPosition.y;
-    var dz = targetPosition.z - currentPosition.z;
-
-    var distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-    if (distance < step) {
-      object.setAttribute("position", targetPosition);
-      return;
-    }
-
-    currentPosition.x += (dx * step) / distance;
-    currentPosition.y += (dy * step) / distance;
-    currentPosition.z += (dz * step) / distance;
-
-    object.setAttribute("position", currentPosition);
-
-    requestAnimationFrame(animate);
-  }
-
-  animate();
-}
+// DRAWER
 
 document.querySelector("#drawer1").addEventListener("click", function () {
   var drawer1 = document.querySelector("#drawer1");
@@ -144,9 +136,15 @@ document.querySelector("#drawer1").addEventListener("click", function () {
     drawer1.getAttribute("position").y == 0 &&
     drawer1.getAttribute("position").z == -5
   ) {
-    moveToPosition(drawer1, { x: -2.6, y: 0, z: -4.35 });
+    drawer1.setAttribute(
+      "animation",
+      "property: position; to: -2.6 0 -4.35; dur: 1000; easing: linear"
+    );
   } else {
-    moveToPosition(drawer1, { x: -2.6, y: 0, z: -5 });
+    drawer1.setAttribute(
+      "animation",
+      "property: position; to: -2.6 0 -5; dur: 1000; easing: linear"
+    );
   }
 });
 
@@ -157,9 +155,15 @@ document.querySelector("#drawer2").addEventListener("click", function () {
     drawer2.getAttribute("position").y == 0.5 &&
     drawer2.getAttribute("position").z == -5
   ) {
-    moveToPosition(drawer2, { x: -2.6, y: 0.5, z: -4.35 });
+    drawer2.setAttribute(
+      "animation",
+      "property: position; to: -2.6 0.5 -4.35; dur: 1000; easing: linear"
+    );
   } else {
-    moveToPosition(drawer2, { x: -2.6, y: 0.5, z: -5 });
+    drawer2.setAttribute(
+      "animation",
+      "property: position; to: -2.6 0.5 -5; dur: 1000; easing: linear"
+    );
   }
 });
 
@@ -170,8 +174,14 @@ document.querySelector("#drawer3").addEventListener("click", function () {
     drawer3.getAttribute("position").y == 1 &&
     drawer3.getAttribute("position").z == -5
   ) {
-    moveToPosition(drawer3, { x: -2.6, y: 1, z: -4.35 });
+    drawer3.setAttribute(
+      "animation",
+      "property: position; to: -2.6 1 -4.35; dur: 1000; easing: linear"
+    );
   } else {
-    moveToPosition(drawer3, { x: -2.6, y: 1, z: -5 });
+    drawer3.setAttribute(
+      "animation",
+      "property: position; to: -2.6 1 -5; dur: 1000; easing: linear"
+    );
   }
 });
