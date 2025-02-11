@@ -1,3 +1,8 @@
+import { StartTest } from './test.js';
+
+
+
+
 let data = [
   { car : [
     {
@@ -138,7 +143,7 @@ computer.addEventListener("click", function () {
 var book = document.createElement("a-entity");
 book = document.getElementById("book");
 book.setAttribute("position", "5.950 2.00 0.650");
-drawer1 = document.getElementById("drawer1");
+// drawer1 = document.getElementById("drawer1");
 scene.appendChild(book);
 
 book.addEventListener("mouseenter", function () {
@@ -302,7 +307,7 @@ paint.addEventListener("click", function () {
 });
 
 
-car = document.getElementById("car-");
+let car = document.getElementById("car-");
 
 console.log(car);
 
@@ -419,6 +424,8 @@ function isFound() {
       var el = document.getElementById(id);
       if (el) {
         scene.removeChild(el);
+        StartTest();
+
       }
       });
     });

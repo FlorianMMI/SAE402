@@ -1,0 +1,54 @@
+[
+    {
+        "id_question": 1,
+        "texte_question": "How do you say \"chat\" in English?",
+        "niveau_question": 1,
+        "reponses": [
+            {
+                "id_question": 1,
+                "texte_reponse": "cat",
+                "est_correcte": true
+            },
+            {
+                "id_question": 1,
+                "texte_reponse": "chat",
+                "est_correcte": false
+            }
+        ]
+    },
+    {
+        "id_question": 2,
+        "texte_question": "How do you say \"chien\" in English?",
+        "niveau_question": 1,
+        "reponses": [
+            {
+                "id_question": 2,
+                "texte_reponse": "dog",
+                "est_correcte": true
+            },
+            {
+                "id_question": 2,
+                "texte_reponse": "chien",
+                "est_correcte": false
+            }
+        ]
+    },
+    {
+        "id_question": 3,
+        "texte_question": "How do you say \"maison\" in English?",
+        "niveau_question": 1,
+        "reponses": [
+            {
+                "id_question": 3,
+                "texte_reponse": "house",
+                "est_correcte": true
+            },
+            {
+                "id_question": 3,
+                "texte_reponse": "home",
+                "est_correcte": false
+            }
+        ]
+    }
+]
+
