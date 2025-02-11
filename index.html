@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Class Trouble VR</title>
-        <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-    
-        <!-- <script src="https://cdn.jsdelivr.net/npm/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script> -->
 
-        <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.4/dist/aframe-extras.min.js"></script>
-        <script
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Trouble VR</title>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script> -->
+
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.4/dist/aframe-extras.min.js"></script>
+    <script
         src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.3.7/dist/aframe-environment-component.min.js"></script>
-        <script
-            src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.js"></script>
-        <link rel="stylesheet" href="./style.css">
-    
-    </head>
+    <script
+        src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.js"></script>
+    <link rel="stylesheet" href="./style.css">
+
+</head>
 
 <body>
     <a-scene physics="gravity: -9.8; restitution: 0.8" loading-screen="dotsColor: white; backgroundColor: #093e2e">
@@ -32,8 +33,8 @@
             <a-asset-item id="loupe-obj" src="models/Loupe/loupe.obj"></a-asset-item>
             <a-asset-item id="loupe-materiaux" src="models/Loupe/loupe.mtl"></a-asset-item>
             <a-asset-item id="car" src="models/Car.glb"></a-asset-item>
-            <a-asset-item id = "computer" src="models/Laptop.glb"></a-asset-item>
-            <a-asset-item id="character" src="models/teacher/Beach Character.glb"></a-asset-item> 
+            <a-asset-item id="computer" src="models/Laptop.glb"></a-asset-item>
+            <a-asset-item id="character" src="models/teacher/Beach Character.glb"></a-asset-item>
             <img id="ground" src="assets/parquet.jpg">
             <img id="grass" src="assets/grass.jpg">
 
@@ -47,7 +48,7 @@
             <a-asset-item id="fence-m" src="models/fence.mtl"></a-asset-item>
 
             <a-asset-item id="table-shop" src="models/Table.glb"></a-asset-item>
-            
+
             <a-asset-item id="Court-o" src="models/character/BasketBallCourt.obj"></a-asset-item>
             <a-asset-item id="Court-m" src="models/character/BasketBallCourt.mtl"></a-asset-item>
 
@@ -70,7 +71,7 @@
             <a-asset-item id="stand-o" src="models/stand/model.obj"></a-asset-item>
             <a-asset-item id="stand-m" src="models/stand/materials.mtl"></a-asset-item>
 
-            <a-asset-item id = "paint" src="models/Paint.glb"></a-asset-item>
+            <a-asset-item id="paint" src="models/Paint.glb"></a-asset-item>
             <a-asset-item id="player-1" src="models/character/Citizen 1.glb" dynamic-body></a-asset-item>
             <a-asset-item id="player-2" src="models/character/Citizen 2.glb"></a-asset-item>
             <a-asset-item id="player-3" src="models/character/Citizen 3.glb"></a-asset-item>
@@ -87,7 +88,7 @@
 
             <a-asset-item id="ball" src="models/character/Basketball.glb"></a-asset-item>
 
-            <a-asset-item id="deskchair" src="models/deskchair.glb">
+            <a-asset-item id="deskchair" src="models/deskchair.glb"></a-asset-item>
             <a-asset-item id="bookshelf" src="models/bookshelf.glb"></a-asset-item>
 
             <a-asset-item id="plant" src="models/plant.glb"></a-asset-item>
@@ -98,7 +99,7 @@
 
             <a-asset-item id="Snorlax" src="models/Low Poly Snorlax.glb"></a-asset-item>
             <a-asset-item id="Market" src="models/Market Stand.glb"></a-asset-item>
-            </a-asset-item>
+
         </a-assets>
 
         <a-entity progressive-controls></a-entity>
@@ -111,7 +112,7 @@
                 </a-entity>
             </a-entity>
             <a-box static-body position="0 1 0" scale="0.5 2 0.5" opacity="0"></a-box>
-            <a-sphere id="launcher" position="0 2.5 0" radius="1.5" opacity="0"></a-sphere>
+            <a-sphere id="launcher" position="0 2.5 0" radius="1.7" opacity="0"></a-sphere>
             <a-entity id="leftController" oculus-touch-controls="hand: left" thumbstick-move></a-entity>
             <a-entity id="rightController" oculus-touch-controls="hand: right">
                 <a-entity raycaster="objects: .collidable" cursor></a-entity>
@@ -262,7 +263,7 @@
         <a-entity position="2.5 0 -1" shadow="cast: true; receive: true" id="table">
             <a-box static-body position="0 1.3 -2" scale="3 0.1 1.8" color="#8B5A2B" id="table-top"></a-box>
             <a-box static-body position="0 1.18361 -2" scale="2.68 0.14 1.53" color="#8B5A2B" id="table-top"></a-box>
-            <a-box static-body position="-1.33 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A"  id="table-bot"></a-box>
+            <a-box static-body position="-1.33 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
             <a-box static-body position="1.335 0.64 -1.26" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
             <a-box static-body position="-1.33 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
             <a-box static-body position="1.335 0.64 -2.75" scale="0.1 1.23 0.1" color="#5D3A1A" id="table-bot"></a-box>
@@ -358,61 +359,39 @@
             <a-sphere static-body position="0.64 0.26 -2.9" radius="0.08" color="#8B5A2B"></a-sphere>
         </a-entity>
 
-        <a-entity id = "book" obj-model="obj: #notebook-obj; mtl: #notebook-materiaux"
-                position="2.2 1.443 -3"
-                scale="0.5 0.5 0.5"
-                rotation="0 45 0"
-                class="collidable">
+        <a-entity id="book" obj-model="obj: #notebook-obj; mtl: #notebook-materiaux" position="2.2 1.443 -3"
+            scale="0.5 0.5 0.5" rotation="0 45 0" class="collidable">
         </a-entity>
 
-        <a-entity id="car-" gltf-model="#car"
-                position="-1.9 0.26 -6.85"
-                scale="0.5 0.5 0.5"
-                rotation="0 45 0"
-                class="collidable">
-            </a-entity>
-
-        <a-entity id="computer-" gltf-model="#computer"
-                position="-2 1.80 -6.5"
-
-                scale="0.05 0.05 0.05"
-                rotation="0 215 0"
-                class="collidable">
-        </a-entity>
-
-        <a-entity id="paint-" gltf-model="#paint"
-            position="6.47 1.443 -3"
-            scale="0.1 0.1 0.1"
-            rotation="0 90 0"
+        <a-entity id="car-" gltf-model="#car" position="-1.9 0.26 -6.85" scale="0.5 0.5 0.5" rotation="0 45 0"
             class="collidable">
         </a-entity>
 
-        <a-entity id="Market" gltf-model="#Market"
-                position="5.25 0 8.25"
-                scale="3 4 2"
-                rotation="0 -45 0"
-                class="collidable">
+        <a-entity id="computer-" gltf-model="#computer" position="-2 1.80 -6.5" scale="0.05 0.05 0.05"
+            rotation="0 215 0" class="collidable">
         </a-entity>
 
-        <a-entity id="shelf" gltf-model="#shelf"
-                position="2 2.5 9"
-                scale="1 1 1.25"
-                rotation="0 90 0"
-                class="collidable">
-        </a-entity>
-        <a-entity id="shelf" gltf-model="#shelf"
-            position="2 1 9"
-            scale="1 1 1.25"
-            rotation="0 90 0"
+        <a-entity id="paint-" gltf-model="#paint" position="6.47 1.443 -3" scale="0.1 0.1 0.1" rotation="0 90 0"
             class="collidable">
         </a-entity>
 
-        <a-text id="money" value="1000" position="4.65 3.2 7.5" scale="1.25 1.25 1.25" rotation="0 215 0" color="#000"></a-text>
+        <a-entity id="Market" gltf-model="#Market" position="5.25 0 8.25" scale="3 4 2" rotation="0 -45 0"
+            class="collidable">
+        </a-entity>
+
+        <a-entity id="shelf" gltf-model="#shelf" position="2 2.5 9" scale="1 1 1.25" rotation="0 90 0"
+            class="collidable">
+        </a-entity>
+        <a-entity id="shelf" gltf-model="#shelf" position="2 1 9" scale="1 1 1.25" rotation="0 90 0" class="collidable">
+        </a-entity>
+
+        <a-text id="money" value="1000" position="4.65 3.2 7.5" scale="1.25 1.25 1.25" rotation="0 215 0"
+            color="#000"></a-text>
 
         <!-- OBJECTS -->
         <!-- Tree -->
         <a-entity id="deskchairobject" gltf-model="#deskchair" position="-3.5 0 -7" scale="4 4 4" rotation="0 230 0"
-            shadow="cast: true; receive: true" static-body>
+            shadow="cast: true; receive: true" dynamic-body>
         </a-entity>
         <a-entity obj-model="obj: #tree-o; mtl: #tree-m" position="-20 2 0" scale="5 5 5" rotation="0 180 0"></a-entity>
         <!-- Door -->
@@ -424,116 +403,144 @@
         <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-23.5 0 -20" scale="1.5 1.5 1.5"
             rotation="0 0 0"></a-entity>
         <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-32 0 -20" scale="1.5 1.5 1.5"
-        rotation="0 0 0"></a-entity>
+            rotation="0 0 0"></a-entity>
         <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-40.5 0 -20" scale="1.5 1.5 1.5"
-        rotation="0 0 0"></a-entity>
+            rotation="0 0 0"></a-entity>
         <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-44.8 0 -15.85" scale="1.5 1.5 1.5"
-        rotation="0 90 0"></a-entity>
-        <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-44.8 0 1" scale="1.5 1.5 1.5" rotation="0 90 0"></a-entity>
-        <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-44.8 0 9.5" scale="1.5 1.5 1.5" rotation="0 90 0"></a-entity>
-        <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-44.8 0 18" scale="1.5 1.5 1.5" rotation="0 90 0"></a-entity>
-        <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-44.8 0 26.5" scale="1.5 1.5 1.5" rotation="0 90 0"></a-entity>
-        <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-44.8 0 35" scale="1.5 1.5 1.5" rotation="0 90 0"></a-entity>
-        <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-40.5 0 39.5" scale="1.5 1.5 1.5" rotation="0 0 0"></a-entity>
-        <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-32 0 39.5" scale="1.5 1.5 1.5" rotation="0 0 0"></a-entity>
-        <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-23.5 0 39.5" scale="1.5 1.5 1.5" rotation="0 0 0"></a-entity>
-        <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-15 0 39.5" scale="1.5 1.5 1.5" rotation="0 0 0"></a-entity>
+            rotation="0 90 0"></a-entity>
+        <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-44.8 0 1" scale="1.5 1.5 1.5"
+            rotation="0 90 0"></a-entity>
+        <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-44.8 0 9.5" scale="1.5 1.5 1.5"
+            rotation="0 90 0"></a-entity>
+        <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-44.8 0 18" scale="1.5 1.5 1.5"
+            rotation="0 90 0"></a-entity>
+        <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-44.8 0 26.5" scale="1.5 1.5 1.5"
+            rotation="0 90 0"></a-entity>
+        <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-44.8 0 35" scale="1.5 1.5 1.5"
+            rotation="0 90 0"></a-entity>
+        <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-40.5 0 39.5" scale="1.5 1.5 1.5"
+            rotation="0 0 0"></a-entity>
+        <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-32 0 39.5" scale="1.5 1.5 1.5"
+            rotation="0 0 0"></a-entity>
+        <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-23.5 0 39.5" scale="1.5 1.5 1.5"
+            rotation="0 0 0"></a-entity>
+        <a-entity obj-model="obj: #fence-o; mtl: #fence-m" position="-15 0 39.5" scale="1.5 1.5 1.5"
+            rotation="0 0 0"></a-entity>
 
 
         <!-- Basket -->
         <a-entity obj-model="obj: #Court-o; mtl: #Court-m" position="-38 -.3 -7" scale="0.8 0.8 0.8"></a-entity>
-        <a-entity obj-model="obj: #stand-o; mtl: #stand-m" position="-44.5 .5 -7" scale="4 4 4" rotation="0 -90 0"></a-entity>
-        <a-entity gltf-model="#player-1" position="-38 0 -16" rotation="0 180 0" scale="0.8 0.8 0.8" animation-mixer="clip: CharacterArmature|Sprint; loop: repeat; timeScale: 1"></a-entity>
+        <a-entity obj-model="obj: #stand-o; mtl: #stand-m" position="-44.5 .5 -7" scale="4 4 4"
+            rotation="0 -90 0"></a-entity>
+        <a-entity gltf-model="#player-1" position="-38 0 -16" rotation="0 180 0" scale="0.8 0.8 0.8"
+            animation-mixer="clip: CharacterArmature|Sprint; loop: repeat; timeScale: 1"></a-entity>
         <a-entity gltf-model="#player-2" position="-38 0 -12" rotation="0 180 0" scale="0.8 0.8 0.8"></a-entity>
         <a-entity gltf-model="#player-3" position="-33 0 -17" rotation="0 270 0" scale="0.8 0.8 0.8"></a-entity>
         <a-entity gltf-model="#player-4" position="-38 0 -18" scale="0.8 0.8 0.8"></a-entity>
         <a-entity gltf-model="#grass2" position="-38 -14 -20" scale="100 100 100"></a-entity>
-        
+
         <a-entity gltf-model="#ball" position="-38 2 -14" scale="0.4 0.4 0.4"></a-entity>
 
 
         <!-- Bookshelf -->
         <a-entity gltf-model="#bookshelf" position="5.95 0.7 0" scale="3.5 3.5 3.5" rotation="0 90 0"
-            shadow="cast: true; receive: true">
+            shadow="cast: true; receive: true" static-body>
         </a-entity>
         <!-- Plant -->
-        <a-entity gltf-model="#plant" position="5.95 1.9 -0.5" scale="0.2 0.2 0.2" rotation="0 0 0"
-            shadow="cast: true; receive: true">
+        <a-entity gltf-model="#plant" position="5.95 2.15 -0.5" scale="0.2 0.2 0.2" rotation="0 0 0"
+            shadow="cast: true; receive: true" dynamic-body click-grab>
         </a-entity>
         <!-- Door -->
         <a-entity gltf-model="#door" position="6.35 0 -7" scale="3.5 3.5 3.5" rotation="0 90 0" shadow="receive: true">
         </a-entity>
 
-         <!-- Board -->
-         <a-box static-body position="0 2.7 -9.49" scale="6 2.5 0.01" color="#093e2e"></a-box>
-         <a-box static-body position="-3 2.7 -9.455" scale="0.1 2.5 0.05" color="#885f32"></a-box>
-         <a-box static-body position="3 2.7 -9.455" scale="0.1 2.5 0.05" color="#885f32"></a-box>
-         <a-box static-body position="0 4 -9.455" scale="6.1 0.1 0.05" color="#885f32"></a-box>
-         <a-box static-body position="0 1.4 -9.455" scale="6.1 0.1 0.05" color="#885f32"></a-box>
+        <!-- Board -->
+        <a-box static-body position="0 2.7 -9.49" scale="6 2.5 0.01" color="#093e2e"></a-box>
+        <a-box static-body position="-3 2.7 -9.455" scale="0.1 2.5 0.05" color="#885f32"></a-box>
+        <a-box static-body position="3 2.7 -9.455" scale="0.1 2.5 0.05" color="#885f32"></a-box>
+        <a-box static-body position="0 4 -9.455" scale="6.1 0.1 0.05" color="#885f32"></a-box>
+        <a-box static-body position="0 1.4 -9.455" scale="6.1 0.1 0.05" color="#885f32"></a-box>
 
-         <!-- classmate -->
-         <a-entity gltf-model="#impostor" position="-1.8 1 -1.7" scale="2 2 2"></a-entity>
-         <a-entity gltf-model="#player-6" position="-3.2 1 -1.7" scale="0.6 0.6 0.6" rotation="0 180 0"></a-entity>
-         <a-entity gltf-model="#player-9" position="-1.8 1 2.3" scale=".6 .6 .6" rotation="0 180 0"></a-entity>
-         <a-entity gltf-model="#ninja" position="-3.2 1 2.3" scale=".4 .4 .4" rotation="0 180 0"></a-entity>
-        <a-entity gltf-model="#player-8" position="-1.8 1 6.3" scale=".6 .6 .6" rotation="0 180 0"></a-entity>
-        <a-entity gltf-model="#player-7" position="-3.2 1 6.3" scale=".6 .6 .6" rotation="0 180 0"></a-entity>
-        <a-entity gltf-model="#player-2" position="1.8 1 -1.7" scale=".6 .6 .6" rotation="0 180 0"></a-entity>
-        <a-entity gltf-model="#player-3" position="3.2 1 -1.7" scale=".6 .6 .6" rotation="0 180 0"></a-entity>
+        <!-- classmate -->
+        <a-entity gltf-model="#impostor" position="-1.8 1 -1.7" scale="2 2 2" dynamic-body></a-entity>
+        <a-entity gltf-model="#player-6" position="-3.2 1 -1.7" scale="0.6 0.6 0.6" rotation="0 180 0"
+            dynamic-body></a-entity>
+        <a-entity gltf-model="#player-9" position="-1.8 1 2.3" scale=".6 .6 .6" rotation="0 180 0"
+            dynamic-body></a-entity>
+        <a-entity gltf-model="#ninja" position="-3.2 1 2.3" scale=".4 .4 .4" rotation="0 180 0" dynamic-body></a-entity>
+        <a-entity gltf-model="#player-8" position="-1.8 1 6.3" scale=".6 .6 .6" rotation="0 180 0"
+            dynamic-body></a-entity>
+        <a-entity gltf-model="#player-7" position="-3.2 1 6.3" scale=".6 .6 .6" rotation="0 180 0"
+            dynamic-body></a-entity>
+        <a-entity gltf-model="#player-2" position="1.8 1 -1.7" scale=".6 .6 .6" rotation="0 180 0"
+            dynamic-body></a-entity>
+        <a-entity gltf-model="#player-3" position="3.2 1 -1.7" scale=".6 .6 .6" rotation="0 180 0"
+            dynamic-body></a-entity>
         <!-- <a-entity gltf-model="#player-2" position="1.8 1 2.3" scale=".6 .6 .6" rotation="0 180 0"></a-entity> -->
-        <a-entity gltf-model="#player-1" position="3.2 1 2.3" scale=".6 .6 .6" rotation="0 180 0"></a-entity>
-        <a-entity gltf-model="#player-4" position="1.8 1 6.3" scale=".6 .6 .6" rotation="0 180 0"></a-entity>
-        <a-entity gltf-model="#player-5" position="3.2 1 6.3" scale=".6 .6 .6" rotation="0 180 0"></a-entity>
+        <a-entity gltf-model="#player-1" position="3.2 1 2.3" scale=".6 .6 .6" rotation="0 180 0"
+            dynamic-body></a-entity>
+        <a-entity gltf-model="#player-4" position="1.8 1 6.3" scale=".6 .6 .6" rotation="0 180 0"
+            dynamic-body></a-entity>
+        <a-entity gltf-model="#player-5" position="3.2 1 6.3" scale=".6 .6 .6" rotation="0 180 0"
+            dynamic-body></a-entity>
 
-         
+
 
         <!-- Chairs -->
         <a-entity gltf-model="#chair" position="-1.8 1 -1.7" scale="0.1 0.08 0.1" rotation="0 180 0"
-        shadow="receive: true" dynamic-body click-grab>
+            shadow="receive: true" dynamic-body click-grab>
         </a-entity>
         <a-entity gltf-model="#chair" position="-3.2 0.45 -1.7" scale="0.1 0.08 0.1" rotation="0 180 0"
-        shadow="receive: true" dynamic-body click-grab>
+            shadow="receive: true" dynamic-body click-grab>
         </a-entity>
         <a-entity gltf-model="#chair" position="-1.8 0.45 2.3" scale="0.1 0.08 0.1" rotation="0 180 0"
-        shadow="receive: true" dynamic-body click-grab>
+            shadow="receive: true" dynamic-body click-grab>
         </a-entity>
         <a-entity gltf-model="#chair" position="-3.2 0.45 2.3" scale="0.1 0.08 0.1" rotation="0 180 0"
-        shadow="receive: true" dynamic-body click-grab>
+            shadow="receive: true" dynamic-body click-grab>
         </a-entity>
         <a-entity gltf-model="#chair" position="-1.8 0.45 6.3" scale="0.1 0.08 0.1" rotation="0 180 0"
-        shadow="receive: true" dynamic-body click-grab>
+            shadow="receive: true" dynamic-body click-grab>
         </a-entity>
         <a-entity gltf-model="#chair" position="-3.2 0.45 6.3" scale="0.1 0.08 0.1" rotation="0 180 0"
-        shadow="receive: true" dynamic-body click-grab>
+            shadow="receive: true" dynamic-body click-grab>
         </a-entity>
 
         <a-entity gltf-model="#chair" position="1.8 0.45 -1.7" scale="0.1 0.08 0.1" rotation="0 180 0"
-        shadow="receive: true" dynamic-body click-grab>
+            shadow="receive: true" dynamic-body click-grab>
         </a-entity>
         <a-entity gltf-model="#chair" position="3.2 0.45 -1.7" scale="0.1 0.08 0.1" rotation="0 180 0"
-        shadow="receive: true" dynamic-body click-grab>
+            shadow="receive: true" dynamic-body click-grab>
         </a-entity>
         <a-entity gltf-model="#chair" position="1.8 0.45 2.3" scale="0.1 0.08 0.1" rotation="0 180 0"
-        shadow="receive: true" dynamic-body click-grab>
+            shadow="receive: true" dynamic-body click-grab>
         </a-entity>
         <a-entity gltf-model="#chair" position="3.2 0.45 2.3" scale="0.1 0.08 0.1" rotation="0 180 0"
-        shadow="receive: true" dynamic-body click-grab>
+            shadow="receive: true" dynamic-body click-grab>
         </a-entity>
         <a-entity gltf-model="#chair" position="1.8 0.45 6.3" scale="0.1 0.08 0.1" rotation="0 180 0"
-        shadow="receive: true" dynamic-body click-grab>
+            shadow="receive: true" dynamic-body click-grab>
         </a-entity>
         <a-entity gltf-model="#chair" position="3.2 0.45 6.3" scale="0.1 0.08 0.1" rotation="0 180 0"
-        shadow="receive: true" dynamic-body click-grab>
+            shadow="receive: true" dynamic-body click-grab>
         </a-entity>
 
         <!-- fish tank -->
         <a-entity gltf-model="#fishTank" position="-4 1.5 9" scale="1.5 1 1" rotation="0 90 0">
-            <a-entity gltf-model="#shark" position="0 1 1" scale=".1 .1 .1" rotation="0 -180 0" animation-mixer="clip: SharkArmature|SharkArmature|SharkArmature|Swim_Bite|SharkArmature|Swim_Bite; loop: repeat; timeScale: 1" animation__position="property: position; to: 0 .5 -1; dur: 5000; easing: linear; loop: true; dir: alternate" animation__rotation="property: rotation; to: 0 180 0; dur: 10000; easing: linear; loop: true; dir: alternate" ></a-entity>
+            <a-entity gltf-model="#shark" position="0 1 1" scale=".1 .1 .1" rotation="0 -180 0"
+                animation-mixer="clip: SharkArmature|SharkArmature|SharkArmature|Swim_Bite|SharkArmature|Swim_Bite; loop: repeat; timeScale: 1"
+                animation__position="property: position; to: 0 .5 -1; dur: 5000; easing: linear; loop: true; dir: alternate"
+                animation__rotation="property: rotation; to: 0 180 0; dur: 10000; easing: linear; loop: true; dir: alternate"></a-entity>
             <a-entity gltf-model="#dead" position="0 1.5 0" scale=".5 .5 .5" rotation="-90 0 0"></a-entity>
-            <a-entity gltf-model="#fish" position="0 1 .8" scale=".1 .1 .1" rotation="0 180 0" animation__position="property: position; to: 0 .5 1; dur: 5000; easing: linear; loop: true; dir: alternate" animation__rotation="property: rotation; to: 0 180 0; dur: 1000; delay:5000; easing: linear; loop: true; dir: alternate"></a-entity>
+            <a-entity gltf-model="#fish" position="0 1 .8" scale=".1 .1 .1" rotation="0 180 0"
+                animation__position="property: position; to: 0 .5 1; dur: 5000; easing: linear; loop: true; dir: alternate"
+                animation__rotation="property: rotation; to: 0 180 0; dur: 1000; delay:5000; easing: linear; loop: true; dir: alternate"></a-entity>
             <a-entity gltf-model="#bone" position=".4 .15 .5" scale="1 1 1" rotation="0 90 0"></a-entity>
-            <a-entity gltf-model="#puffer" id="pufferfish" position="1 -1.5 0" scale=".15 .15 .15" rotation="0 90 0" animation-mixer="clip: Fish_Armature|Out_Of_Water; loop: repeat; timeScale: 1" shadow="receive: true" dynamic-body click-grab></a-entity>
-            <a-entity gltf-model="#tentacle" position="-0.2 0 -.9" scale=".05 .05 .05" rotation="0 0 0"  animation-mixer="clip:TentacleArmature|TentacleArmature|TentacleArmature|Tentacle_Idle|TentacleArmatur"></a-entity>
+            <a-entity gltf-model="#puffer" id="pufferfish" position="1 -1.5 0" scale=".15 .15 .15" rotation="0 90 0"
+                animation-mixer="clip: Fish_Armature|Out_Of_Water; loop: repeat; timeScale: 1" shadow="receive: true"
+                dynamic-body click-grab></a-entity>
+            <a-entity gltf-model="#tentacle" position="-0.2 0 -.9" scale=".05 .05 .05" rotation="0 0 0"
+                animation-mixer="clip:TentacleArmature|TentacleArmature|TentacleArmature|Tentacle_Idle|TentacleArmatur"></a-entity>
         </a-entity>
 
         <script src="script.js"></script>
