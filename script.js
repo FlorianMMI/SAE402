@@ -59,14 +59,6 @@ AFRAME.registerComponent("click-grab", {
       }
     }
 
-    //   function logMouse(e) {
-    //     let evt = e.type;
-    //     while (evt.length < 11)
-    //         evt += ' ';
-    //     showmesg(evt + " button=" + e.button, 'test')
-    //     return false;
-    // }
-
     el.oncontextmenu = function () {
       return false;
     };
@@ -75,7 +67,6 @@ AFRAME.registerComponent("click-grab", {
 
     el.addEventListener("mousedown", function () {
       updatePosition;
-      console.log("mouse down");
       launcher.setAttribute("static-body", "");
       isGrabbed = true;
       el.setAttribute("dynamic-body", "mass: 0");
@@ -84,13 +75,11 @@ AFRAME.registerComponent("click-grab", {
 
     scene.addEventListener("mouseup", function (event) {
       if ((event.button == 0) & isGrabbed) {
-        console.log("Mouse button clicked:", event.button);
         isGrabbed = false;
         launcher.removeAttribute("static-body");
         el.setAttribute("dynamic-body", "mass: 1");
       }
       if ((event.button == 2) & isGrabbed) {
-        console.log("Mouse button clicked:", event.button);
         isGrabbed = false;
         el.setAttribute("dynamic-body", "mass: 1");
         setTimeout(() => {
