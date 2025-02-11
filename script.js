@@ -40,7 +40,7 @@ AFRAME.registerComponent("click-grab", {
     let camera = document.querySelector("#camera");
     let isGrabbed = false;
 
-    function updatePostion(event) {
+    function updatePosition(event) {
       if (isGrabbed) {
         let cameraPos = new THREE.Vector3();
         let cameraQuat = new THREE.Quaternion();
@@ -59,17 +59,43 @@ AFRAME.registerComponent("click-grab", {
       }
     }
 
+    //   function logMouse(e) {
+    //     let evt = e.type;
+    //     while (evt.length < 11)
+    //         evt += ' ';
+    //     showmesg(evt + " button=" + e.button, 'test')
+    //     return false;
+    // }
+
+    el.oncontextmenu = function () {
+      return false;
+    };
+
+    let launcher = document.querySelector("#launcher");
+
     el.addEventListener("mousedown", function () {
+      updatePosition;
+      console.log("mouse down");
+      launcher.setAttribute("static-body", "");
       isGrabbed = true;
       el.setAttribute("dynamic-body", "mass: 0");
-      window.addEventListener("mousemove", updatePostion);
+      window.addEventListener("mousemove", updatePosition);
     });
 
-    scene.addEventListener("mouseup", function () {
-      if (isGrabbed) {
+    scene.addEventListener("mouseup", function (event) {
+      if ((event.button == 0) & isGrabbed) {
+        console.log("Mouse button clicked:", event.button);
+        isGrabbed = false;
+        launcher.removeAttribute("static-body");
+        el.setAttribute("dynamic-body", "mass: 1");
+      }
+      if ((event.button == 2) & isGrabbed) {
+        console.log("Mouse button clicked:", event.button);
         isGrabbed = false;
         el.setAttribute("dynamic-body", "mass: 1");
-        window.removeEventListener("mousemove", updatePostion);
+        setTimeout(() => {
+          launcher.removeAttribute("static-body");
+        }, 100);
       }
     });
 
@@ -78,14 +104,14 @@ AFRAME.registerComponent("click-grab", {
       rightController.addEventListener("triggerdown", function () {
         isGrabbed = true;
         el.setAttribute("dynamic-body", "mass: 0");
-        window.addEventListener("mousemove", updatePostion);
+        window.addEventListener("mousemove", updatePosition);
       });
 
       rightController.addEventListener("triggerup", function () {
         if (isGrabbed) {
           isGrabbed = false;
           el.setAttribute("dynamic-body", "mass: 1");
-          window.removeEventListener("mousemove", updatePostion);
+          window.removeEventListener("mousemove", updatePosition);
         }
       });
     }
