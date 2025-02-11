@@ -52,7 +52,7 @@
                 </a-entity>
             </a-entity>
             <a-box static-body position="0 1 0" scale="0.5 2 0.5" opacity="0"></a-box>
-            <a-sphere id="launcher" position="0 2.5 0" radius="1.5" opacity="0"></a-sphere>
+            <a-sphere id="launcher" position="0 2.5 0" radius="1.7" opacity="0"></a-sphere>
             <a-entity id="leftController" oculus-touch-controls="hand: left" thumbstick-move></a-entity>
             <a-entity id="rightController" oculus-touch-controls="hand: right">
                 <a-entity raycaster="objects: .collidable" cursor></a-entity>
@@ -309,7 +309,7 @@
         </a-entity>
         <!-- Plant -->
         <a-entity gltf-model="#plant" position="5.95 1.9 -0.5" scale="0.2 0.2 0.2" rotation="0 0 0"
-            shadow="cast: true; receive: true" dynamic-body>
+            shadow="cast: true; receive: true" dynamic-body click-grab>
         </a-entity>
         <!-- Door -->
         <a-entity gltf-model="#door" position="6.35 0 -7" scale="3.5 3.5 3.5" rotation="0 90 0" shadow="receive: true">
