@@ -31,6 +31,69 @@ AFRAME.registerComponent("thumbstick-move", {
   },
 });
 
+// Grab
+
+AFRAME.registerComponent("click-grab", {
+  init: function () {
+    let el = this.el;
+    let scene = el.sceneEl;
+    let camera = document.querySelector("#camera");
+    let isGrabbed = false;
+
+    function updatePostion(event) {
+      if (isGrabbed) {
+        let cameraPos = new THREE.Vector3();
+        let cameraQuat = new THREE.Quaternion();
+
+        camera.object3D.getWorldPosition(cameraPos);
+        camera.object3D.getWorldQuaternion(cameraQuat);
+
+        let mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+        let mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+
+        let offset = new THREE.Vector3(mouseX * 0.5, mouseY * 0.5, -1);
+        offset.applyQuaternion(cameraQuat);
+
+        let newPosition = cameraPos.clone().add(offset);
+        el.object3D.position.copy(newPosition);
+      }
+    }
+
+    el.addEventListener("mousedown", function () {
+      isGrabbed = true;
+      el.setAttribute("dynamic-body", "mass: 0");
+      window.addEventListener("mousemove", updatePostion);
+    });
+
+    scene.addEventListener("mouseup", function () {
+      if (isGrabbed) {
+        isGrabbed = false;
+        el.setAttribute("dynamic-body", "mass: 1");
+        window.removeEventListener("mousemove", updatePostion);
+      }
+    });
+
+    let rightController = document.querySelector("#rightController");
+    if (rightController) {
+      rightController.addEventListener("triggerdown", function () {
+        isGrabbed = true;
+        el.setAttribute("dynamic-body", "mass: 0");
+        window.addEventListener("mousemove", updatePostion);
+      });
+
+      rightController.addEventListener("triggerup", function () {
+        if (isGrabbed) {
+          isGrabbed = false;
+          el.setAttribute("dynamic-body", "mass: 1");
+          window.removeEventListener("mousemove", updatePostion);
+        }
+      });
+    }
+  },
+});
+
+//
+
 function moveToPosition(object, targetPosition) {
   var currentPosition = object.getAttribute("position");
   var step = 0.01;

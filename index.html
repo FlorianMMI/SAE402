@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <a-scene physics="gravity: -9.8; restitution: 0.8">
+    <a-scene physics="gravity: -9.8; restitution: 0.4">
 
         <a-assets>
             <a-asset-item id="navmesh" src="./models/navmesh.gltf"></a-asset-item>
@@ -49,12 +49,13 @@
         <a-entity progressive-controls></a-entity>
 
         <a-entity id="rig" movement-controls="constrainToNavMesh: true;
-                                   controls: checkpoint, gamepad, trackpad, keyboard, nipple;" position="0 1 0">
-            <a-entity camera position="0 1.5 0" look-controls="pointerLockEnabled: true">
+                                   controls: checkpoint, gamepad, trackpad, keyboard, nipple;" position="0 0 0">
+            <a-entity camera id="camera" position="0 2.5 0" look-controls="pointerLockEnabled: true">
                 <a-entity cursor position="0 0 -0.01" geometry="primitive: sphere; radius: 0.00005"
                     material="color: #202020; shader: flat">
                 </a-entity>
             </a-entity>
+            <a-box static-body position="0 1 0" scale="0.5 1 0.5" opacity="0"></a-box>
             <a-entity id="leftController" oculus-touch-controls="hand: left" thumbstick-move></a-entity>
             <a-entity id="rightController" oculus-touch-controls="hand: right">
                 <a-entity raycaster="objects: .collidable" cursor></a-entity>
@@ -63,7 +64,7 @@
 
 
         <!-- NavMesh -->
-        <a-entity nav-mesh normal-material visible="false" position="0 1 0" gltf-model="#navmesh"></a-entity>
+        <a-entity nav-mesh normal-material visible="false" position="0 0 0" gltf-model="#navmesh"></a-entity>
 
         <!-- SKY -->
         <a-sky color="#ADD8E6"></a-sky>
@@ -303,11 +304,11 @@
         <a-box static-body position="0 1.4 -9.455" scale="6.1 0.1 0.06" color="#885f32"></a-box>
         <!-- Deskchair -->
         <a-entity gltf-model="#deskchair" position="-3.5 0 -7" scale="4 4 4" rotation="0 230 0"
-            shadow="cast: true; receive: true" static-body>
+            shadow="cast: true; receive: true" dynamic-body>
         </a-entity>
         <!-- Bookshelf -->
         <a-entity gltf-model="#bookshelf" position="5.95 0.7 0" scale="3.5 3.5 3.5" rotation="0 90 0"
-            shadow="cast: true; receive: true">
+            shadow="cast: true; receive: true" static-body>
         </a-entity>
         <!-- Plant -->
         <a-entity gltf-model="#plant" position="5.95 1.9 -0.5" scale="0.2 0.2 0.2" rotation="0 0 0"
@@ -318,42 +319,42 @@
         </a-entity>
 
         <!-- Chairs -->
-        <a-entity gltf-model="#chair" position="-1.8 0.45 -1.7" scale="0.1 0.08 0.1" rotation="0 180 0"
-            shadow="receive: true" dynamic-body>
+        <a-entity gltf-model="#chair" position="-1.8 1 -1.7" scale="0.1 0.08 0.1" rotation="0 180 0"
+            shadow="receive: true" dynamic-body click-grab>
         </a-entity>
         <a-entity gltf-model="#chair" position="-3.2 0.45 -1.7" scale="0.1 0.08 0.1" rotation="0 180 0"
-            shadow="receive: true" dynamic-body>
+            shadow="receive: true" dynamic-body click-grab>
         </a-entity>
         <a-entity gltf-model="#chair" position="-1.8 0.45 2.3" scale="0.1 0.08 0.1" rotation="0 180 0"
-            shadow="receive: true" dynamic-body>
+            shadow="receive: true" dynamic-body click-grab>
         </a-entity>
         <a-entity gltf-model="#chair" position="-3.2 0.45 2.3" scale="0.1 0.08 0.1" rotation="0 180 0"
-            shadow="receive: true" dynamic-body>
+            shadow="receive: true" dynamic-body click-grab>
         </a-entity>
         <a-entity gltf-model="#chair" position="-1.8 0.45 6.3" scale="0.1 0.08 0.1" rotation="0 180 0"
-            shadow="receive: true" dynamic-body>
+            shadow="receive: true" dynamic-body click-grab>
         </a-entity>
         <a-entity gltf-model="#chair" position="-3.2 0.45 6.3" scale="0.1 0.08 0.1" rotation="0 180 0"
-            shadow="receive: true" dynamic-body>
+            shadow="receive: true" dynamic-body click-grab>
         </a-entity>
 
         <a-entity gltf-model="#chair" position="1.8 0.45 -1.7" scale="0.1 0.08 0.1" rotation="0 180 0"
-            shadow="receive: true" dynamic-body>
+            shadow="receive: true" dynamic-body click-grab>
         </a-entity>
         <a-entity gltf-model="#chair" position="3.2 0.45 -1.7" scale="0.1 0.08 0.1" rotation="0 180 0"
-            shadow="receive: true" dynamic-body>
+            shadow="receive: true" dynamic-body click-grab>
         </a-entity>
         <a-entity gltf-model="#chair" position="1.8 0.45 2.3" scale="0.1 0.08 0.1" rotation="0 180 0"
-            shadow="receive: true" dynamic-body>
+            shadow="receive: true" dynamic-body click-grab>
         </a-entity>
         <a-entity gltf-model="#chair" position="3.2 0.45 2.3" scale="0.1 0.08 0.1" rotation="0 180 0"
-            shadow="receive: true" dynamic-body>
+            shadow="receive: true" dynamic-body click-grab>
         </a-entity>
         <a-entity gltf-model="#chair" position="1.8 0.45 6.3" scale="0.1 0.08 0.1" rotation="0 180 0"
-            shadow="receive: true" dynamic-body>
+            shadow="receive: true" dynamic-body click-grab>
         </a-entity>
         <a-entity gltf-model="#chair" position="3.2 0.45 6.3" scale="0.1 0.08 0.1" rotation="0 180 0"
-            shadow="receive: true" dynamic-body>
+            shadow="receive: true" dynamic-body click-grab>
         </a-entity>
 
         <!-- Tree -->
