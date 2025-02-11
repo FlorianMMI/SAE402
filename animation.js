@@ -12,7 +12,6 @@ let renderCharacter = function () {
     ascene.appendChild(acharacter);
   
     acharacter.addEventListener("click", function () {
-      console.log("click");
       acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Walk; loop: repeat; timeScale: 1');
       acharacter.setAttribute('rotation', '0 90 0');
       acharacter.setAttribute('animation', 'property: position; to: 0 0 -8; dur: 1000; easing: linear');
@@ -20,7 +19,7 @@ let renderCharacter = function () {
       setTimeout(function () {
         acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Run; loop: repeat; timeScale: 1');
         acharacter.setAttribute('rotation', '0 0 0');
-        acharacter.setAttribute('animation', 'property: position; to: 0 0 1; dur: 2000; easing: linear');
+        acharacter.setAttribute('animation', 'property: position; to: 0 0 2; dur: 2000; easing: linear');
   
         setTimeout(function () {
           acharacter.setAttribute('rotation', '0 90 0');
@@ -71,7 +70,7 @@ let renderCharacter = function () {
     {
         url: "models/teacher/Business Man.glb",
         name: "Business Man",
-        price: "8",
+        price: "0",
         description: "Rich guy",
     },
     {
@@ -139,7 +138,6 @@ let renderCharacter = function () {
     ascene.appendChild(atable);
   
     atable.addEventListener("click", function () {
-      console.log("click");
       let otherboxes = document.querySelectorAll("#character-list");
       let othertext = document.querySelectorAll("#text-product");
       let money = document.getElementById("money");
@@ -164,7 +162,12 @@ let renderCharacter = function () {
         aBox.setAttribute("id", `box-color`);
         aBox.setAttribute("position", `${3 - (index % 5) * .5} ${3.1 - Math.floor(index / 5) * 1.5} 9`);
         const atext = document.createElement("a-text");
-        atext.setAttribute("value", color.price);
+        if (color.price == 0){
+          atext.setAttribute("value","");
+        }
+        else{
+          atext.setAttribute("value", color.price);
+        }
         atext.setAttribute("color", "red");
         atext.setAttribute("id","text-product")
         atext.setAttribute("position", `${3.25 - (index % 5) * .5} ${3.5 - Math.floor(index / 5) * 1.4} 9.25`);
@@ -172,16 +175,12 @@ let renderCharacter = function () {
         atext.setAttribute("rotation", "0 180 0");
         ascene.appendChild(atext);
         ascene.appendChild(aBox);
-        let text = document.getElementById("text-product");
-        console.log(text);
         aBox.addEventListener("click", function () {
           if (color.price > moneyvalue){
-            console.log(`Clicked on ${color.normal}`);
             renderBoard();
   
           }
           else{
-            console.log(`Clicked on ${color.normal}`);
             let tabletops = document.querySelectorAll("#table-top");
             tabletops.forEach((tabletop) => {
               tabletop.setAttribute("color", color.normal);
@@ -190,8 +189,11 @@ let renderCharacter = function () {
             tablebottoms.forEach((tablebottom) => {
               tablebottom.setAttribute("color", color.dark);
           });
+          atext.setAttribute("value","");
+          
           moneyvalue = moneyvalue - color.price;
           money.setAttribute("value", moneyvalue);
+          color.price = 0;
           }
   
         });
@@ -224,7 +226,12 @@ let renderCharacter = function () {
         characterEntity.setAttribute("rotation", "0 180 0");
         characterEntity.setAttribute("id", `character-list`);
         const atext = document.createElement("a-text");
-        atext.setAttribute("value", character.price);
+        if (character.price == 0){
+          atext.setAttribute("value","");
+        }
+        else{
+          atext.setAttribute("value", character.price);
+        }
         atext.setAttribute("color", "red");
         atext.setAttribute("id","text-product")
         atext.setAttribute("position", `${3.15 - (index % 5) * .5} ${3 - Math.floor(index / 5) * 1.4} 8.8`);
@@ -237,11 +244,12 @@ let renderCharacter = function () {
             renderBoard();
           }
           else{
-            console.log(`Clicked on ${character.name}`);
             let characters = document.getElementById("characters");
             characters.setAttribute("gltf-model", character.url);
             moneyvalue = moneyvalue - character.price;
             money.setAttribute("value", moneyvalue);
+            character.price = 0;
+            atext.setAttribute("value","");
           }
   
         });
@@ -307,5 +315,18 @@ let renderCharacter = function () {
     ascene.removeChild(aText);
     }, 3000);
   };
+
+  let fish = document.getElementById("pufferfish");
+  console.log(fish);
+  // console.log(fish.position);
+  let fishPosition = fish.getAttribute('position');
+  console.log(fishPosition);
+  if ((fishPosition.x > -0.6 && fishPosition.x < 0.6) && (fishPosition.z > -0.6 && fishPosition.z < 0.6) && (fishPosition.y > 0 && fishPosition.y < 1)){
+    fish.setAttribute('animation-mixer', 'clip:Fish_Armature|Death; loop: once; timeScale: 1');
+    // setTimeout(function () {
+    //   fish.setAttribute('rotation', '0 0 180');
+    // }, 1000);
+    console.log("Fish is dead");
+  }
 renderMarket();
 renderCharacter ();
