@@ -424,10 +424,11 @@ function isFound() {
       var el = document.getElementById(id);
       if (el) {
         scene.removeChild(el);
-        StartTest();
+        
 
       }
       });
+      StartTest();
     });
 
     scene.appendChild(testBox);

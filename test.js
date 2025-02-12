@@ -1,16 +1,27 @@
-// test.js
+const response = await fetch('./question.json');
+    const data = await response.json();
+
+    let correctAnswers = []
+    data.forEach(elmt => {
+        if (elmt.reponses[0].est_correcte === true) {
+            correctAnswers.push (elmt.reponses[0].texte_reponse);
+        }
+    });
 
 
-
+const scene = document.querySelector("a-scene");
+let cpt_resp = 0;
 
 async function StartTest() {
 
-    const response = await fetch('./question.json');
-    const data = await response.json();
-    console.log(data);
+    
     const camera = document.querySelector("#rig");
-    camera.setAttribute("position", "1.8 1.2 2.3");
+    camera.setAttribute("position", "1.8 0 2.3");
     camera.setAttribute("movement-controls", "constrainToNavMesh: true; controls: checkpoint;");
+
+    let chair = document.querySelector("#cr-chair");
+    chair.removeAttribute("dynamic-body");
+
 
     const scene = document.querySelector("a-scene");
 
@@ -37,34 +48,176 @@ async function StartTest() {
         // Remplace le texte par la première question
         const premiereQuestion = data[0].texte_question;
         textElement.setAttribute("value", premiereQuestion);
+        textElement.setAttribute("id", "question"); 
 
         const textReponse1 = document.createElement("a-text");
         textReponse1.setAttribute("value", data[0].reponses[0].texte_reponse);
+        console.log("Ceci est sensé s'affiche" ,  data[0].reponses[0].texte_reponse);
+        textReponse1.setAttribute("id", "reponse1");
         textReponse1.setAttribute("color", "#000");
         textReponse1.setAttribute("align", "center");
         textReponse1.setAttribute("wrapCount", "25");
         textReponse1.setAttribute("position", "0 -0.2 0.01");
         textReponse1.setAttribute("scale", "0.6 0.6 0.6");
-        textReponse1.addEventListener("click", () => {
-            console.log("Réponse 1 cliquée");
-        });
+
         infoBox.appendChild(textReponse1);
 
         const textReponse2 = document.createElement("a-text");
         textReponse2.setAttribute("value", data[0].reponses[1].texte_reponse);
+        textReponse2.setAttribute("id", "reponse2");
         textReponse2.setAttribute("color", "#000");
         textReponse2.setAttribute("align", "center");
         textReponse2.setAttribute("wrapCount", "25");
         textReponse2.setAttribute("position", "0 -0.4 0.01");
         textReponse2.setAttribute("scale", "0.6 0.6 0.6");
-        textReponse2.setAttribute("cursor-listener", "");
-        textReponse2.addEventListener("click", () => {
-            textReponse2.setAttribute("color", "#f00");
-            console.log("Réponse 2 cliquée");
-        });
         infoBox.appendChild(textReponse2);
-    }, 5000);
+
+        const hitBoxRep1 = document.createElement("a-box");
+        hitBoxRep1.setAttribute("position", "0 0 -0.01");
+        hitBoxRep1.setAttribute("id", "HitBoxRep1");
+        hitBoxRep1.setAttribute("width", "2");
+        hitBoxRep1.setAttribute("height", "0.2");
+        hitBoxRep1.setAttribute("depth", "0.01");
+        hitBoxRep1.setAttribute("material", "color: #f00; opacity: 0;");
+        textReponse1.appendChild(hitBoxRep1);
+        hitBoxRep1.addEventListener("click", () => {
+            
+            if (isCorrect(data[0].reponses[0].texte_reponse)) {
+
+
+                let money = document.querySelector("#money");
+                money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
+                textReponse1.removeChild(hitBoxRep1);
+                textReponse2.removeChild(hitBoxRep2);
+                cpt_resp += 1;
+                nextQuestion(1);
+                
+
+            }
+            else {
+                textElement.setAttribute("value", "Mauvaise réponse");
+                nextQuestion(1);
+            }
+            
+        });
+        
+
+        const hitBoxRep2 = document.createElement("a-box");
+        hitBoxRep2.setAttribute("position", "0 0 -0.01");
+        hitBoxRep2.setAttribute("id", "HitBoxRep2");
+        hitBoxRep2.setAttribute("width", "2");
+        hitBoxRep2.setAttribute("height", "0.2");
+        hitBoxRep2.setAttribute("depth", "0.01");
+        hitBoxRep2.setAttribute("material", "opacity: 0");
+        hitBoxRep2.addEventListener("click", () => {
+
+            if (isCorrect(data[0].reponses[0].texte_reponse)) {
+
+                let money = document.querySelector("#money");
+                money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
+                textReponse1.removeChild(hitBoxRep1);
+                textReponse2.removeChild(hitBoxRep2);
+                cpt_resp += 1;
+                nextQuestion(1);
+            }
+            else {
+                textElement.setAttribute("value", "Mauvaise réponse");
+                nextQuestion(1);
+            }
+        });
+        textReponse2.appendChild(hitBoxRep2);
+    }, 2000);
 
 }
+
+
+function nextQuestion(id) {
+
+    
+    console.log(data.length && id);
+    if (id > data.length - 1) {
+        question.setAttribute("value", "Fin du test, vous avez eu " + cpt_resp + "/" + data.length + " bonnes réponses. Ainsi que" + cpt_resp * 2 + " points");
+        document.querySelector("#reponse1").setAttribute("value", "");
+        document.querySelector("#reponse2").setAttribute("value", "");
+        return;
+    }
+
+    let question = document.querySelector("#question");
+    question.setAttribute("value", data[id].texte_question);
+    
+
+    
+
+    let reponse1 = document.querySelector("#reponse1");
+    let reponse2 = document.querySelector("#reponse2");
+
+    // Update response values
+    reponse1.setAttribute("value", data[id].reponses[0].texte_reponse);
+    reponse2.setAttribute("value", data[id].reponses[1].texte_reponse);
+
+    const hitBoxRep1 = document.createElement("a-box");
+    hitBoxRep1.setAttribute("position", "0 0 -0.01");
+    hitBoxRep1.setAttribute("id", "HitBoxRep1");
+    hitBoxRep1.setAttribute("width", "2");
+    hitBoxRep1.setAttribute("height", "0.2");
+    hitBoxRep1.setAttribute("depth", "0.01");
+    hitBoxRep1.setAttribute("material", "color: #f00; opacity: 0;");
+    hitBoxRep1.addEventListener("click", () => {
+        if (isCorrect(data[id].reponses[0].texte_reponse)) {
+            let money = document.querySelector("#money");
+            money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
+            cpt_resp += 1;
+            id += 1;
+            nextQuestion(id);
+        } else {
+            question.setAttribute("value", "Mauvaise réponse");
+            id += 1;
+            nextQuestion(id);
+        }
+    });
+    reponse1.appendChild(hitBoxRep1);
+
+    const hitBoxRep2 = document.createElement("a-box");
+    hitBoxRep2.setAttribute("position", "0 0 -0.01");
+    hitBoxRep2.setAttribute("id", "HitBoxRep2");
+    hitBoxRep2.setAttribute("width", "2");
+    hitBoxRep2.setAttribute("height", "0.2");
+    hitBoxRep2.setAttribute("depth", "0.01");
+    hitBoxRep2.setAttribute("material", "opacity: 0;");
+    hitBoxRep2.addEventListener("click", () => {
+        if (isCorrect(data[id].reponses[1].texte_reponse)) {
+            console.log(isCorrect(data[id].reponses[1].texte_reponse));
+            let money = document.querySelector("#money");
+            money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
+            cpt_resp += 1;
+            id += 1;
+            nextQuestion(id);
+        } else {
+            question.setAttribute("value", "Mauvaise réponse");
+            id += 1;
+            nextQuestion(id);
+        }
+    });
+    reponse2.appendChild(hitBoxRep2);
+    
+    
+
+}
+    
+    
+
+function isCorrect(value) {
+  
+    if (correctAnswers.includes(value)) {
+        return true
+    }
+    else {
+        return false
+    }
+
+};
+
+
+
 
 export { StartTest }; 
