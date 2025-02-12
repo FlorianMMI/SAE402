@@ -11,7 +11,6 @@ async function StartTest() {
     const camera = document.querySelector("#rig");
     camera.setAttribute("position", "1.8 1.2 2.3");
     camera.setAttribute("movement-controls", "constrainToNavMesh: true; controls: checkpoint;");
-    
 
     const scene = document.querySelector("a-scene");
 
@@ -39,22 +38,31 @@ async function StartTest() {
         const premiereQuestion = data[0].texte_question;
         textElement.setAttribute("value", premiereQuestion);
 
-        data[0].reponses.forEach((reponse, index) => {
-            const textReponse = document.createElement("a-text");
-            textReponse.setAttribute("value", reponse.texte_reponse);
-            textReponse.setAttribute("color", "#000");
-            textReponse.setAttribute("align", "center");
-            textReponse.setAttribute("wrapCount", "25");
-            textReponse.setAttribute("position", `0 ${-0.2 * (index + 1)} 0.01`);
-            textReponse.setAttribute("scale", "0.6 0.6 0.6");
-
-            textReponse.setAttribute("class", "clickable");
-            textReponse.addEventListener("click", () => {
-                console.log("Réponse sélectionnée :", reponse.texte_reponse);
-            });
-
-            infoBox.appendChild(textReponse);
+        const textReponse1 = document.createElement("a-text");
+        textReponse1.setAttribute("value", data[0].reponses[0].texte_reponse);
+        textReponse1.setAttribute("color", "#000");
+        textReponse1.setAttribute("align", "center");
+        textReponse1.setAttribute("wrapCount", "25");
+        textReponse1.setAttribute("position", "0 -0.2 0.01");
+        textReponse1.setAttribute("scale", "0.6 0.6 0.6");
+        textReponse1.addEventListener("click", () => {
+            console.log("Réponse 1 cliquée");
         });
+        infoBox.appendChild(textReponse1);
+
+        const textReponse2 = document.createElement("a-text");
+        textReponse2.setAttribute("value", data[0].reponses[1].texte_reponse);
+        textReponse2.setAttribute("color", "#000");
+        textReponse2.setAttribute("align", "center");
+        textReponse2.setAttribute("wrapCount", "25");
+        textReponse2.setAttribute("position", "0 -0.4 0.01");
+        textReponse2.setAttribute("scale", "0.6 0.6 0.6");
+        textReponse2.setAttribute("cursor-listener", "");
+        textReponse2.addEventListener("click", () => {
+            textReponse2.setAttribute("color", "#f00");
+            console.log("Réponse 2 cliquée");
+        });
+        infoBox.appendChild(textReponse2);
     }, 5000);
 
 }
