@@ -100,10 +100,10 @@ async function StartTest() {
 
             }
             else {
+                textElement.setAttribute("value", "Wrong !");
                 setTimeout(() => {
-                    textElement.setAttribute("value", "Wrong !");
-                }, 1000);
-                nextQuestion(1);
+                    nextQuestion(1);
+                }, 2000);
             }
             
         });
@@ -128,10 +128,11 @@ async function StartTest() {
                 nextQuestion(1);
             }
             else {
+                textElement.setAttribute("value", "Wrong !");
                 setTimeout(() => {
-                    textElement.setAttribute("value", "Wrong !");
-                }, 1000);
-                nextQuestion(1);
+                    nextQuestion(1);
+                }, 2000);
+                
             }
         });
         textReponse2.appendChild(hitBoxRep2);
@@ -149,7 +150,9 @@ function nextQuestion(id) {
         question.setAttribute("value", "End of the test, you got " + cpt_resp + "/" + data.length + "And you got " + cpt_resp * 2 + " shop credits");
         document.querySelector("#reponse1").setAttribute("value", "");
         document.querySelector("#reponse2").setAttribute("value", "");
-        return;
+        setTimeout(() => {
+            question.setAttribute("color", "blue");
+        }, 5000);
     }
 
     
@@ -180,11 +183,12 @@ function nextQuestion(id) {
             id += 1;
             nextQuestion(id);
         } else {
+            question.setAttribute("value", "Wrong !");
             setTimeout(() => {
-                textElement.setAttribute("value", "Wrong !");
+                id += 1;
+                nextQuestion(id);
             }, 1000);
-            id += 1;
-            nextQuestion(id);
+            
         }
     });
     reponse1.appendChild(hitBoxRep1);
@@ -205,11 +209,11 @@ function nextQuestion(id) {
             id += 1;
             nextQuestion(id);
         } else {
+            question.setAttribute("value", "Wrong !");
             setTimeout(() => {
-                textElement.setAttribute("value", "Wrong !");
-            }, 10000);
-            id += 1;
-            nextQuestion(id);
+                id += 1;
+                nextQuestion(id);
+            }, 1000);
         }
     });
     reponse2.appendChild(hitBoxRep2);
