@@ -526,21 +526,17 @@
         </a-entity>
 
         <!-- fish tank -->
-        <a-entity gltf-model="#fishTank" position="-4 1.5 9" scale="1.5 1 1" rotation="0 90 0">
-            <a-entity gltf-model="#shark" position="0 1 1" scale=".1 .1 .1" rotation="0 -180 0"
-                animation-mixer="clip: SharkArmature|SharkArmature|SharkArmature|Swim_Bite|SharkArmature|Swim_Bite; loop: repeat; timeScale: 1"
-                animation__position="property: position; to: 0 .5 -1; dur: 5000; easing: linear; loop: true; dir: alternate"
-                animation__rotation="property: rotation; to: 0 180 0; dur: 10000; easing: linear; loop: true; dir: alternate"></a-entity>
+         <a-entity gltf-model="#fishTank" position="-4 1.5 9" scale="1.5 1 1" rotation="0 90 0">
+            <a-entity gltf-model="#shark" position="0 1 1" scale=".1 .1 .1" rotation="0 -180 0" animation-mixer="clip: SharkArmature|SharkArmature|SharkArmature|Swim_Bite|SharkArmature|Swim_Bite; loop: repeat; timeScale: 1" animation__position="property: position; to: 0 .5 -1; dur: 5000; easing: linear; loop: true; dir: alternate" animation__rotation="property: rotation; to: 0 180 0; dur: 10000; easing: linear; loop: true; dir: alternate" ></a-entity>
             <a-entity gltf-model="#dead" position="0 1.5 0" scale=".5 .5 .5" rotation="-90 0 0"></a-entity>
-            <a-entity gltf-model="#fish" position="0 1 .8" scale=".1 .1 .1" rotation="0 180 0"
-                animation__position="property: position; to: 0 .5 1; dur: 5000; easing: linear; loop: true; dir: alternate"
-                animation__rotation="property: rotation; to: 0 180 0; dur: 1000; delay:5000; easing: linear; loop: true; dir: alternate"></a-entity>
+            <a-entity gltf-model="#fish" position="0 1 .8" scale=".1 .1 .1" rotation="0 180 0" animation__position="property: position; to: 0 .5 1; dur: 5000; easing: linear; loop: true; dir: alternate" animation__rotation="property: rotation; to: 0 180 0; dur: 1000; delay:5000; easing: linear; loop: true; dir: alternate"></a-entity>
             <a-entity gltf-model="#bone" position=".4 .15 .5" scale="1 1 1" rotation="0 90 0"></a-entity>
-            <a-entity gltf-model="#puffer" id="pufferfish" position="1 -1.5 0" scale=".15 .15 .15" rotation="0 90 0"
-                animation-mixer="clip: Fish_Armature|Out_Of_Water; loop: repeat; timeScale: 1" shadow="receive: true"
-                dynamic-body click-grab></a-entity>
-            <a-entity gltf-model="#tentacle" position="-0.2 0 -.9" scale=".05 .05 .05" rotation="0 0 0"
-                animation-mixer="clip:TentacleArmature|TentacleArmature|TentacleArmature|Tentacle_Idle|TentacleArmatur"></a-entity>
+            <!-- <a-entity gltf-model="#puffer" id="pufferfish" position="1 -1.5 0" scale=".15 .15 .15" rotation="0 90 0" shadow="receive: true" dynamic-body></a-entity> -->
+            <a-entity gltf-model="#tentacle" position="-0.2 0 -.9" scale=".05 .05 .05" rotation="0 0 0"  animation-mixer="clip:TentacleArmature|TentacleArmature|TentacleArmature|Tentacle_Idle|TentacleArmatur"></a-entity>
+        </a-entity>
+        <a-cylinder position="-4 0 9" radius="0.25" height="3" color="black"></a-cylinder>
+        <a-entity gltf-model="#puffer" id="pufferfish" position="-3.5 1 8" scale="0.15 0.15 0.15" rotation="0 90 0" dynamic-body click-grab animation-mixer="clip: Fish_Armature|Out_Of_Water; loop: repeat; timeScale: 1">
+            <a-box position="0 0 0" width="3" height="3" depth="3" opacity="0"></a-box>
         </a-entity>
 
         <script src="script.js"></script>
