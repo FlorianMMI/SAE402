@@ -1,4 +1,24 @@
-// Joystick
+// PC to VR
+
+AFRAME.registerComponent("adjust-camera-height", {
+  init: function () {
+    let rig = document.querySelector("#rig");
+    let scene = this.el;
+
+    scene.addEventListener("enter-vr", function () {
+      if (scene.is("vr-mode")) {
+        rig.setAttribute("position", { x: 0, y: 1.8, z: 0 }); // Hauteur en VR
+      }
+    });
+
+    scene.addEventListener("exit-vr", function () {
+      rig.setAttribute("position", { x: 0, y: 0, z: 0 }); // Hauteur en mode PC
+    });
+  },
+});
+document.querySelector("a-scene").setAttribute("adjust-camera-height", "");
+
+// Joystick VR
 AFRAME.registerComponent("thumbstick-move", {
   init: function () {
     let rig = document.getElementById("rig");
