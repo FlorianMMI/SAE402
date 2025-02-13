@@ -157,6 +157,11 @@ function nextQuestion(id) {
 
             const chair = document.querySelector("#cr-chair");
             chair.setAttribute("dynamic-body", "");
+
+            const infoBox = document.querySelector("a-box");
+            if (infoBox) {
+                infoBox.parentNode.removeChild(infoBox);
+            }
         }, 5000);
     }
 
