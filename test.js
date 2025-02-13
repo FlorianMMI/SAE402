@@ -151,7 +151,12 @@ function nextQuestion(id) {
         document.querySelector("#reponse1").setAttribute("value", "");
         document.querySelector("#reponse2").setAttribute("value", "");
         setTimeout(() => {
-            question.setAttribute("color", "blue");
+            const camera = document.querySelector("#rig");
+            camera.setAttribute("position", "1.8 0 2.3");
+            camera.setAttribute("movement-controls", "constrainToNavMesh: true; controls: checkpoint;");
+
+            const chair = document.querySelector("#cr-chair");
+            chair.setAttribute("dynamic-body", "");
         }, 5000);
     }
 
@@ -184,10 +189,11 @@ function nextQuestion(id) {
             nextQuestion(id);
         } else {
             question.setAttribute("value", "Wrong !");
+            characterAnimation();
             setTimeout(() => {
                 id += 1;
                 nextQuestion(id);
-            }, 1000);
+            }, 10000);
             
         }
     });
@@ -210,10 +216,11 @@ function nextQuestion(id) {
             nextQuestion(id);
         } else {
             question.setAttribute("value", "Wrong !");
+            characterAnimation();
             setTimeout(() => {
                 id += 1;
                 nextQuestion(id);
-            }, 1000);
+            }, 10000);
         }
     });
     reponse2.appendChild(hitBoxRep2);
@@ -235,7 +242,51 @@ function isCorrect(value) {
 
 };
 
-
+let characterAnimation = function () {
+    let animations = ["Punch_Right", "Punch_Left", "Kick_Right", "Kick_Left"];
+    let emote=["Roll", "Death","Gun_Shoot"]
+    let acharacter = document.getElementById('characters');
+      acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Walk; loop: repeat; timeScale: 1');
+      acharacter.setAttribute('rotation', '0 90 0');
+      acharacter.setAttribute('animation', 'property: position; to: 0 0 -8; dur: 1000; easing: linear');
+  
+      setTimeout(function () {
+        acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Run; loop: repeat; timeScale: 1');
+        acharacter.setAttribute('rotation', '0 0 0');
+        acharacter.setAttribute('animation', 'property: position; to: 0 0 2; dur: 2000; easing: linear');
+  
+        setTimeout(function () {
+          acharacter.setAttribute('rotation', '0 90 0');
+          let randomAnimation = animations[Math.floor(Math.random() * animations.length)];
+          acharacter.setAttribute('animation-mixer', `clip: CharacterArmature|${randomAnimation}; loop: once; timeScale: 1`);
+  
+          setTimeout(function () {
+            acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Run_Back; loop: repeat; timeScale: 1');
+            acharacter.setAttribute('animation', 'property: position; to: 0 0 -4; dur: 2000; easing: linear');
+            acharacter.setAttribute('rotation', '0 0 0');
+  
+            setTimeout(function () {
+              let randomEmote = emote[Math.floor(Math.random() * emote.length)];
+              acharacter.setAttribute('animation-mixer', `clip: CharacterArmature|${randomEmote}; loop: once; timeScale: 1`); 
+              
+              acharacter.setAttribute('animation', 'property: position; to: 0 0 -8; dur: 2000; easing: linear');
+              acharacter.setAttribute('rotation', '0 35 0');
+  
+              setTimeout(function () {
+                acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Walk; loop: repeat; timeScale: 1');
+                acharacter.setAttribute('animation', 'property: position; to: -2 0 -8; dur: 1000; easing: linear');
+                acharacter.setAttribute('rotation', '0 -90 0');
+  
+                setTimeout(function () {
+                  acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Idle; loop: repeat; timeScale: 1');
+                  acharacter.setAttribute('rotation', '0 0 0');
+                }, 1000);
+              }, 2000);
+            }, 1000);
+          }, 1000);
+        }, 2000);
+      }, 1000);
+  };
 
 
 export { StartTest }; 
