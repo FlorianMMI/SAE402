@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <a-scene physics="gravity: -9.8; restitution: 0.8" loading-screen="dotsColor: white; backgroundColor: #093e2e">
+    <a-scene physics="gravity: -9.8; restitution: 0.3" loading-screen="dotsColor: white; backgroundColor: #093e2e">
 
         <a-entity progressive-controls></a-entity>
 
@@ -115,7 +115,7 @@
             <a-sphere id="launcher" position="0 2.5 0" radius="1.7" opacity="0"></a-sphere>
             <a-entity id="leftController" oculus-touch-controls="hand: left" thumbstick-move></a-entity>
             <a-entity id="rightController" oculus-touch-controls="hand: right">
-                <a-entity raycaster="objects: .collidable" cursor></a-entity>
+                <a-entity id="vrcursor" raycaster="showLine:false; objects: .collidable" cursor></a-entity>
             </a-entity>
         </a-entity>
 
@@ -359,19 +359,13 @@
             <a-sphere static-body position="0.64 0.26 -2.9" radius="0.08" color="#8B5A2B"></a-sphere>
         </a-entity>
 
-        <a-entity id = "book" obj-model="obj: #notebook-obj; mtl: #notebook-materiaux"
-                position="2.2 1.443 -3"
-                scale="0.3 0.3 0.3"
-                rotation="0 45 0"
-                class="collidable">
+        <a-entity id="book" obj-model="obj: #notebook-obj; mtl: #notebook-materiaux" position="2.2 1.443 -3"
+            scale="0.5 0.5 0.5" rotation="0 45 0" class="collidable">
         </a-entity>
 
-        <a-entity id="car-" gltf-model="#car"
-                position="-1.9 2 -6.85"
-                scale="0.5 0.5 0.5"
-                rotation="0 45 0"
-                class="collidable">
-            </a-entity>
+        <a-entity id="car-" gltf-model="#car" position="-1.9 0.26 -6.85" scale="0.5 0.5 0.5" rotation="0 45 0"
+            class="collidable">
+        </a-entity>
 
         <a-entity id="computer-" gltf-model="#computer" position="-2 1.80 -6.5" scale="0.05 0.05 0.05"
             rotation="0 215 0" class="collidable">
@@ -518,7 +512,7 @@
         <a-entity gltf-model="#chair" position="3.2 0.45 -1.7" scale="0.1 0.08 0.1" rotation="0 180 0"
             shadow="receive: true" dynamic-body click-grab>
         </a-entity>
-        <a-entity id = "cr-chair" gltf-model="#chair" position="1.8 0.45 2.3" scale="0.1 0.08 0.1" rotation="0 180 0"
+        <a-entity gltf-model="#chair" position="1.8 0.45 2.3" scale="0.1 0.08 0.1" rotation="0 180 0"
             shadow="receive: true" dynamic-body click-grab>
         </a-entity>
         <a-entity gltf-model="#chair" position="3.2 0.45 2.3" scale="0.1 0.08 0.1" rotation="0 180 0"
@@ -550,8 +544,7 @@
         </a-entity>
 
         <script src="script.js"></script>
-        <script type = "module" src="Selection.js"></script>
-        <script type = "module" src = "test.js"></script>
+        <script src="Selection.js"></script>
         <script src="animation.js"></script>
     </a-scene>
 </body>
