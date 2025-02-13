@@ -316,17 +316,35 @@ let renderCharacter = function () {
     }, 3000);
   };
 
-  let fish = document.getElementById("pufferfish");
+let fish = document.getElementById("pufferfish");
   console.log(fish);
-  // console.log(fish.position);
-  let fishPosition = fish.getAttribute('position');
-  console.log(fishPosition);
-  if ((fishPosition.x > -0.6 && fishPosition.x < 0.6) && (fishPosition.z > -0.6 && fishPosition.z < 0.6) && (fishPosition.y > 0 && fishPosition.y < 1)){
+  fish.addEventListener("mouseup", function () {
+    let fishPosition = fish.getAttribute('position');
+    console.log(fishPosition);
+  if ((fishPosition.x < -2 && fishPosition.x > -5) && (fishPosition.y > 0 && fishPosition.y < 3) && (fishPosition.z > 7.5 && fishPosition.z < 10)  ){
+    fish.removeAttribute('animation-mixer');
     fish.setAttribute('animation-mixer', 'clip:Fish_Armature|Death; loop: once; timeScale: 1');
-    // setTimeout(function () {
-    //   fish.setAttribute('rotation', '0 0 180');
-    // }, 1000);
-    console.log("Fish is dead");
-  }
+    setTimeout(function () {
+      fish.removeAttribute('animation-mixer');
+      fish.removeAttribute('dynamic-body'); 
+      fish.setAttribute('rotation', '0 0 180');   
+      setTimeout(function () {
+        fish.setAttribute('animation', 'property: position; to:-4 1.75 8.9; dur: 2000; easing: linear');
+        let ascene = document.querySelector('a-scene');
+        let text = document.createElement('a-text');
+        text.setAttribute('value', 'You killed the puffer fish !');
+        text.setAttribute('position', '-4 2.25 8');
+        text.setAttribute('align', 'center');
+        text.setAttribute('color', 'red');
+        text.setAttribute('font', './assets/font/Gloria-msdf.json');
+        text.setAttribute('font-image', './assets/font/Gloria-msdf.png');
+        text.setAttribute('negate', 'false');
+        text.setAttribute('scale', '.75 .75 .75');
+        text.setAttribute('rotation', '0 180 0');
+        ascene.appendChild(text);
+      }, 100);
+    }, 100);
+}
+  });
 renderMarket();
 renderCharacter ();
