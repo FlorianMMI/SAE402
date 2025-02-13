@@ -4,7 +4,7 @@ let renderCharacter = function () {
 
   let ascene = document.querySelector("a-scene");
   let acharacter = document.createElement("a-entity");
-  acharacter.setAttribute("gltf-model", "#character");
+  // acharacter.setAttribute("gltf-model", "#character");
   acharacter.setAttribute("scale", "1.75 1.75 1.75");
   acharacter.setAttribute("position", "-2 0 -8");
   acharacter.setAttribute("id", "characters");

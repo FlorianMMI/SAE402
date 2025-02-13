@@ -11,8 +11,6 @@
 
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.4/dist/aframe-extras.min.js"></script>
     <script
-        src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.3.7/dist/aframe-environment-component.min.js"></script>
-    <script
         src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.js"></script>
     <link rel="stylesheet" href="./style.css">
 
@@ -136,7 +134,7 @@
         <a-box src="#ground" position="-0.02" scale="14 20 0.04" repeat="7 7 0" rotation="-90 0 0"
             shadow="receive: true" material="roughness: 1" static-body></a-box>
         <a-plane src="#grass" position="-20 -.25 0" scale="50 80 1" repeat="15 15 2" rotation="-90 0 0"
-            shadow="receive: true" material="roughness: 1" static-body></a-plane>
+            shadow="receive: true" material="roughness: 1"></a-plane>
         <!-- material="shader:flat" -->
 
         <!-- CEILING -->
@@ -148,26 +146,26 @@
         <!-- lights -->
         <!-- right back -->
         <a-box position="1.70 4.4 3.5" material="shader: flat" shadow="cast: true; receive: true" scale="0.5 0.05 2.8"
-            rotation="0 0 0" color="#fff" static-body></a-box>
+            rotation="0 0 0" color="#fff"></a-box>
         <a-box position="2.30 4.4 3.5" material="shader: flat" shadow="cast: true; receive: true" scale="0.5 0.05 2.8"
-            rotation="0 0 0" color="#fff" static-body></a-box>
+            rotation="0 0 0" color="#fff"></a-box>
         <a-light type="point" color="#FFF" position="0 4.35 0" scale="1 1 2"
             light="intensity: 0.35; castShadow: true; shadowRadius: 30"></a-light>
         <!-- right front -->
         <a-box position="1.70 4.4 -3.5" material="shader: flat" shadow="cast: true; receive: true" scale="0.5 0.05 2.8"
-            rotation="0 0 0" color="#fff" static-body></a-box>
+            rotation="0 0 0" color="#fff"></a-box>
         <a-box position="2.30 4.4 -3.5" material="shader: flat" shadow="cast: true; receive: true" scale="0.5 0.05 2.8"
-            rotation="0 0 0" color="#fff" static-body></a-box>
+            rotation="0 0 0" color="#fff"></a-box>
         <!-- left back -->
         <a-box position="-1.70 4.4 3.5" material="shader: flat" shadow="cast: true; receive: true" scale="0.5 0.05 2.8"
-            rotation="0 0 0" color="#fff" static-body></a-box>
+            rotation="0 0 0" color="#fff"></a-box>
         <a-box position="-2.30 4.4 3.5" material="shader: flat" shadow="cast: true; receive: true" scale="0.5 0.05 2.8"
-            rotation="0 0 0" color="#fff" static-body></a-box>
+            rotation="0 0 0" color="#fff"></a-box>
         <!-- left front -->
         <a-box position="-1.70 4.4 -3.5" material="shader: flat" shadow="cast: true; receive: true" scale="0.5 0.05 2.8"
-            rotation="0 0 0" color="#fff" static-body></a-box>
+            rotation="0 0 0" color="#fff"></a-box>
         <a-box position="-2.30 4.4 -3.5" material="shader: flat" shadow="cast: true; receive: true" scale="0.5 0.05 2.8"
-            rotation="0 0 0" color="#fff" static-body></a-box>
+            rotation="0 0 0" color="#fff"></a-box>
 
 
 
@@ -185,71 +183,76 @@
             material="roughness: 1" static-body></a-box>
         <!-- Left Wall -->
         <!-- right -->
-        <a-box position="-7 2.5 -9" shadow="cast: true; receive: true" scale="3 5 1" rotation="0 90 0" color="#d4bc96"
-            static-body></a-box>
-        <!-- left -->
-        <a-box position="-7 2.5 9" shadow="cast: true; receive: true" scale="3 5 1" rotation="0 90 0" color="#d4bc96"
-            static-body></a-box>
-        <!-- middleleft -->
-        <a-box position="-7 2.5 -3" shadow="cast: true; receive: true" scale="3 5 1" rotation="0 90 0" color="#d4bc96"
-            static-body></a-box>
-        <!-- middleleft -->
-        <a-box position="-7 2.5 3" shadow="cast: true; receive: true" scale="3 5 1" rotation="0 90 0" color="#d4bc96"
-            static-body></a-box>
-        <!-- bottom -->
-        <a-box position="-7 0.5 0" shadow="cast: true; receive: true" scale="20 1 1" rotation="0 90 0" color="#d4bc96"
-            static-body></a-box>
-        <!-- top -->
-        <a-box position="-7 4.3 0" shadow="cast: true; receive: true" scale="20 1.5 1" repeat="40 40 1"
-            rotation="0 90 0" color="#d4bc96" static-body></a-box>
+        <a-entity static-body>
+            <a-box position="-7 2.5 -9" shadow="cast: true; receive: true" scale="3 5 1" rotation="0 90 0"
+                color="#d4bc96"></a-box>
+            <!-- left -->
+            <a-box position="-7 2.5 9" shadow="cast: true; receive: true" scale="3 5 1" rotation="0 90 0"
+                color="#d4bc96"></a-box>
+            <!-- middleleft -->
+            <a-box position="-7 2.5 -3" shadow="cast: true; receive: true" scale="3 5 1" rotation="0 90 0"
+                color="#d4bc96"></a-box>
+            <!-- middleleft -->
+            <a-box position="-7 2.5 3" shadow="cast: true; receive: true" scale="3 5 1" rotation="0 90 0"
+                color="#d4bc96"></a-box>
+            <!-- bottom -->
+            <a-box position="-7 0.5 0" shadow="cast: true; receive: true" scale="20 1 1" rotation="0 90 0"
+                color="#d4bc96"></a-box>
+            <!-- top -->
+            <a-box position="-7 4.3 0" shadow="cast: true; receive: true" scale="20 1.5 1" repeat="40 40 1"
+                rotation="0 90 0" color="#d4bc96"></a-box>
+        </a-entity>
 
         <!-- Windows -->
         <!-- center -->
-        <a-cylinder position="-6.5 3.65 0" material="roughness: 1" radius="0.15" height="3.5" color="#885f32"
-            rotation="90 0 0"></a-cylinder>
-        <a-box position="-6.75 2.3 -1.55" scale="2.7 0.2 0.7" rotation="0 90 90" color="#885f32" static-body></a-box>
-        <a-box position="-6.75 2.3 1.55" material="roughness: 1" scale="2.7 0.2 0.7" rotation="0 90 90" color="#885f32"
-            static-body></a-box>
-        <a-box position="-6.68 1 0" scale="3.5 0.2 0.85" rotation="0 90 0" color="#885f32" static-body></a-box>
-        <a-box position="-6.75 3.6 0" scale="3.2 0.2 0.7" rotation="0 90 0" color="#885f32" static-body></a-box>
-        <a-box position="-6.75 2.3 0" scale="3.2 0.2 0.2" rotation="0 90 0" color="#885f32" static-body></a-box>
-        <a-box position="-6.75 2.3 0" scale="3.2 0.2 0.2" rotation="0 90 90" color="#885f32" static-body></a-box>
-        <a-box position="-6.75 2.3 0" scale="3.2 3 0.01" rotation="0 90 90" color="#effbff" static-body
-            opacity="0.4"></a-box>
+        <a-entity static-body>
+            <a-cylinder position="-6.5 3.65 0" material="roughness: 1" radius="0.15" height="3.5" color="#885f32"
+                rotation="90 0 0"></a-cylinder>
+            <a-box position="-6.75 2.3 -1.55" scale="2.7 0.2 0.7" rotation="0 90 90" color="#885f32"></a-box>
+            <a-box position="-6.75 2.3 1.55" material="roughness: 1" scale="2.7 0.2 0.7" rotation="0 90 90"
+                color="#885f32"></a-box>
+            <a-box position="-6.68 1 0" scale="3.5 0.2 0.85" rotation="0 90 0" color="#885f32"></a-box>
+            <a-box position="-6.75 3.6 0" scale="3.2 0.2 0.7" rotation="0 90 0" color="#885f32"></a-box>
+            <a-box position="-6.75 2.3 0" scale="3.2 0.2 0.2" rotation="0 90 0" color="#885f32"></a-box>
+            <a-box position="-6.75 2.3 0" scale="3.2 0.2 0.2" rotation="0 90 90" color="#885f32"></a-box>
+            <a-box position="-6.75 2.3 0" scale="3.2 3 0.01" rotation="0 90 90" color="#effbff" opacity="0.4"></a-box>
+        </a-entity>
         <!-- left -->
-        <a-cylinder position="-6.5 3.65 6" material="roughness: 1" radius="0.15" height="3.5" color="#885f32"
-            rotation="90 0 0"></a-cylinder>
-        <a-box position="-6.75 2.3 4.45" scale="2.7 0.2 0.7" rotation="0 90 90" color="#885f32" static-body></a-box>
-        <a-box position="-6.75 2.3 7.55" material="roughness: 1" scale="2.7 0.2 0.7" rotation="0 90 90" color="#885f32"
-            static-body></a-box>
-        <a-box position="-6.68 1 6" scale="3.5 0.2 0.85" rotation="0 90 0" color="#885f32" static-body></a-box>
-        <a-box position="-6.75 3.6 6" scale="3.2 0.2 0.7" rotation="0 90 0" color="#885f32" static-body></a-box>
-        <a-box position="-6.75 2.3 6" scale="3.2 0.2 0.2" rotation="0 90 0" color="#885f32" static-body></a-box>
-        <a-box position="-6.75 2.3 6" scale="3.2 0.2 0.2" rotation="0 90 90" color="#885f32" static-body></a-box>
-        <a-box position="-6.75 2.3 6" scale="3.2 3 0.01" rotation="0 90 90" color="#effbff" static-body
-            opacity="0.4"></a-box>
+        <a-entity static-body>
+            <a-cylinder position="-6.5 3.65 6" material="roughness: 1" radius="0.15" height="3.5" color="#885f32"
+                rotation="90 0 0"></a-cylinder>
+            <a-box position="-6.75 2.3 4.45" scale="2.7 0.2 0.7" rotation="0 90 90" color="#885f32"></a-box>
+            <a-box position="-6.75 2.3 7.55" material="roughness: 1" scale="2.7 0.2 0.7" rotation="0 90 90"
+                color="#885f32"></a-box>
+            <a-box position="-6.68 1 6" scale="3.5 0.2 0.85" rotation="0 90 0" color="#885f32"></a-box>
+            <a-box position="-6.75 3.6 6" scale="3.2 0.2 0.7" rotation="0 90 0" color="#885f32"></a-box>
+            <a-box position="-6.75 2.3 6" scale="3.2 0.2 0.2" rotation="0 90 0" color="#885f32"></a-box>
+            <a-box position="-6.75 2.3 6" scale="3.2 0.2 0.2" rotation="0 90 90" color="#885f32"></a-box>
+            <a-box position="-6.75 2.3 6" scale="3.2 3 0.01" rotation="0 90 90" color="#effbff" opacity="0.4"></a-box>
+        </a-entity>
         <!-- right -->
-        <a-cylinder position="-6.5 3.65 -6" material="roughness: 1" radius="0.15" height="3.5" color="#885f32"
-            rotation="90 0 0"></a-cylinder>
-        <a-box position="-6.75 2.3 -7.55" scale="2.7 0.2 0.7" rotation="0 90 90" color="#885f32" static-body></a-box>
-        <a-box position="-6.75 2.3 -4.45" material="roughness: 1" scale="2.7 0.2 0.7" repeat="40 40 1"
-            rotation="0 90 90" color="#885f32" static-body></a-box>
-        <a-box position="-6.68 1 -6" scale="3.5 0.2 0.85" rotation="0 90 0" color="#885f32" static-body></a-box>
-        <a-box position="-6.75 3.6 -6" scale="3.2 0.2 0.7" rotation="0 90 0" color="#885f32" static-body></a-box>
-        <a-box position="-6.75 2.3 -6" scale="3.2 0.2 0.2" rotation="0 90 0" color="#885f32" static-body></a-box>
-        <a-box position="-6.75 2.3 -6" scale="3.2 0.2 0.2" rotation="0 90 90" color="#885f32" static-body></a-box>
-        <a-box position="-6.75 2.3 -6" scale="3.2 3 0.01" rotation="0 90 90" color="#effbff" static-body
-            opacity="0.4"></a-box>
+        <a-entity static-body>
+            <a-cylinder position="-6.5 3.65 -6" material="roughness: 1" radius="0.15" height="3.5" color="#885f32"
+                rotation="90 0 0"></a-cylinder>
+            <a-box position="-6.75 2.3 -7.55" scale="2.7 0.2 0.7" rotation="0 90 90" color="#885f32"></a-box>
+            <a-box position="-6.75 2.3 -4.45" material="roughness: 1" scale="2.7 0.2 0.7" repeat="40 40 1"
+                rotation="0 90 90" color="#885f32"></a-box>
+            <a-box position="-6.68 1 -6" scale="3.5 0.2 0.85" rotation="0 90 0" color="#885f32"></a-box>
+            <a-box position="-6.75 3.6 -6" scale="3.2 0.2 0.7" rotation="0 90 0" color="#885f32"></a-box>
+            <a-box position="-6.75 2.3 -6" scale="3.2 0.2 0.2" rotation="0 90 0" color="#885f32"></a-box>
+            <a-box position="-6.75 2.3 -6" scale="3.2 0.2 0.2" rotation="0 90 90" color="#885f32"></a-box>
+            <a-box position="-6.75 2.3 -6" scale="3.2 3 0.01" rotation="0 90 90" color="#effbff" opacity="0.4"></a-box>
+        </a-entity>
 
         <!-- Top Wall line -->
-        <a-box position="0 4.34 -9.4" scale="13 0.2 0.2" rotation="-90 0 0" color="#885f32" material="roughness: 1"
-            static-body></a-box>
-        <a-box position="0 4.34 9.4" scale="13 0.2 0.2" rotation="-90 0 0" color="#885f32" material="roughness: 1"
-            static-body></a-box>
-        <a-box position="6.4 4.34 0" scale="19 0.2 0.2" rotation="0 90 0" color="#885f32" material="roughness: 1"
-            static-body></a-box>
-        <a-box position="-6.4 4.34 0" scale="19 0.2 0.2" rotation="0 90 0" color="#885f32" material="roughness: 1"
-            static-body></a-box>
+        <a-box position="0 4.34 -9.4" scale="13 0.2 0.2" rotation="-90 0 0" color="#885f32"
+            material="roughness: 1"></a-box>
+        <a-box position="0 4.34 9.4" scale="13 0.2 0.2" rotation="-90 0 0" color="#885f32"
+            material="roughness: 1"></a-box>
+        <a-box position="6.4 4.34 0" scale="19 0.2 0.2" rotation="0 90 0" color="#885f32"
+            material="roughness: 1"></a-box>
+        <a-box position="-6.4 4.34 0" scale="19 0.2 0.2" rotation="0 90 0" color="#885f32"
+            material="roughness: 1"></a-box>
 
 
         <!-- Tables -->
@@ -356,7 +359,7 @@
             <a-sphere static-body position="0.64 0.26 -2.9" radius="0.08" color="#8B5A2B"></a-sphere>
         </a-entity>
 
-        <a-entity id="book" obj-model="obj: #notebook-obj; mtl: #notebook-materiaux" position="2.2 1.443 -3"
+        <!-- <a-entity id="book" obj-model="obj: #notebook-obj; mtl: #notebook-materiaux" position="2.2 1.443 -3"
             scale="0.5 0.5 0.5" rotation="0 45 0" class="collidable">
         </a-entity>
 
@@ -370,7 +373,7 @@
 
         <a-entity id="Market" gltf-model="#Market" position="5.25 0 8.25" scale="3 4 2" rotation="0 -45 0"
             class="collidable">
-        </a-entity>
+        </a-entity> -->
 
         <a-entity id="shelf" gltf-model="#shelf" position="2 2.5 9" scale="1 1 1.25" rotation="0 90 0"
             class="collidable">
@@ -448,14 +451,14 @@
         </a-entity>
 
         <!-- Board -->
-        <a-box static-body position="0 2.7 -9.49" scale="6 2.5 0.01" color="#093e2e"></a-box>
-        <a-box static-body position="-3 2.7 -9.455" scale="0.1 2.5 0.05" color="#885f32"></a-box>
-        <a-box static-body position="3 2.7 -9.455" scale="0.1 2.5 0.05" color="#885f32"></a-box>
-        <a-box static-body position="0 4 -9.455" scale="6.1 0.1 0.05" color="#885f32"></a-box>
-        <a-box static-body position="0 1.4 -9.455" scale="6.1 0.1 0.05" color="#885f32"></a-box>
+        <a-box position="0 2.7 -9.49" scale="6 2.5 0.01" color="#093e2e"></a-box>
+        <a-box position="-3 2.7 -9.455" scale="0.1 2.5 0.05" color="#885f32"></a-box>
+        <a-box position="3 2.7 -9.455" scale="0.1 2.5 0.05" color="#885f32"></a-box>
+        <a-box position="0 4 -9.455" scale="6.1 0.1 0.05" color="#885f32"></a-box>
+        <a-box position="0 1.4 -9.455" scale="6.1 0.1 0.05" color="#885f32"></a-box>
 
         <!-- classmate -->
-        <a-entity gltf-model="#impostor" position="-1.8 1 -1.7" scale="2 2 2" dynamic-body></a-entity>
+        <!-- <a-entity gltf-model="#impostor" position="-1.8 1 -1.7" scale="2 2 2" dynamic-body></a-entity>
         <a-entity gltf-model="#player-6" position="-3.2 1 -1.7" scale="0.6 0.6 0.6" rotation="0 180 0"
             dynamic-body></a-entity>
         <a-entity gltf-model="#player-9" position="-1.8 1 2.3" scale=".6 .6 .6" rotation="0 180 0"
@@ -474,7 +477,7 @@
         <a-entity gltf-model="#player-4" position="1.8 1 6.3" scale=".6 .6 .6" rotation="0 180 0"
             dynamic-body></a-entity>
         <a-entity gltf-model="#player-5" position="3.2 1 6.3" scale=".6 .6 .6" rotation="0 180 0"
-            dynamic-body></a-entity>
+            dynamic-body></a-entity> -->
 
 
 
