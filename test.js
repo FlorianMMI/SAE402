@@ -163,8 +163,8 @@ function nextQuestion(id) {
                 infoBox.parentNode.removeChild(infoBox);
             }
         }, 5000);
+        return;
     }
-
     
     question.setAttribute("value", data[id].texte_question);
     
