@@ -31,6 +31,7 @@ async function StartTest() {
     const scene = document.querySelector("a-scene");
 
     const infoBox = document.createElement("a-box");
+    infoBox.setAttribute("id", "infoBox");
     infoBox.setAttribute("position", "1.8 2 0.8");
     infoBox.setAttribute("rotation", `-45 ${Math.PI / 2} 0`);
     infoBox.setAttribute("width", "3");
@@ -153,12 +154,12 @@ function nextQuestion(id) {
         setTimeout(() => {
             const camera = document.querySelector("#rig");
             camera.setAttribute("position", "1.8 0 2.3");
-            camera.setAttribute("movement-controls", "constrainToNavMesh: true; controls: checkpoint;");
+            camera.setAttribute("movement-controls", "constrainToNavMesh: true; controls: checkpoint, gamepad, trackpad, keyboard, nipple;");
 
             const chair = document.querySelector("#cr-chair");
             chair.setAttribute("dynamic-body", "");
 
-            const infoBox = document.querySelector("a-box");
+            const infoBox = document.querySelector("#infoBox");
             if (infoBox) {
                 infoBox.parentNode.removeChild(infoBox);
             }
