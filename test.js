@@ -3,10 +3,15 @@ const response = await fetch('./question.json');
 
     let correctAnswers = []
     data.forEach(elmt => {
-        if (elmt.reponses[0].est_correcte === true) {
+        if (elmt.reponses[0].est_correcte == true) {
             correctAnswers.push (elmt.reponses[0].texte_reponse);
         }
+        if (elmt.reponses[1].est_correcte == true) {
+            correctAnswers.push (elmt.reponses[1].texte_reponse);
+        }
     });
+
+    console.log(correctAnswers);
 
 
 const scene = document.querySelector("a-scene");
@@ -29,11 +34,11 @@ async function StartTest() {
     infoBox.setAttribute("position", "1.8 2 0.8");
     infoBox.setAttribute("rotation", `-45 ${Math.PI / 2} 0`);
     infoBox.setAttribute("width", "3");
-    infoBox.setAttribute("height", "0.7");
+    infoBox.setAttribute("height", "1.5");
     infoBox.setAttribute("depth", "0.01");
     infoBox.setAttribute("material", "color: #fff; opacity: 0.9");
     const textElement = document.createElement("a-text");
-    textElement.setAttribute("value", "debut du test, trouvez la bonne reponse");
+    textElement.setAttribute("value", "Start of the test...");
     textElement.setAttribute("color", "#000");
     textElement.setAttribute("align", "center");
     textElement.setAttribute("wrapCount", "25");
@@ -95,7 +100,9 @@ async function StartTest() {
 
             }
             else {
-                textElement.setAttribute("value", "Mauvaise réponse");
+                setTimeout(() => {
+                    textElement.setAttribute("value", "Wrong !");
+                }, 1000);
                 nextQuestion(1);
             }
             
@@ -121,7 +128,9 @@ async function StartTest() {
                 nextQuestion(1);
             }
             else {
-                textElement.setAttribute("value", "Mauvaise réponse");
+                setTimeout(() => {
+                    textElement.setAttribute("value", "Wrong !");
+                }, 1000);
                 nextQuestion(1);
             }
         });
@@ -133,16 +142,17 @@ async function StartTest() {
 
 function nextQuestion(id) {
 
+    let question = document.querySelector("#question");
     
     console.log(data.length && id);
     if (id > data.length - 1) {
-        question.setAttribute("value", "Fin du test, vous avez eu " + cpt_resp + "/" + data.length + " bonnes réponses. Ainsi que" + cpt_resp * 2 + " points");
+        question.setAttribute("value", "End of the test, you got " + cpt_resp + "/" + data.length + "And you got " + cpt_resp * 2 + " shop credits");
         document.querySelector("#reponse1").setAttribute("value", "");
         document.querySelector("#reponse2").setAttribute("value", "");
         return;
     }
 
-    let question = document.querySelector("#question");
+    
     question.setAttribute("value", data[id].texte_question);
     
 
@@ -170,7 +180,9 @@ function nextQuestion(id) {
             id += 1;
             nextQuestion(id);
         } else {
-            question.setAttribute("value", "Mauvaise réponse");
+            setTimeout(() => {
+                textElement.setAttribute("value", "Wrong !");
+            }, 1000);
             id += 1;
             nextQuestion(id);
         }
@@ -193,7 +205,9 @@ function nextQuestion(id) {
             id += 1;
             nextQuestion(id);
         } else {
-            question.setAttribute("value", "Mauvaise réponse");
+            setTimeout(() => {
+                textElement.setAttribute("value", "Wrong !");
+            }, 10000);
             id += 1;
             nextQuestion(id);
         }
