@@ -53,18 +53,15 @@
 
             <a-asset-item id="impostor" src="models/character/Sussy Imposter.glb" dynamic-body></a-asset-item>
 
-            <a-asset-item id="bigarm" src="models/classmate/Big arm.glb"></a-asset-item>
             <a-asset-item id="evilimpostor" src="models/classmate/Evil Imposter.glb"></a-asset-item>
-            <a-asset-item id="mech" src="models/classmate/Mech.glb"></a-asset-item>
             <a-asset-item id="ninja" src="models/classmate/Ninja.glb"></a-asset-item>
-            <a-asset-item id="zombie" src="models/classmate/Zombie.glb"></a-asset-item>
-            <a-asset-item id="zombiehalf" src="models/classmate/Zombie half.glb"></a-asset-item>
             <a-asset-item id="shark" src="models/classmate/Shark.glb"></a-asset-item>
             <a-asset-item id="tentacle" src="models/classmate/Tentacle.glb"></a-asset-item>
             <a-asset-item id="fish" src="models/classmate/Fish.glb"></a-asset-item>
             <a-asset-item id="bone" src="models/classmate/Fish Bone.glb"></a-asset-item>
             <a-asset-item id="puffer" src="models/classmate/Puffer.glb"></a-asset-item>
             <a-asset-item id="dead" src="models/classmate/Dead Flounder.glb"></a-asset-item>
+            <a-asset-item id="character-shop" src="models/classmate/Character Base.glb"></a-asset-item>
 
 
             <a-asset-item id="stand-o" src="models/stand/model.obj"></a-asset-item>
@@ -545,6 +542,10 @@
             <a-box position="0 0 0" width="3" height="3" depth="3" opacity="0"></a-box>
         </a-entity>
 
+        <a-entity gltf-model="#table-shop" scale=".5 .5 .5" position="5.5 1 8" rotation="0 35 0" id="Table-shop"></a-entity>
+        <a-entity gltf-model="#character-shop" scale=".75 .75 .75" position="5.5 1 8" rotation="0 35 0"  static-body></a-entity>
+        <a-entity gltf-model="#character-shop" position="7.85 1 8.6" scale=".45 .45 .45" rotation="0 180 0" id="Character-shop"
+            ></a-entity>
         <script src="script.js"></script>
         <script type="module" src="Selection.js"></script>
         <script type="module" src="test.js"></script>
