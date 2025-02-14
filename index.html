@@ -35,7 +35,10 @@
             <a-asset-item id="character" src="models/teacher/Beach Character.glb"></a-asset-item>
             <img id="ground" src="assets/parquet.jpg">
             <img id="grass" src="assets/grass.jpg">
-
+            <a-asset-item id="tree" src="models/outside/tree.glb"></a-asset-item>
+            <a-asset-item id="treedead" src="models/outside/deadTree.glb"></a-asset-item>
+            <a-asset-item id="slide" src="models/outside/Slide.glb"></a-asset-item>
+            <a-asset-item id="swing" src="models/outside/Swing set.glb"></a-asset-item>
             <a-asset-item id="tree-o" src="models/tree.obj"></a-asset-item>
             <a-asset-item id="tree-m" src="models/tree.mtl"></a-asset-item>
 
@@ -359,7 +362,7 @@
             <a-sphere static-body position="0.64 0.26 -2.9" radius="0.08" color="#8B5A2B"></a-sphere>
         </a-entity>
 
-        <!-- <a-entity id="book" obj-model="obj: #notebook-obj; mtl: #notebook-materiaux" position="2.2 1.443 -3"
+        <a-entity id="book" obj-model="obj: #notebook-obj; mtl: #notebook-materiaux" position="2.2 1.443 -3"
             scale="0.5 0.5 0.5" rotation="0 45 0" class="collidable">
         </a-entity>
 
@@ -373,17 +376,35 @@
 
         <a-entity id="Market" gltf-model="#Market" position="5.25 0 8.25" scale="3 4 2" rotation="0 -45 0"
             class="collidable">
-        </a-entity> -->
-
-        <a-entity id="shelf" gltf-model="#shelf" position="2 2.5 9" scale="1 1 1.25" rotation="0 90 0"
+        </a-entity>
+        <a-entity id="shelf" gltf-model="#shelf"
+                position="2 2.5 9"
+                scale="1 1 1.25"
+                rotation="0 90 0"
+                class="collidable">
+        </a-entity>
+        <a-entity id="shelf" gltf-model="#shelf"
+            position="2 1 9"
+            scale="1 1 1.25"
+            rotation="0 90 0"
             class="collidable">
         </a-entity>
-        <a-entity id="shelf" gltf-model="#shelf" position="2 1 9" scale="1 1 1.25" rotation="0 90 0" class="collidable">
-        </a-entity>
+        <a-box position="2 1.35 9.75" class="collidable" color="#8B5A2B" scale="3 0.2 2" shadow="cast: true; receive: true" static-body></a-box>
+        <a-box position="2 2.75 9.75" class="collidable" color="#8B5A2B" scale="3 0.2 2" shadow="cast: true; receive: true" static-body></a-box>
 
-        <a-text id="money" value="1000" position="4.65 3.2 7.5" scale="1.25 1.25 1.25" rotation="0 215 0"
-            color="#000"></a-text>
+        <a-text id="money" value="10" position="0 2 9.5" scale="1.25 1.25 1.25" rotation="0 180 0" color="#00ff00"></a-text>
+        <a-text id="dollar" value="$" position="-.5 2 9.5" scale="1.25 1.25 1.25" rotation="0 180 0" color="#00ff00"></a-text>
 
+        <!-- OBJECTS -->
+        <!-- Tree -->
+        <a-entity gltf-model="#treedead" position="-30 0 15" scale="4 4 4" rotation="0 230 0"
+        shadow="cast: true; receive: true" static-body></a-entity>
+        <a-entity gltf-model="#tree" position="-20 1.5 8" scale="4 4 4" rotation="0 230 0"
+        shadow="cast: true; receive: true" static-body></a-entity>
+
+        <!-- Playground -->
+        <a-entity gltf-model="#slide" position="-10 0 7" scale="1 1 1" rotation="0 180 0"></a-entity>
+        <a-entity gltf-model="#swing" position="-10 0 -7" scale=".03 .03 .03" rotation="0 180 0"></a-entity>
         <!-- OBJECTS -->
         <!-- Tree -->
         <a-entity id="deskchairobject" gltf-model="#deskchair" position="-3.5 0 -7" scale="4 4 4" rotation="0 230 0"
