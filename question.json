@@ -49,6 +49,22 @@
                 "est_correcte": true
             }
         ]
+    },
+    {
+        "id_question": 4,
+        "texte_question": "How do you say \"Livre\" in English?",
+        "niveau_question": 1,
+        "reponses": [
+            {
+                "id_question": 4,
+                "texte_reponse": "Book",
+                "est_correcte": true
+            },
+            {
+                "id_question": 4,
+                "texte_reponse": "Cook",
+                "est_correcte": false
+            }
+        ]
     }
 ]
-

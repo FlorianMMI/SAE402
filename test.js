@@ -25,26 +25,27 @@ async function StartTest() {
     camera.setAttribute("movement-controls", "constrainToNavMesh: true; controls: checkpoint;");
 
     let chair = document.querySelector("#cr-chair");
-    chair.removeAttribute("dynamic-body");
+    chair.removeAttribute("dynamic-body"); 
 
 
     const scene = document.querySelector("a-scene");
 
     const infoBox = document.createElement("a-box");
     infoBox.setAttribute("id", "infoBox");
-    infoBox.setAttribute("position", "1.8 2 0.8");
-    infoBox.setAttribute("rotation", `-45 ${Math.PI / 2} 0`);
-    infoBox.setAttribute("width", "3");
-    infoBox.setAttribute("height", "1.5");
+    infoBox.setAttribute("position", "1.8 1.5 1.3");
+    infoBox.setAttribute("rotation", `-90 0 0`);
+    infoBox.setAttribute("width", "1.4");
+    infoBox.setAttribute("height", "1.2");
     infoBox.setAttribute("depth", "0.01");
-    infoBox.setAttribute("material", "color: #fff; opacity: 0.9");
+    infoBox.setAttribute("material", "color: #fff; opacity: 1");
     const textElement = document.createElement("a-text");
     textElement.setAttribute("value", "Start of the test...");
     textElement.setAttribute("color", "#000");
     textElement.setAttribute("align", "center");
-    textElement.setAttribute("wrapCount", "25");
+    textElement.setAttribute("width", "1.4");
+    textElement.setAttribute("wrapCount", "15");
     textElement.setAttribute("position", "0 0 0.01");
-    textElement.setAttribute("scale", "0.6 0.6 0.6");
+    // textElement.setAttribute("scale", "0.4 0.4 0.4");
 
     infoBox.appendChild(textElement);
 
@@ -62,9 +63,9 @@ async function StartTest() {
         textReponse1.setAttribute("id", "reponse1");
         textReponse1.setAttribute("color", "#000");
         textReponse1.setAttribute("align", "center");
-        textReponse1.setAttribute("wrapCount", "25");
+        textReponse1.setAttribute("wrapCount", "20");
         textReponse1.setAttribute("position", "0 -0.2 0.01");
-        textReponse1.setAttribute("scale", "0.6 0.6 0.6");
+        textReponse1.setAttribute("scale", "0.4 0.4 0.4");
 
         infoBox.appendChild(textReponse1);
 
@@ -75,7 +76,7 @@ async function StartTest() {
         textReponse2.setAttribute("align", "center");
         textReponse2.setAttribute("wrapCount", "25");
         textReponse2.setAttribute("position", "0 -0.4 0.01");
-        textReponse2.setAttribute("scale", "0.6 0.6 0.6");
+        textReponse2.setAttribute("scale", "0.4 0.4 0.4");
         infoBox.appendChild(textReponse2);
 
         const hitBoxRep1 = document.createElement("a-box");
@@ -148,7 +149,7 @@ function nextQuestion(id) {
     
     console.log(data.length && id);
     if (id > data.length - 1) {
-        question.setAttribute("value", "End of the test, you got " + cpt_resp + "/" + data.length + "And you got " + cpt_resp * 2 + " shop credits");
+        question.setAttribute("value", "End of the test, you got " + cpt_resp + "/" + data.length + " And you got " + cpt_resp * 2 + " shop credits");
         document.querySelector("#reponse1").setAttribute("value", "");
         document.querySelector("#reponse2").setAttribute("value", "");
         setTimeout(() => {
