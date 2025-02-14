@@ -114,16 +114,16 @@ let renderCharacter = function () {
   ];
   
   let colors = [
-    { normal: "#8B5A2B", dark: "#654321", price: 5 }, // Chêne
-    { normal: "#A67B5B", dark: "#6F4F28", price: 7 }, // Noyer
-    { normal: "#D2B48C", dark: "#A08050", price: 3 }, // Bois clair
-    { normal: "#6B4226", dark: "#4E2A14", price: 6 }, // Acajou
-    { normal: "#4B3621", dark: "#2E1A0F", price: 8 }, // Ébène
-    { normal: "#B0A999", dark: "#7D7461", price: 4 }, // Beige pierre
-    { normal: "#5D5C61", dark: "#3C3B3D", price: 9 }, // Gris anthracite
-    { normal: "#FFF8DC", dark: "#EED5B7", price: 2 }, // Ivoire
-    { normal: "#C0C0C0", dark: "#808080", price: 10 }, // Métallisé
-    { normal: "#3F301D", dark: "#22150C", price: 1 }  // Bois foncé
+    { normal: "#8B5A2B", dark: "#654321", price: 5 },
+    { normal: "#A67B5B", dark: "#6F4F28", price: 7 },
+    { normal: "#D2B48C", dark: "#A08050", price: 3 },
+    { normal: "#6B4226", dark: "#4E2A14", price: 6 },
+    { normal: "#4B3621", dark: "#2E1A0F", price: 8 },
+    { normal: "#B0A999", dark: "#7D7461", price: 4 },
+    { normal: "#5D5C61", dark: "#3C3B3D", price: 9 },
+    { normal: "#FFF8DC", dark: "#EED5B7", price: 2 }, 
+    { normal: "#C0C0C0", dark: "#808080", price: 10 }, 
+    { normal: "#3F301D", dark: "#22150C", price: 1 } 
   ];
   
   
