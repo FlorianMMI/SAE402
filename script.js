@@ -89,9 +89,12 @@ AFRAME.registerComponent("click-grab", {
     };
 
     let launcher = document.querySelector("#launcher");
+    const clickSound = document.querySelector("#clickSound");
+    const releaseSound = document.querySelector("#releaseSound");
 
     el.addEventListener("mousedown", function () {
       updatePosition;
+      clickSound.components.sound.playSound();
       launcher.setAttribute("static-body", "");
       isGrabbed = true;
       el.setAttribute("dynamic-body", "mass: 0");
@@ -100,11 +103,13 @@ AFRAME.registerComponent("click-grab", {
 
     scene.addEventListener("mouseup", function (event) {
       if ((event.button == 0) & isGrabbed) {
+        clickSound.components.sound.playSound();
         isGrabbed = false;
         launcher.removeAttribute("static-body");
         el.setAttribute("dynamic-body", "mass: 1");
       }
       if ((event.button == 2) & isGrabbed) {
+        releaseSound.components.sound.playSound();
         isGrabbed = false;
         el.setAttribute("dynamic-body", "mass: 1");
         setTimeout(() => {
