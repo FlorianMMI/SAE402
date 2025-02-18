@@ -129,22 +129,22 @@ let renderCharacter = function () {
   
   let renderMarket = function () {
     let ascene = document.querySelector('a-scene');
-    let amarket = document.createElement('a-entity');
-    amarket.setAttribute('gltf-model', '#Snorlax');
-    amarket.setAttribute('scale', '3 3 1.5');
-    amarket.setAttribute('position', '5.5 .8 8.5');
-    amarket.setAttribute('rotation', '0 35 0');
-    amarket.setAttribute('id', 'Snorlax');
-    ascene.appendChild(amarket);
-  
-      let atable = document.createElement('a-entity');
-    atable.setAttribute('gltf-model', '#table-shop');
-    atable.setAttribute('scale', '.5 .5 .5');
-    atable.setAttribute('position', '5.5 1 8');
-    atable.setAttribute('rotation', '0 35 0');
-    atable.setAttribute('id', 'Table-shop');
-    ascene.appendChild(atable);
-  
+    let merchant = document.createElement('a-entity');
+    merchant.setAttribute('gltf-model', '#Snorlax');
+    merchant.setAttribute('scale', '3 3 1.5');
+    merchant.setAttribute('position', '5.5 .8 8.5');
+    merchant.setAttribute('rotation', '0 35 0');
+    merchant.setAttribute('id', 'Snorlax');
+    ascene.appendChild(merchant);
+    merchant.addEventListener("click", function () {
+      renderTableInFrontOfMerchant();
+    });
+  //   let merchantTable = document.querySelectorAll('#market-table');
+  //   merchantTable.forEach(table => table.addEventListener("click", function () {
+  //     let tablesToRemove = Array.from(merchantTable);
+  //     tablesToRemove.forEach(table => ascene.removeChild(table));
+  // }));
+    let atable = document.getElementById("Table-shop");
     atable.addEventListener("click", function () {
       let otherboxes = document.querySelectorAll("#character-list");
       let othertext = document.querySelectorAll("#text-product");
@@ -209,7 +209,7 @@ let renderCharacter = function () {
       });
     });
   
-  
+    let amarket = document.getElementById("Character-shop");
     amarket.addEventListener("click", function () {
       let money = document.getElementById("money");
       let moneyvalue = money.getAttribute("value");
@@ -359,4 +359,73 @@ let renderCharacter = function () {
   });
 renderMarket();
 renderCharacter ();
+let renderTableInFrontOfMerchant = function () {
+  let ascene = document.querySelector('a-scene');
+  let existingTables = document.querySelectorAll('#market-table');
+  if (existingTables.length > 0) {
+    existingTables.forEach(table => ascene.removeChild(table));
+  } else {
+    const box1 = document.createElement("a-box");
+    box1.setAttribute("static-body", "");
+    box1.setAttribute("position", "5 2.25 8");
+    box1.setAttribute("scale", "2 1.25 0.01");
+    box1.setAttribute("color", "#093e2e");
+    box1.setAttribute("rotation", "0 45 0");
+    box1.setAttribute("id", "market-table");
+    ascene.appendChild(box1);
 
+    const box2 = document.createElement("a-box");
+    box2.setAttribute("static-body", "");
+    box2.setAttribute("position", "5 2.85 8");
+    box2.setAttribute("scale", "2.05 0.05 0.05");
+    box2.setAttribute("color", "#885f32");
+    box2.setAttribute("rotation", "0 45 0");
+    box2.setAttribute("id", "market-table");
+    ascene.appendChild(box2);
+
+    const box3 = document.createElement("a-box");
+    box3.setAttribute("static-body", "");
+    box3.setAttribute("position", "5 1.65 8");
+    box3.setAttribute("scale", "2.05 0.05 0.05");
+    box3.setAttribute("color", "#885f32");
+    box3.setAttribute("rotation", "0 45 0");
+    box3.setAttribute("id", "market-table");
+    ascene.appendChild(box3);
+
+    const box4 = document.createElement("a-box");
+    box4.setAttribute("static-body", "");
+    box4.setAttribute("position", "4.28 2.25 8.72");
+    box4.setAttribute("scale", "0.05 1.25 0.05");
+    box4.setAttribute("color", "#885f32");
+    box4.setAttribute("rotation", "0 45 0");
+    box4.setAttribute("id", "market-table");
+    ascene.appendChild(box4);
+
+    const box5 = document.createElement("a-box");
+    box5.setAttribute("static-body", "");
+    box5.setAttribute("position", "5.73 2.25 7.27");
+    box5.setAttribute("scale", "0.05 1.25 0.05");
+    box5.setAttribute("color", "#885f32");
+    box5.setAttribute("rotation", "0 45 0");
+    box5.setAttribute("id", "market-table");
+    ascene.appendChild(box5);
+
+    let aText = document.createElement("a-text");
+    aText.setAttribute("id", "market-table");
+    aText.setAttribute("value", "Welcome in the shop\nHere, you can click on the \ntable or the character to buy items\nand then you can buy\nitem by clicking on them\nif you have enough money ;)");
+    aText.setAttribute("scale", "0.5 0.45 0.5");
+    aText.setAttribute("position", `4.95 2.3 7.95`);
+    aText.setAttribute("rotation", "0 225 0");
+    aText.setAttribute("font", "./assets/font/Gloria-msdf.json");
+    aText.setAttribute("font-image", "./assets/font/Gloria-msdf.png");
+    aText.setAttribute("negate", "false");
+    aText.setAttribute("align", "center");
+    aText.setAttribute("color", "#FFF");
+    ascene.appendChild(aText);
+  }
+  let merchantTable = document.querySelectorAll('#market-table');
+  merchantTable.forEach(table => table.addEventListener("click", function () {
+    let tablesToRemove = Array.from(merchantTable);
+    tablesToRemove.forEach(table => ascene.removeChild(table));
+  }));
+};
