@@ -18,12 +18,12 @@ require_once("Repository/UserRepository.php");
             
            
             if (isset ($name)){
-                if ($request->getParam("items")){
-                    return $this->UserRepository->finditems($name);
-                }
-                else {
+                // if ($request->getParam("items")){
+                //     return $this->UserRepository->finditems($name);
+                // }
+                
                     return $this->UserRepository->finduser($name);
-                }
+                
                 
                 
             }
