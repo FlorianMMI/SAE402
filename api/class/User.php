@@ -1,23 +1,34 @@
 <?php 
 
 class Client implements JsonSerializable {
+    private int $id_user;
     private string $name;
     private int $money;
     private int $round;
     private array $id_questions;
 
-    public function __construct(string $name, int $money, int $round, array $id_questions) {
+
+    public function __construct(string $name) {
         $this->name = $name;
         
     }
 
     public function jsonSerialize() : array {
         return [
+            'id_user' => $this->id_user,
             'name' => $this->name,
             'money' => $this->money,
             'round' => $this->round,
             'id_questions' => $this->id_questions
         ];
+    }
+
+    public function getIdUser(): int {
+        return $this->id_user;
+    }
+
+    public function setIdUser(int $id_user): void {
+        $this->id_user = $id_user;
     }
 
     public function getName(): string {
