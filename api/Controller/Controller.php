@@ -1,5 +1,5 @@
 <?php 
-require_once("Class/HttpRequest.php");
+require_once("class/HttpRequest.php");
 
 /**
  *  Class Controller

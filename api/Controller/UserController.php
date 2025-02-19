@@ -15,9 +15,17 @@ require_once("Repository/UserRepository.php");
         protected function processGetRequest(HttpRequest $request): ?array {
             
             $name = $request->getParam("name");
+            
            
             if ($name){
-                return $this->UserRepository->finduser($name);
+                if ($request->getParam("items")){
+                    return $this->UserRepository->finditems($name);
+                }
+                else {
+                    return $this->UserRepository->finduser($name);
+                }
+                
+                
             }
             else {
                 return $this->UserRepository->findAll();
