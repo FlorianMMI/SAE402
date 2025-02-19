@@ -1,48 +1,7 @@
 import { StartTest } from './test.js';
 
-
-
-
-let data = [
-  { car : [
-    {
-    "Wheel": "Roues",
-    "Engine": "Moteur",
-    "Body": "Carrosserie",
-    "Headlight": "Phare",
-    
-  }
-  ],
-  bookdata : [
-   {
-    "Page": "Page",
-    "Cover": "Couverture",
-    "Title": "Titre",
-    "Author": "Auteur",
-  }
-
-
-  ],
-  computerdata : [
-    {
-    "Screen": "Ecran",
-    "Keyboard": "Clavier",
-    "Mouse": "Souris",
-    "Webcam": "Caméra",
-  }
-
-],
-paintData : [
-  {
-    "Canvas": "Toile",
-    "Brush": "Pinceau",
-    "Palette": "Palette",
-    "Easel": "Chevalet",
-  }
-],
-}
-]
-
+const response = await fetch('./data.json');
+    const data = await response.json();
 
 
 
@@ -139,11 +98,10 @@ computer.addEventListener("click", function () {
   
 });
 
-// Création de l'entité livre (book)
+
 var book = document.createElement("a-entity");
 book = document.getElementById("book");
 book.setAttribute("position", "5.950 2.00 0.650");
-// drawer1 = document.getElementById("drawer1");
 scene.appendChild(book);
 
 book.addEventListener("mouseenter", function () {
@@ -351,8 +309,7 @@ car.addEventListener("mouseleave", function () {
 });
 
 car.addEventListener("click", function () {
-  console.log("click");
-
+  
   
 
   const existingText = document.querySelector("#vocab-car");
