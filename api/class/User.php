@@ -1,15 +1,15 @@
 <?php 
 
 class Client implements JsonSerializable {
+    
     private int $id_user;
     private string $name;
     private int $money;
     private int $round;
     private array $id_questions;
 
-
-    public function __construct(string $name) {
-        $this->name = $name;
+    public function __construct(int $id_user) {
+        $this->id_user = $id_user;
         
     }
 
@@ -23,13 +23,9 @@ class Client implements JsonSerializable {
         ];
     }
 
-    public function getIdUser(): int {
-        return $this->id_user;
-    }
-
-    public function setIdUser(int $id_user): void {
-        $this->id_user = $id_user;
-    }
+    
+    
+    
 
     public function getName(): string {
         return $this->name;

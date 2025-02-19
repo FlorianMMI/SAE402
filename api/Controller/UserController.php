@@ -17,7 +17,7 @@ require_once("Repository/UserRepository.php");
             $name = $request->getParam("name");
             
            
-            if ($name){
+            if (isset ($name)){
                 if ($request->getParam("items")){
                     return $this->UserRepository->finditems($name);
                 }
