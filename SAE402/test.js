@@ -17,6 +17,14 @@ const response = await fetch('./question.json');
 const scene = document.querySelector("a-scene");
 let cpt_resp = 0;
 
+let storedUserInput = JSON.parse(localStorage.getItem("currentUserInput"));
+console.log("Render", storedUserInput);
+
+let players = JSON.parse(localStorage.getItem("players"));
+let userData = players.find(player => player.player_name === storedUserInput);
+console.log("User Data: ", userData);
+userData.round = 0;
+
 async function StartTest() {
 
     
@@ -94,6 +102,9 @@ async function StartTest() {
 
                 let money = document.querySelector("#money");
                 money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
+                userData.money = userData.money + 2;
+                players = players.map(player => player.player_name === storedUserInput ? userData : player);
+                localStorage.setItem("players", JSON.stringify(players));
                 textReponse1.removeChild(hitBoxRep1);
                 textReponse2.removeChild(hitBoxRep2);
                 cpt_resp += 1;
@@ -124,6 +135,9 @@ async function StartTest() {
 
                 let money = document.querySelector("#money");
                 money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
+                userData.money = userData.money + 2;
+                players = players.map(player => player.player_name === storedUserInput ? userData : player);
+                localStorage.setItem("players", JSON.stringify(players));
                 textReponse1.removeChild(hitBoxRep1);
                 textReponse2.removeChild(hitBoxRep2);
                 cpt_resp += 1;
@@ -191,6 +205,9 @@ function nextQuestion(id) {
         if (isCorrect(data[id].reponses[0].texte_reponse)) {
             let money = document.querySelector("#money");
             money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
+            userData.money = userData.money + 2;
+            players = players.map(player => player.player_name === storedUserInput ? userData : player);
+            localStorage.setItem("players", JSON.stringify(players));
             cpt_resp += 1;
             id += 1;
             nextQuestion(id);
@@ -218,6 +235,9 @@ function nextQuestion(id) {
             console.log(isCorrect(data[id].reponses[1].texte_reponse));
             let money = document.querySelector("#money");
             money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
+            userData.money = userData.money + 2;
+            players = players.map(player => player.player_name === storedUserInput ? userData : player);
+            localStorage.setItem("players", JSON.stringify(players));
             cpt_resp += 1;
             id += 1;
             nextQuestion(id);
