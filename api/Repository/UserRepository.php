@@ -14,6 +14,8 @@ class UserRepository extends EntityRepository {
         $requete -> execute();
         $answer = $requete -> fetchAll(PDO::FETCH_CLASS);
         return $answer;
+
+        
     }
 
     public function finduser($user) {
@@ -30,6 +32,16 @@ class UserRepository extends EntityRepository {
         $requete->execute();
         $answer = $requete->fetchAll(PDO::FETCH_CLASS);
         return $answer;
+    }
+
+    public function save($user) {
+        $stmt = $this->cnx->prepare("INSERT INTO User (players_name) VALUES (:players_name)");
+        $stmt->bindParam(':players_name', $user->players_name);
+        if ($stmt->execute()) {
+            return $this->cnx->lastInsertId();
+        } else {
+            return false;
+        }
     }
 
 }
