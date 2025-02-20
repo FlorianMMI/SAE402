@@ -558,10 +558,14 @@
             <a-box position="0 0 0" width="3" height="3" depth="3" opacity="0"></a-box>
         </a-entity>
 
-        <a-entity gltf-model="#table-shop" scale=".5 .5 .5" position="5.5 1 8" rotation="0 35 0" id="Table-shop"></a-entity>
-        <a-entity gltf-model="#character-shop" scale=".75 .75 .75" position="5.5 1 8" rotation="0 35 0"  static-body></a-entity>
-        <a-entity gltf-model="#character-shop" position="7.85 1 8.6" scale=".45 .45 .45" rotation="0 180 0" id="Character-shop"
-            ></a-entity>
+        <a-entity gltf-model="#table-shop" scale=".5 .5 .5" position="5.5 1 8" rotation="0 35 0" id="Table-shop">
+            <a-box position="0 0 0" scale="1.5 1 1" color="black" opacity="0"></a-box>
+        </a-entity>
+        <!-- <a-entity gltf-model="#character-shop" scale=".75 .75 .75" position="5.5 1 8" rotation="0 35 0"  static-body>
+        </a-entity> -->
+        <a-entity gltf-model="#character-shop" position="7.85 1 8.6" scale=".45 .45 .45" rotation="0 180 0" id="Character-shop">
+            <a-box position="6.15 1 0" scale="1.25 2 1" color="red" opacity="0"></a-box>
+        </a-entity>
         <script src="script.js"></script>
         <script type="module" src="Selection.js"></script>
         <script type="module" src="test.js"></script>
