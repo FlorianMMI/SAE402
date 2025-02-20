@@ -1,7 +1,8 @@
 let storedUserInput = JSON.parse(localStorage.getItem("currentUserInput"));
 console.log("Render", storedUserInput);
 
-let userData = JSON.parse(localStorage.getItem(storedUserInput));
+let players = JSON.parse(localStorage.getItem("players"));
+let userData = players.find(player => player.player_name === storedUserInput);
 console.log("User Data: ", userData);
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -157,22 +158,7 @@ let renderCharacter = function () {
     amarket.setAttribute('id', 'Snorlax');
     ascene.appendChild(amarket);
   
-    let atable = document.createElement('a-entity');
-    atable.setAttribute('gltf-model', '#table-shop');
-    atable.setAttribute('scale', '.5 .5 .5');
-    atable.setAttribute('position', '5.5 1 8');
-    atable.setAttribute('rotation', '0 35 0');
-    atable.setAttribute('id', 'Table-shop');
-
-    let box = document.createElement('a-box');
-    box.setAttribute('id', 'Table-shop');
-    box.setAttribute('position', '0 0 0'); 
-    box.setAttribute('scale', '1.5 1 1');
-    box.setAttribute('color', 'brown'); 
-    atable.appendChild(box);
-
-    ascene.appendChild(atable);
-  
+    let atable = document.getElementById("Table-shop");
     atable.addEventListener("click", function () {
       let otherboxes = document.querySelectorAll("#character-list");
       let othertext = document.querySelectorAll("#text-product");
@@ -245,8 +231,8 @@ let renderCharacter = function () {
       });
     });
   
-  
-    amarket.addEventListener("click", function () {
+    let acharacter = document.getElementById("Character-shop");
+    acharacter.addEventListener("click", function () {
       let money = document.getElementById("money");
       let moneyvalue = money.getAttribute("value");
       let otherboxes = document.querySelectorAll("#box-color");
@@ -263,6 +249,7 @@ let renderCharacter = function () {
       }
   
       characters.forEach((character, index) => {
+        console.log(userData);
         if (userData.id_shop.includes(character.name)) {
           character.price = 0;
         }
