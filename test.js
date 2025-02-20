@@ -1,10 +1,24 @@
+
+
 const response = await fetch('./question.json');
 const temp = await response.json();
 console.log(temp);
 
+
+
+import { getRequest } from "./api-request.js";
+const userData = await getRequest("user");
+  console.log(userData[0].round);
+
+
+
+
+
 let rounds = [2,4,6,8,10,12,14,16,18];
-let round = 0;
+let round = parseInt(userData[0].round);
 let questionIndex = 0;
+
+
 
 let data = [];
 
