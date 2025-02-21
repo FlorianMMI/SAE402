@@ -4,9 +4,9 @@ class Client implements JsonSerializable {
     
     private int $id_user;
     private string $name;
-    private int $money;
-    private int $round;
-    private array $id_questions;
+    private int $money = 0;
+    private int $round = 0;
+    private array $id_questions = [];
 
     public function __construct(int $id_user) {
         $this->id_user = $id_user;
@@ -16,7 +16,7 @@ class Client implements JsonSerializable {
     public function jsonSerialize() : array {
         return [
             'id_user' => $this->id_user,
-            'name' => $this->name,
+            'players_name' => $this->name,
             'money' => $this->money,
             'round' => $this->round,
             'id_questions' => $this->id_questions

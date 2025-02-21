@@ -1,5 +1,14 @@
-let userInput = "";
 import { renderButton } from "./loading2.js";
+import { getRequest, postRequest } from "./SAE402/api-request.js";
+
+let userInput = "";
+
+const users = await getRequest("user");
+
+
+
+
+
 
 function updateTextDisplay(textDisplay) {
   textDisplay.setAttribute(
@@ -19,8 +28,16 @@ function handleKeyClick(key, textDisplay, keysContainer) {
     console.log("Nom validé: ", userInput);
     keysContainer.parentNode.removeChild(keysContainer);
     textDisplay.parentNode.removeChild(textDisplay);
-    let players = JSON.parse(localStorage.getItem("players") || "[]");
-    let existingPlayer = players.find(player => player.player_name === userInput);
+
+    let playersNames = [];
+    console.log("ceci est la longueur ", users.length)
+    for (let i = 0; i < users.length; i++) {
+      playersNames.push(users[i].players_name.toUpperCase());
+    }
+    
+    
+
+    let existingPlayer = playersNames.includes(userInput);
 
     if (existingPlayer) {
       console.log("Données enregistrées: ", existingPlayer);
@@ -34,19 +51,40 @@ function handleKeyClick(key, textDisplay, keysContainer) {
       localStorage.setItem("currentUserInput", JSON.stringify(userInput));
       return userInput;
     } else {
-      let newPlayer = {
-        player_name: userInput,
-        money: 0,
-        round: 1,
-        id_questions: [],
-        id_shop: ["King", "Casual"],
-      };
-      players.push(newPlayer);
-      localStorage.setItem("players", JSON.stringify(players));
-      console.log("Données enregistrées: ", newPlayer);
-      console.log(" existe pas, on l'a créé", userInput);
-      localStorage.setItem("currentUserInput", JSON.stringify(userInput)); 
-      return userInput;
+      console.log("Nom: ", userInput);
+      // const newPlayer = {
+      //   players_name: userInput,
+      //   money: 0,
+      //   round: 0,
+      //   id_questions: [],
+      // };
+      // Remplacez 'http://votre-api-url/api/user' par l'URL de votre API
+    fetch('https://florian-bounissou.fr/ClassTrouble/api/user', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          name: 'exemple',
+          money: 100,
+          round: 1,
+          id_questions: [1, 2, 3]
+      })
+    })
+    .then(response => {
+      if (!response.ok) {
+          throw new Error('Erreur réseau : ' + response.status);
+      }
+      return response.json();
+    })
+    .then(data => console.log(data))
+    .catch(error => console.error('Erreur :', error));
+      // players.push(newPlayer);
+      // localStorage.setItem("players", JSON.stringify(players));
+      // console.log("Données enregistrées: ", newPlayer);
+      // console.log(" existe pas, on l'a créé", userInput);
+      // localStorage.setItem("currentUserInput", JSON.stringify(userInput)); 
+      // return userInput;
     }
   } else {
     userInput += key;

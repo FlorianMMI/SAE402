@@ -34,11 +34,12 @@ class UserRepository extends EntityRepository {
         return $answer;
     }
 
-    public function save($user) {
+    public function save($p) {
         $stmt = $this->cnx->prepare("INSERT INTO User (players_name) VALUES (:players_name)");
-        $stmt->bindParam(':players_name', $user->players_name);
+        $playersName = $p->getName();
+        $stmt->bindParam(':players_name', $playersName);
         if ($stmt->execute()) {
-            return $this->cnx->lastInsertId();
+            return $p;
         } else {
             return false;
         }

@@ -4,11 +4,17 @@ const response = await fetch('./question.json');
 const temp = await response.json();
 console.log(temp);
 
+const storedUserInput = JSON.parse(localStorage.getItem("currentUserInput"));
+if (storedUserInput) {
+    console.log("Stored user input:", storedUserInput);
+} else {
+    console.log("No stored user input found");
+}
 
 
 import { getRequest } from "./api-request.js";
-const userData = await getRequest("user");
-  console.log(userData[0].round);
+const userData = await getRequest("user?name=" + storedUserInput);
+
 
 
 
