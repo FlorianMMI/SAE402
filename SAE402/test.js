@@ -4,7 +4,7 @@ const response = await fetch('./question.json');
 const temp = await response.json();
 console.log(temp);
 
-const storedUserInput = JSON.parse(localStorage.getItem("currentUserInput"));
+let  storedUserInput = JSON.parse(localStorage.getItem("currentUserInput"));
 if (storedUserInput) {
     console.log("Stored user input:", storedUserInput);
 } else {
@@ -15,10 +15,10 @@ if (storedUserInput) {
 import { getRequest } from "./api-request.js";
 const userData = await getRequest("user?name=" + storedUserInput);
 
+let money = document.querySelector("#money");
+money.setAttribute("value", parseInt(userData[0].money));
 
-
-
-
+console.log(userData);
 
 let rounds = [2,4,6,8,10,12,14,16,18];
 let round = parseInt(userData[0].round);

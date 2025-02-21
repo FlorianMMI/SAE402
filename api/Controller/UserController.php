@@ -51,7 +51,12 @@ require_once("class/User.php");
         }
 
         protected function processPatchRequest(HttpRequest $request){
-            return null;
+            $json = $request->getJson();
+            $obj = json_decode($json);
+            $name = $obj->name;
+            $money = $obj->money;
+            $round = $obj->round;
+            return $this->UserRepository->updateUser($name, $money, $round);
         }
     }
 

@@ -48,27 +48,22 @@ function handleKeyClick(key, textDisplay, keysContainer) {
         "value: CONTINUE; align: center; color: white; width: 3; font: ./assets/font/Gloria-msdf.json; font-image: ./assets/font/Gloria-msdf.png; negate:false"
       );
       console.log("Existe déjà");
+
       localStorage.setItem("currentUserInput", JSON.stringify(userInput));
+      
       return userInput;
     } else {
       console.log("Nom: ", userInput);
-      // const newPlayer = {
-      //   players_name: userInput,
-      //   money: 0,
-      //   round: 0,
-      //   id_questions: [],
-      // };
-      // Remplacez 'http://votre-api-url/api/user' par l'URL de votre API
     fetch('https://florian-bounissou.fr/ClassTrouble/api/user', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-          name: 'exemple',
-          money: 100,
-          round: 1,
-          id_questions: [1, 2, 3]
+          name: String(userInput),
+          money: 0,
+          round: 0,
+          id_questions: []
       })
     })
     .then(response => {
@@ -79,13 +74,13 @@ function handleKeyClick(key, textDisplay, keysContainer) {
     })
     .then(data => console.log(data))
     .catch(error => console.error('Erreur :', error));
-      // players.push(newPlayer);
-      // localStorage.setItem("players", JSON.stringify(players));
-      // console.log("Données enregistrées: ", newPlayer);
-      // console.log(" existe pas, on l'a créé", userInput);
-      // localStorage.setItem("currentUserInput", JSON.stringify(userInput)); 
-      // return userInput;
+     
     }
+    if (localStorage.getItem("currentUserInput")) {
+      localStorage.removeItem("currentUserInput");
+    }
+    localStorage.setItem("currentUserInput", JSON.stringify(userInput));
+
   } else {
     userInput += key;
   }

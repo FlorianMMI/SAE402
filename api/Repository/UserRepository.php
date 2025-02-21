@@ -45,6 +45,14 @@ class UserRepository extends EntityRepository {
         }
     }
 
+    public function updateUser($user, $money, $round) {
+        $stmt = $this->cnx->prepare("UPDATE User SET money = :money, round = :round WHERE players_name = :user");
+        $stmt->bindParam(':money', $money);
+        $stmt->bindParam(':round', $round);
+        $stmt->bindParam(':user', $user);
+        return $stmt->execute();
+    }
+
 }
 
 
