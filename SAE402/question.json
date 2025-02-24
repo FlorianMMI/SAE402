@@ -6,19 +6,19 @@
         "reponses": [
             {
                 "id_question": 1,
-                "texte_reponse": "Wheel",
-                "est_correcte": true
+                "texte_reponse": "Wild",
+                "est_correcte": false
             },
             {
                 "id_question": 1,
-                "texte_reponse": "Wild",
-                "est_correcte": false
+                "texte_reponse": "Wheel",
+                "est_correcte": true
             }
         ]
     },
     {
         "id_question": 2,
-        "texte_question": "How do you say \"Siège\" in English?",
+        "texte_question": "How do you say \"Siege\" in English?",
         "niveau_question": 1,
         "reponses": [
             {
@@ -40,13 +40,13 @@
         "reponses": [
             {
                 "id_question": 3,
-                "texte_reponse": "Ease",
-                "est_correcte": false
+                "texte_reponse": "Easel",
+                "est_correcte": true
             },
             {
                 "id_question": 3,
-                "texte_reponse": "Easel",
-                "est_correcte": true
+                "texte_reponse": "Ease",
+                "est_correcte": false
             }
         ]
     },
@@ -74,13 +74,13 @@
         "reponses": [
             {
                 "id_question": 5,
-                "texte_reponse": "Engine",
-                "est_correcte": true
+                "texte_reponse": "Motel",
+                "est_correcte": false
             },
             {
                 "id_question": 5,
-                "texte_reponse": "Motel",
-                "est_correcte": false
+                "texte_reponse": "Engine",
+                "est_correcte": true
             }
         ]
     },
@@ -108,13 +108,13 @@
         "reponses": [
             {
                 "id_question": 7,
-                "texte_reponse": "Headlight",
-                "est_correcte": true
+                "texte_reponse": "Tail",
+                "est_correcte": false
             },
             {
                 "id_question": 7,
-                "texte_reponse": "Tail",
-                "est_correcte": false
+                "texte_reponse": "Headlight",
+                "est_correcte": true
             }
         ]
     },
@@ -142,13 +142,13 @@
         "reponses": [
             {
                 "id_question": 9,
-                "texte_reponse": "Cover",
-                "est_correcte": true
+                "texte_reponse": "Curtain",
+                "est_correcte": false
             },
             {
                 "id_question": 9,
-                "texte_reponse": "Curtain",
-                "est_correcte": false
+                "texte_reponse": "Cover",
+                "est_correcte": true
             }
         ]
     },
@@ -176,19 +176,19 @@
         "reponses": [
             {
                 "id_question": 11,
-                "texte_reponse": "Author",
-                "est_correcte": true
+                "texte_reponse": "Actor",
+                "est_correcte": false
             },
             {
                 "id_question": 11,
-                "texte_reponse": "Actor",
-                "est_correcte": false
+                "texte_reponse": "Author",
+                "est_correcte": true
             }
         ]
     },
     {
         "id_question": 12,
-        "texte_question": "How do you say \"écran\" in English?",
+        "texte_question": "How do you say \"ecran\" in English?",
         "niveau_question": 1,
         "reponses": [
             {
@@ -210,13 +210,13 @@
         "reponses": [
             {
                 "id_question": 13,
-                "texte_reponse": "Keyboard",
-                "est_correcte": true
+                "texte_reponse": "Keypad",
+                "est_correcte": false
             },
             {
                 "id_question": 13,
-                "texte_reponse": "Keypad",
-                "est_correcte": false
+                "texte_reponse": "Keyboard",
+                "est_correcte": true
             }
         ]
     },
@@ -239,18 +239,18 @@
     },
     {
         "id_question": 15,
-        "texte_question": "How do you say \"caméra\" in English?",
+        "texte_question": "How do you say \"camera\" in English?",
         "niveau_question": 1,
         "reponses": [
             {
                 "id_question": 15,
-                "texte_reponse": "Webcam",
-                "est_correcte": true
+                "texte_reponse": "Camcorder",
+                "est_correcte": false
             },
             {
                 "id_question": 15,
-                "texte_reponse": "Camcorder",
-                "est_correcte": false
+                "texte_reponse": "Webcam",
+                "est_correcte": true
             }
         ]
     },
@@ -278,13 +278,13 @@
         "reponses": [
             {
                 "id_question": 17,
-                "texte_reponse": "Brush",
-                "est_correcte": true
+                "texte_reponse": "Bristle",
+                "est_correcte": false
             },
             {
                 "id_question": 17,
-                "texte_reponse": "Bristle",
-                "est_correcte": false
+                "texte_reponse": "Brush",
+                "est_correcte": true
             }
         ]
     },

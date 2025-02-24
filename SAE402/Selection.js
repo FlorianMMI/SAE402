@@ -15,8 +15,12 @@ let cpt_obj = 0;
 
 const counterText = document.createElement("a-text");
 counterText.setAttribute("id", "counter-text");
-counterText.setAttribute("value", "Objet " + cpt_obj +"/4");
-counterText.setAttribute("position", "1.2 2.1 -9.47");
+counterText.setAttribute("value", "Object " + cpt_obj + "/4");
+counterText.setAttribute("align", "center");
+counterText.setAttribute("position", "2.5 3.3 -9.47");
+counterText.setAttribute("font", "./assets/font/Gloria-msdf.json");
+counterText.setAttribute("font-image", "./assets/font/Gloria-msdf.png");
+counterText.setAttribute("negate", "false");
 counterText.setAttribute("scale", "0.5 0.5 0.5");
 scene.appendChild(counterText);
 

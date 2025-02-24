@@ -1,5 +1,5 @@
 
-
+const scene = document.querySelector("a-scene");
 const response = await fetch('./question.json');
 const temp = await response.json();
 console.log(temp);
@@ -18,22 +18,51 @@ const userData = await getRequest("user?name=" + storedUserInput);
 let money = document.querySelector("#money");
 money.setAttribute("value", parseInt(userData[0].money));
 
-console.log(userData);
 
 let rounds = [2,4,6,8,10,12,14,16,18];
 let round = parseInt(userData[0].round);
 let questionIndex = 0;
 
 
+const userText = document.createElement("a-text");
+userText.setAttribute("position", "2.5 3.5 -9.47");
+userText.setAttribute("value", "Name : " + (storedUserInput || "Guest"));
+userText.setAttribute("color", "#FFF");
+userText.setAttribute("align", "center");
+userText.setAttribute("width", "2.5");
+userText.setAttribute("font", "./assets/font/Gloria-msdf.json");
+userText.setAttribute("font-image", "./assets/font/Gloria-msdf.png");
+userText.setAttribute("negate", "false");
 
+const roundText = document.createElement("a-text");
+roundText.setAttribute("position", "2.5 3.0 -9.47");
+roundText.setAttribute("value", "Round: " + (round + 1));
+roundText.setAttribute("color", "#FFF");
+roundText.setAttribute("align", "center");
+roundText.setAttribute("width", "2.5");
+roundText.setAttribute("font", "./assets/font/Gloria-msdf.json");
+roundText.setAttribute("font-image", "./assets/font/Gloria-msdf.png");
+roundText.setAttribute("negate", "false");
+
+
+scene.appendChild(userText);
+scene.appendChild(roundText);
+;
+
+
+
+
+//mise en place des réponses correctes et questions pour chaque round
 let data = [];
 
 for (let i = 0; i < rounds.length; i++) {
-    let nb = rounds[i];
-    let roundQuestions = [];
+    const nb = rounds[i];
+    const roundQuestions = [];
+    // Create a copy of the questions to sample from for this round
+    const availableQuestions = [...temp];
     for (let j = 0; j < nb; j++) {
-        let random = Math.floor(Math.random() * temp.length);
-        roundQuestions.push(temp[random]);
+        const randomIndex = Math.floor(Math.random() * availableQuestions.length);
+        roundQuestions.push(availableQuestions.splice(randomIndex, 1)[0]);
     }
     data.push(roundQuestions);
 }
@@ -53,7 +82,7 @@ data.forEach(roundArr => {
 });
 console.log(correctAnswers);
 
-const scene = document.querySelector("a-scene");
+
 let cpt_resp = 0;
 
 async function StartTest() {
@@ -133,7 +162,28 @@ async function StartTest() {
         hitBoxRep1.addEventListener("click", () => {
             if (isCorrect(currentQuestion.reponses[0].texte_reponse)) {
                 let money = document.querySelector("#money");
+                let temp = money.getAttribute("value");
                 money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
+                
+                fetch('https://florian-bounissou.fr/ClassTrouble/api/user', {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: storedUserInput,
+                        money: parseInt(temp) + 2,
+                        round: round,
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => console.log(data))
+                .catch(error => console.error('Erreur :', error));
                 cpt_resp += 1;
                 nextQuestion(questionIndex + 1);
             } else {
@@ -155,7 +205,28 @@ async function StartTest() {
         hitBoxRep2.addEventListener("click", () => {
             if (isCorrect(currentQuestion.reponses[1].texte_reponse)) {
                 let money = document.querySelector("#money");
+                let temp = money.getAttribute("value");
                 money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
+                
+                fetch('https://florian-bounissou.fr/ClassTrouble/api/user', {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: storedUserInput,
+                        money: parseInt(temp) + 2,
+                        round: round,
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => console.log(data))
+                .catch(error => console.error('Erreur :', error));
                 cpt_resp += 1;
                 nextQuestion(questionIndex + 1);
             } else {
@@ -181,6 +252,7 @@ function nextQuestion(newIndex) {
             round++;
             questionIndex = 0;
             questionElem.setAttribute("value", "Round " + (round + 1) + " begins...");
+
             // Brief pause before next round questions load
             setTimeout(() => {
                 updateQuestion(infoBox);
@@ -191,6 +263,7 @@ function nextQuestion(newIndex) {
                 " And you got " + cpt_resp * 2 + " shop credits");
             document.querySelector("#reponse1").setAttribute("value", "");
             document.querySelector("#reponse2").setAttribute("value", "");
+            
             setTimeout(() => {
                 const camera = document.querySelector("#rig");
                 camera.setAttribute("position", "1.8 0 2.3");
@@ -245,9 +318,30 @@ function updateQuestion(infoBox) {
     hitBoxRep1.addEventListener("click", () => {
         if (isCorrect(currentQuestion.reponses[0].texte_reponse)) {
             let money = document.querySelector("#money");
-            money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
-            cpt_resp += 1;
-            nextQuestion(questionIndex + 1);
+                let temp = money.getAttribute("value");
+                money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
+                
+                fetch('https://florian-bounissou.fr/ClassTrouble/api/user', {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: storedUserInput,
+                        money: parseInt(temp) + 2,
+                        round: round,
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => console.log(data))
+                .catch(error => console.error('Erreur :', error));
+                cpt_resp += 1;
+                nextQuestion(questionIndex + 1);
         } else {
             questionElem.setAttribute("value", "Wrong !");
             characterAnimation();
@@ -268,9 +362,30 @@ function updateQuestion(infoBox) {
     hitBoxRep2.addEventListener("click", () => {
         if (isCorrect(currentQuestion.reponses[1].texte_reponse)) {
             let money = document.querySelector("#money");
-            money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
-            cpt_resp += 1;
-            nextQuestion(questionIndex + 1);
+                let temp = money.getAttribute("value");
+                money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
+                
+                fetch('https://florian-bounissou.fr/ClassTrouble/api/user', {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: storedUserInput,
+                        money: parseInt(temp) + 2,
+                        round: round,
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => console.log(data))
+                .catch(error => console.error('Erreur :', error));
+                cpt_resp += 1;
+                nextQuestion(questionIndex + 1);
         } else {
             questionElem.setAttribute("value", "Wrong !");
             characterAnimation();
@@ -285,6 +400,24 @@ function updateQuestion(infoBox) {
 function isCorrect(value) {
     return correctAnswers.includes(value);
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 let characterAnimation = function () {
     let animations = ["Punch_Right", "Punch_Left", "Kick_Right", "Kick_Left"];
