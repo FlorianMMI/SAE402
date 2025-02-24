@@ -26,6 +26,7 @@ let cpt_obj = 0;
 // If the user round is greater than 0, display all vocabulary texts and the test prompt
 if (userData[0].round > 0) {
   // Extract vocabulary objects from the JSON data
+  cpt_obj = 4;
   const computerObj = data[0].computerdata[0];
   const bookObj = data[0].bookdata[0];
   const paintObj = data[0].paintData[0];

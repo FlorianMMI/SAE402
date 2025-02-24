@@ -469,23 +469,4 @@ let renderTableInFrontOfMerchant = function () {
 
 
 
-document.addEventListener("keydown", function (event) {
-  if (event.key === 'a') {
-    let character = document.getElementById("characters");
-    character.removeAttribute('animation-mixer');
-    let ball = document.createElement('a-sphere');
-    let size = Math.random() * 0.2 + 0.1;
-    ball.setAttribute('radius', size);
-    ball.setAttribute('position', '-2.15 2.15 -8');
-    
-    ball.setAttribute('click-grab', '');
-    ball.setAttribute('color', 'red');
-    let ascene = document.querySelector('a-scene');
-    ascene.appendChild(ball);
-    ball.setAttribute('animation', 'property: position; to: 1.8 2 2.6; dur: 500; easing: linear');
-    character.setAttribute('animation-mixer', `clip: CharacterArmature|Gun_Shoot; loop: once; timeScale: 1`);
-    setTimeout(function () {
-      ball.setAttribute('dynamic-body', '');
-    }, 500);
-  }
-});
+

@@ -188,9 +188,19 @@ async function StartTest() {
                 nextQuestion(questionIndex + 1);
             } else {
                 textElement.setAttribute("value", "Wrong !");
-                setTimeout(() => {
-                    nextQuestion(questionIndex + 1);
-                }, 2000);
+                if (Math.random() < 0.5) {
+                    characterAnimation();
+                    setTimeout(() => {
+                        nextQuestion(questionIndex + 1);
+                    }, 10000);
+                } else {
+                    setTimeout(() => {
+                        shootBall();
+                    }, 2000);
+                    setTimeout(() => {
+                        nextQuestion(questionIndex + 1);
+                    }, 3000);
+                }
             }
         });
         textReponse1.appendChild(hitBoxRep1);
@@ -231,9 +241,19 @@ async function StartTest() {
                 nextQuestion(questionIndex + 1);
             } else {
                 textElement.setAttribute("value", "Wrong !");
-                setTimeout(() => {
-                    nextQuestion(questionIndex + 1);
-                }, 2000);
+                if (Math.random() < 0.5) {
+                    characterAnimation();
+                    setTimeout(() => {
+                        nextQuestion(questionIndex + 1);
+                    }, 10000);
+                } else {
+                    setTimeout(() => {
+                        shootBall();
+                    }, 2000);
+                    setTimeout(() => {
+                        nextQuestion(questionIndex + 1);
+                    }, 3000);
+                }
             }
         });
         textReponse2.appendChild(hitBoxRep2);
@@ -344,10 +364,19 @@ function updateQuestion(infoBox) {
                 nextQuestion(questionIndex + 1);
         } else {
             questionElem.setAttribute("value", "Wrong !");
-            characterAnimation();
-            setTimeout(() => {
-                nextQuestion(questionIndex + 1);
-            }, 10000);
+            if (Math.random() < 0.5) {
+                characterAnimation();
+                setTimeout(() => {
+                    nextQuestion(questionIndex + 1);
+                }, 10000);
+            } else {
+                setTimeout(() => {
+                    shootBall();
+                }, 2000);
+                setTimeout(() => {
+                    nextQuestion(questionIndex + 1);
+                }, 3000);
+            }
         }
     });
     reponse1.appendChild(hitBoxRep1);
@@ -388,10 +417,20 @@ function updateQuestion(infoBox) {
                 nextQuestion(questionIndex + 1);
         } else {
             questionElem.setAttribute("value", "Wrong !");
-            characterAnimation();
-            setTimeout(() => {
-                nextQuestion(questionIndex + 1);
-            }, 10000);
+            if (Math.random() < 0.5) {
+                characterAnimation();
+                setTimeout(() => {
+                    nextQuestion(questionIndex + 1);
+                }, 10000);
+            } else {
+                setTimeout(() => {
+                    shootBall();
+                }, 2000);
+                setTimeout(() => {
+                    nextQuestion(questionIndex + 1);
+                }, 3000);
+            }
+            
         }
     });
     reponse2.appendChild(hitBoxRep2);
@@ -465,5 +504,28 @@ function stepRunAnimation(character, animations, emotes) {
         }, 2000);
     }, 1000);
 };
+
+
+function shootBall() {
+    let character = document.getElementById("characters");
+    character.removeAttribute("animation-mixer");
+
+    let ball = document.createElement("a-sphere");
+    let size = Math.random() * 0.2 + 0.1;
+    ball.setAttribute("radius", size);
+    ball.setAttribute("position", "-2.15 2.15 -8");
+    ball.setAttribute("click-grab", "");
+    ball.setAttribute("color", "red");
+    
+    let ascene = document.querySelector("a-scene");
+    ascene.appendChild(ball);
+    
+    ball.setAttribute("animation", "property: position; to: 1.8 2 2.6; dur: 500; easing: linear");
+    character.setAttribute("animation-mixer", "clip: CharacterArmature|Gun_Shoot; loop: once; timeScale: 1");
+    
+    setTimeout(() => {
+      ball.setAttribute("dynamic-body", "");
+    }, 500);
+}
 
 export { StartTest };
