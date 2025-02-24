@@ -411,54 +411,56 @@ function isCorrect(value) {
 
 
 
-
-
-
-
-
-
-
-
+// Character animation function
+//
+// This function initializes the character with a walking animation,
+// sets its initial rotation and position, and then transitions to a running sequence.
 let characterAnimation = function () {
+    // List of possible fight animations.
     let animations = ["Punch_Right", "Punch_Left", "Kick_Right", "Kick_Left"];
-    let emote = ["Roll", "Death", "Gun_Shoot"];
-    let acharacter = document.getElementById('characters');
-    acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Walk; loop: repeat; timeScale: 1');
-    acharacter.setAttribute('rotation', '0 90 0');
-    acharacter.setAttribute('animation', 'property: position; to: 0 0 -8; dur: 1000; easing: linear');
+    // List of possible emotes.
+    let emotes = ["Roll", "Death", "Gun_Shoot"];
+    // Get the character element.
+    let character = document.getElementById('characters');
 
-    setTimeout(function () {
-        acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Run; loop: repeat; timeScale: 1');
-        acharacter.setAttribute('rotation', '0 0 0');
-        acharacter.setAttribute('animation', 'property: position; to: 0 0 2; dur: 2000; easing: linear');
+    // Initialize with a walk animation, set initial rotation and position.
+    character.setAttribute('animation-mixer', 'clip: CharacterArmature|Walk; loop: repeat; timeScale: 1');
+    character.setAttribute('rotation', '0 90 0');
+    character.setAttribute('animation', 'property: position; to: 0 0 -8; dur: 1000; easing: linear');
 
-        setTimeout(function () {
-            acharacter.setAttribute('rotation', '0 90 0');
-            let randomAnimation = animations[Math.floor(Math.random() * animations.length)];
-            acharacter.setAttribute('animation-mixer', `clip: CharacterArmature|${randomAnimation}; loop: once; timeScale: 1`);
+    // After 1 second, start the run sequence.
+    setTimeout(() => {
+        stepRunAnimation(character, animations, emotes);
+    }, 1000);
+};
 
-            setTimeout(function () {
-                acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Run_Back; loop: repeat; timeScale: 1');
-                acharacter.setAttribute('animation', 'property: position; to: 0 0 -4; dur: 2000; easing: linear');
-                acharacter.setAttribute('rotation', '0 0 0');
+// Step 1: Running and subsequent animations.
+//
+// This function triggers a run-back animation, then performs a random emote,
+// transitions to a walking animation, and finally switches to an idle animation.
+function stepRunAnimation(character, animations, emotes) {
+    // Trigger the run-back animation and move forward.
+    character.setAttribute('animation-mixer', 'clip: CharacterArmature|Run_Back; loop: repeat; timeScale: 1');
+    character.setAttribute('animation', 'property: position; to: 0 0 -4; dur: 2000; easing: linear');
+    character.setAttribute('rotation', '0 0 0');
 
-                setTimeout(function () {
-                    let randomEmote = emote[Math.floor(Math.random() * emote.length)];
-                    acharacter.setAttribute('animation-mixer', `clip: CharacterArmature|${randomEmote}; loop: once; timeScale: 1`);
-                    acharacter.setAttribute('animation', 'property: position; to: 0 0 -8; dur: 2000; easing: linear');
-                    acharacter.setAttribute('rotation', '0 35 0');
+    // After 1 second, perform a random emote.
+    setTimeout(() => {
+        let randomEmote = emotes[Math.floor(Math.random() * emotes.length)];
+        character.setAttribute('animation-mixer', `clip: CharacterArmature|${randomEmote}; loop: once; timeScale: 1`);
+        character.setAttribute('animation', 'property: position; to: 0 0 -8; dur: 2000; easing: linear');
+        character.setAttribute('rotation', '0 35 0');
 
-                    setTimeout(function () {
-                        acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Walk; loop: repeat; timeScale: 1');
-                        acharacter.setAttribute('animation', 'property: position; to: -2 0 -8; dur: 1000; easing: linear');
-                        acharacter.setAttribute('rotation', '0 -90 0');
+        // After 2 seconds, switch to walk animation and update position.
+        setTimeout(() => {
+            character.setAttribute('animation-mixer', 'clip: CharacterArmature|Walk; loop: repeat; timeScale: 1');
+            character.setAttribute('animation', 'property: position; to: -2 0 -8; dur: 1000; easing: linear');
+            character.setAttribute('rotation', '0 -90 0');
 
-                        setTimeout(function () {
-                            acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Idle; loop: repeat; timeScale: 1');
-                            acharacter.setAttribute('rotation', '0 0 0');
-                        }, 1000);
-                    }, 2000);
-                }, 1000);
+            // After 1 second, transition to idle animation.
+            setTimeout(() => {
+                character.setAttribute('animation-mixer', 'clip: CharacterArmature|Idle; loop: repeat; timeScale: 1');
+                character.setAttribute('rotation', '0 0 0');
             }, 1000);
         }, 2000);
     }, 1000);
