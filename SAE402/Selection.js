@@ -444,6 +444,20 @@ car.addEventListener("click", function () {
   scene.appendChild(aText);
 });
 
+
+/* --------------------------
+
+    Exit Door Event       
+
+---------------------------- */
+
+let door = document.getElementById("exit");
+door.addEventListener("click", function () {
+  console.log("door clicked");
+  window.location.href = "../index.html";
+});
+
+
 /* --------------------------
    Helper Function: isFound()
    --------------------------
