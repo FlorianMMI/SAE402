@@ -3,12 +3,14 @@ import { getRequest, postRequest } from "./SAE402/api-request.js";
 
 let userInput = localStorage.getItem("currentUserInput");
 console.log(userInput);
-if (!userInput) {
-  userInput = "Enter your name"
-}
-else{
+if (userInput !== null) {
   userInput = JSON.parse(userInput);
 }
+
+if (userInput === null) {
+  userInput = "";
+}
+console.log(userInput);
 
 const users = await getRequest("user");
 
@@ -26,6 +28,9 @@ function updateTextDisplay(textDisplay) {
   );
   textDisplay.setAttribute("position", "0 3 -3");
 }
+
+
+
 
 function handleKeyClick(key, textDisplay, keysContainer) {
   if (key === "<-") {
@@ -107,7 +112,9 @@ function initializeKeyboard(keysContainer, textDisplay) {
     keyEntity.setAttribute(
       "geometry",
       "primitive: plane; width: 0.2; height: 0.2"
+      
     );
+    keyEntity.setAttribute("collidable", "");
     keyEntity.setAttribute("material", "color: #222");
     keyEntity.setAttribute(
       "text",

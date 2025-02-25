@@ -1,6 +1,7 @@
 <?php
 require_once "class/HttpRequest.php";
 require_once "Controller/UserController.php";
+require_once "Controller/ShopController.php";
 
 
 /** IMPORTANT
@@ -26,6 +27,7 @@ require_once "Controller/UserController.php";
  */
 $router = [
     "user" => new UserController(),
+    "shop" => new ShopController()
     
 
     
