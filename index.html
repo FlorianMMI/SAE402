@@ -31,9 +31,7 @@
                     material="color: #202020; shader: flat">
                 </a-entity>
             </a-camera>
-            <a-entity id="leftController" oculus-touch-controls="hand: left" thumbstick-move></a-entity>
-            <a-entity id="rightController" oculus-touch-controls="hand: right">
-                <a-entity raycaster="objects: .collidable" cursor></a-entity>
+            <a-entity id="rightController" laser-controls="hand:right" oculus-touch-controls="hand: right" curso thumbstick-move>
             </a-entity>
         </a-entity>
 
