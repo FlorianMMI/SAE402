@@ -446,9 +446,7 @@ car.addEventListener("click", function () {
 
 
 /* --------------------------
-
     Exit Door Event       
-
 ---------------------------- */
 
 let door = document.getElementById("exit");

@@ -1,13 +1,20 @@
 import { renderButton } from "./loading2.js";
 import { getRequest, postRequest } from "./SAE402/api-request.js";
 
-let userInput = "";
+let userInput = localStorage.getItem("currentUserInput");
+console.log(userInput);
+if (!userInput) {
+  userInput = "Enter your name"
+}
+else{
+  userInput = JSON.parse(userInput);
+}
 
 const users = await getRequest("user");
 
 
 
-
+ 
 
 
 function updateTextDisplay(textDisplay) {
@@ -50,7 +57,7 @@ function handleKeyClick(key, textDisplay, keysContainer) {
       console.log("Existe déjà");
 
       localStorage.setItem("currentUserInput", JSON.stringify(userInput));
-      
+
       return userInput;
     } else {
       console.log("Nom: ", userInput);
@@ -96,7 +103,7 @@ function initializeKeyboard(keysContainer, textDisplay) {
   let rowSize = 10;
 
   keys.forEach((key, index) => {
-    let keyEntity = document.createElement("a-entity");
+    let keyEntity = document.createElement("a-plane");
     keyEntity.setAttribute(
       "geometry",
       "primitive: plane; width: 0.2; height: 0.2"
@@ -116,6 +123,16 @@ function initializeKeyboard(keysContainer, textDisplay) {
     keyEntity.addEventListener("click", () => {
       handleKeyClick(key, textDisplay, keysContainer);
     });
+
+    keyEntity.addEventListener("raycaster-intersected", () => {
+      keyEntity.setAttribute("material", "color: #555");
+    });
+
+    keyEntity.addEventListener("raycaster-intersected-cleared", () => {
+      keyEntity.setAttribute("material", "color: #222");
+    });
+
+    
     keysContainer.appendChild(keyEntity);
   });
 
