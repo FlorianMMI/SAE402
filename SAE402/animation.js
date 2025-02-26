@@ -1,21 +1,26 @@
+import { getRequest } from "./api-request.js";
+
+
 let storedUserInput = JSON.parse(localStorage.getItem("currentUserInput"));
 console.log("Render", storedUserInput);
 
-let players = JSON.parse(localStorage.getItem("players"));
-let userData = players.find(player => player.player_name === storedUserInput);
+const userData = await getRequest("user?name=" + storedUserInput);
 console.log("User Data: ", userData);
 
 document.addEventListener("DOMContentLoaded", () => {
-if (userData) {
-    const userMoney = userData.money;
+  if (userData) {
+    const userMoney = userData[0].money;
     console.log("userMoney: ", userMoney);
     if (userData && userMoney !== undefined) {
-    document.querySelector("#money").setAttribute("value", userData.money);
-    console.log("Données enregistrées: ", userData);
-    console.log("Thunes dans la pocket ", userMoney);
+      document.querySelector("#money").setAttribute("value", userMoney);
+      console.log("Données enregistrées: ", userData);
+      console.log("Thunes dans la pocket ", userMoney);
     }
-}
+  }
 });
+
+
+
 
 
 
@@ -303,6 +308,14 @@ let renderCharacter = function () {
       });
     });
   }
+
+
+
+
+
+
+
+  
   let renderBoard = function () {
     let ascene = document.querySelector('a-scene');
     const box1 = document.createElement("a-box");
