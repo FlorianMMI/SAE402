@@ -5,7 +5,7 @@ class Shop implements JsonSerializable {
     
     private int $id_shop;
     private string $achat = "";
-    private int $id_user;
+    private int $id_user= 0;
  
 
     public function __construct(int $id_shop) {
@@ -38,9 +38,5 @@ class Shop implements JsonSerializable {
     }
     
 }
-
-
-
-
 
 ?>

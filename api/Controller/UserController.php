@@ -35,15 +35,18 @@ require_once("class/User.php");
             }
         }
 
-        protected function processPostRequest(HttpRequest $request): ?array {
+        protected function processPostRequest(HttpRequest $request)  {
             $json = $request->getJson();
             $obj = json_decode($json);
             $p = new Client(0); // 0 is a symbolic and temporary value since the product does not have a real id yet.
             $p->setName($obj->name);
+            $p->setMoney($obj->money);
+            $p->setRound($obj->round);
+            $p->setIdQuestions($obj->id_questions);
 
 
             $ok = $this->UserRepository->save($p); 
-            return $ok ? [$p] : null;
+            return $ok ? $p : false;
         }
 
         protected function processDeleteRequest(HttpRequest $request): ?array {
@@ -51,12 +54,7 @@ require_once("class/User.php");
         }
 
         protected function processPatchRequest(HttpRequest $request){
-            $json = $request->getJson();
-            $obj = json_decode($json);
-            $name = $obj->name;
-            $money = $obj->money;
-            $round = $obj->round;
-            return $this->UserRepository->updateUser($name, $money, $round);
+            return null;
         }
     }
 

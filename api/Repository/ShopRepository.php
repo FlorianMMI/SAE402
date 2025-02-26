@@ -1,7 +1,7 @@
 <?php
 
-require_once "ShopRepository.php";
-require_once "class/User.php";
+require_once "EntityRepository.php";
+require_once "class/Shop.php";
 
 class ShopRepository extends EntityRepository {
 
@@ -10,7 +10,7 @@ class ShopRepository extends EntityRepository {
     }
     
     public function findAll() {
-        $requete = $this -> cnx -> prepare("SELECT * FROM Shop");
+        $requete = $this -> cnx -> prepare("SELECT * FROM shop");
         $requete -> execute();
         $answer = $requete -> fetchAll(PDO::FETCH_CLASS);
         return $answer;
