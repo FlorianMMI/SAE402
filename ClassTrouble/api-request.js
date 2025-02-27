@@ -4,7 +4,7 @@
  */
 
 
-let API_URL = "https://florian-bounissou.fr/ClassTrouble/api/"; // URL de base de l'API (à définir)
+let API_URL = "https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/"; // URL de base de l'API (à définir)
 
 
 /**
