@@ -207,6 +207,8 @@ let renderMarket = function () {
           money.setAttribute("value", moneyvalue);
 
           color.price = 0;
+
+          console.log(userData[0].id_user);
           if (!store[0].achat.includes(color.normal)) {
             fetch(`https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/shop`, {
                     method: 'POST',
@@ -215,8 +217,8 @@ let renderMarket = function () {
                     },
                     body: JSON.stringify({
 
-                      achat: toString(color.normal),
-                      id_user: userData[0].id_user
+                      achat: String(color.normal),
+                      id_user: parseInt(userData[0].id_user)
                     })
                   })
                   .then(response => {
