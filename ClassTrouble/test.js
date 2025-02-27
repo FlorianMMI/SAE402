@@ -2,12 +2,14 @@
 // The test is composed of a series of questions with two possible answers
 // The user must select the correct answer to progress to the next question
 // If the user selects the wrong answer, a random event will occur
-
+import { getRequest } from "./api-request.js";
 
 const scene = document.querySelector("a-scene");
-const response = await fetch('./Json/question.json');
-const temp = await response.json();
-console.log(temp);
+
+
+
+
+
 
 let  storedUserInput = JSON.parse(localStorage.getItem("currentUserInput"));
 if (storedUserInput) {
@@ -17,7 +19,7 @@ if (storedUserInput) {
 }
 
 
-import { getRequest } from "./api-request.js";
+
 const userData = await getRequest("user?name=" + storedUserInput);
 console.log("ceci est userData", userData);
 let money = document.querySelector("#money");
@@ -55,6 +57,19 @@ scene.appendChild(roundText);
 ;
 
 
+const tempQuestion = await getRequest("question");
+const tempreponses = await getRequest("reponse");
+let temp = tempQuestion.map((question, index) => {
+    return {
+        ...question,
+        reponses: tempreponses.filter(reponse => reponse.id_question === question.id_question).map(reponse => {
+            return {
+                ...reponse,
+                est_correcte: reponse.est_correcte === "1" ? true : false
+            };
+        })
+    };
+});
 
 
 // Setting up correct answers and questions for each round
@@ -74,18 +89,15 @@ for (let i = 0; i < rounds.length; i++) {
 
 console.log(data);
 
-let correctAnswers = [];
-data.forEach(roundArr => {
-  roundArr.forEach(q => {
-    if (q.reponses[0].est_correcte === true) {
-        correctAnswers.push(q.reponses[0].texte_reponse);
-    }
-    if (q.reponses[1].est_correcte === true) {
-        correctAnswers.push(q.reponses[1].texte_reponse);
-    }
-  });
-});
-console.log(correctAnswers);
+let correctAnswers = data.flat().reduce((acc, question) => {
+    question.reponses.forEach(reponse => {
+        if (reponse.est_correcte === true) {
+            acc.push(reponse.texte_reponse);
+        }
+    });
+    return acc;
+}, []);
+console.log("Correct Answers", correctAnswers);
 
 
 let cpt_resp = 0;
@@ -177,7 +189,7 @@ async function StartTest() {
                 let temp = money.getAttribute("value");
                 money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
                 
-                fetch('https://florian-bounissou.fr/ClassTrouble/api/user', {
+                fetch('https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user', {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
@@ -234,7 +246,7 @@ async function StartTest() {
                 let temp = money.getAttribute("value");
                 money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
                 
-                fetch('https://florian-bounissou.fr/ClassTrouble/api/user', {
+                fetch('https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user', {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
@@ -366,7 +378,7 @@ function updateQuestion(infoBox) {
                 let temp = money.getAttribute("value");
                 money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
                 
-                fetch('https://florian-bounissou.fr/ClassTrouble/api/user', {
+                fetch('https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user', {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
@@ -423,7 +435,7 @@ function updateQuestion(infoBox) {
                 let temp = money.getAttribute("value");
                 money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
                 
-                fetch('https://florian-bounissou.fr/ClassTrouble/api/user', {
+                fetch('https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user', {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
