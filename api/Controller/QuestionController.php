@@ -12,7 +12,7 @@ require_once("class/Question.php");
         public QuestionRepository $QuestionRepository;
 
         public function __construct(){
-            $this->ShopRepository = new QuestionRepository();
+            $this->QuestionRepository = new QuestionRepository();
         }
 
         protected function processGetRequest(HttpRequest $request): ?array {
