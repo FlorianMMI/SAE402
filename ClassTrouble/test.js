@@ -26,7 +26,7 @@ let money = document.querySelector("#money");
 money.setAttribute("value", parseInt(userData[0].money));
 
 
-let rounds = [2,4,6,8,10,12,14,16,18];
+let rounds = [2,6,10];
 let round = parseInt(userData[0].round);
 let questionIndex = 0;
 
@@ -71,18 +71,20 @@ let temp = tempQuestion.map((question, index) => {
     };
 });
 
-
 // Setting up correct answers and questions for each round
 let data = [];
+let usedQuestions = new Set();
 
 for (let i = 0; i < rounds.length; i++) {
     const nb = rounds[i];
     const roundQuestions = [];
     // Create a copy of the questions to sample from for this round
-    const availableQuestions = [...temp];
+    const availableQuestions = temp.filter(question => !usedQuestions.has(question.id_question));
     for (let j = 0; j < nb; j++) {
         const randomIndex = Math.floor(Math.random() * availableQuestions.length);
-        roundQuestions.push(availableQuestions.splice(randomIndex, 1)[0]);
+        const selectedQuestion = availableQuestions.splice(randomIndex, 1)[0];
+        roundQuestions.push(selectedQuestion);
+        usedQuestions.add(selectedQuestion.id_question);
     }
     data.push(roundQuestions);
 }
