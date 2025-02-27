@@ -56,7 +56,7 @@ let renderButton = function () {
   ascene.appendChild(buttonCommande);
   button.addEventListener("click", function () {
     console.log("Button Clicked");
-    window.location.href = "./SAE402/index.html";
+    window.location.href = "./ClassTrouble/index.html";
   });
   buttonRules.addEventListener("click", function () {
     console.log("Button Rules Clicked");

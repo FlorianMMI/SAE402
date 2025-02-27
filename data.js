@@ -1,5 +1,5 @@
 import { renderButton } from "./loading2.js";
-import { getRequest, postRequest } from "./SAE402/api-request.js";
+import { getRequest, postRequest } from "./ClassTrouble/api-request.js";
 
 let userInput = localStorage.getItem("currentUserInput");
 console.log(userInput);
