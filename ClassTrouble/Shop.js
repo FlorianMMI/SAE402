@@ -20,66 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
-
-
-
-let renderCharacter = function () {
-    let animations = ["Punch_Right", "Punch_Left", "Kick_Right", "Kick_Left"];
-    let emote=["Roll", "Death","Gun_Shoot"]
-  
-    let ascene = document.querySelector('a-scene');
-    let acharacter = document.createElement('a-entity');
-    acharacter.setAttribute('gltf-model', '#character');
-    acharacter.setAttribute('scale', '1.75 1.75 1.75');
-    acharacter.setAttribute('position', '-2 0 -8');
-    acharacter.setAttribute('id', 'characters');
-    acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Idle; loop: repeat; timeScale: 1');
-    ascene.appendChild(acharacter);
-  
-    acharacter.addEventListener("click", function () {
-      acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Walk; loop: repeat; timeScale: 1');
-      acharacter.setAttribute('rotation', '0 90 0');
-      acharacter.setAttribute('animation', 'property: position; to: 0 0 -8; dur: 1000; easing: linear');
-  
-      setTimeout(function () {
-        acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Run; loop: repeat; timeScale: 1');
-        acharacter.setAttribute('rotation', '0 0 0');
-        acharacter.setAttribute('animation', 'property: position; to: 0 0 2; dur: 2000; easing: linear');
-  
-        setTimeout(function () {
-          acharacter.setAttribute('rotation', '0 90 0');
-          let randomAnimation = animations[Math.floor(Math.random() * animations.length)];
-          acharacter.setAttribute('animation-mixer', `clip: CharacterArmature|${randomAnimation}; loop: once; timeScale: 1`);
-  
-          setTimeout(function () {
-            acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Run_Back; loop: repeat; timeScale: 1');
-            acharacter.setAttribute('animation', 'property: position; to: 0 0 -4; dur: 2000; easing: linear');
-            acharacter.setAttribute('rotation', '0 0 0');
-  
-            setTimeout(function () {
-              let randomEmote = emote[Math.floor(Math.random() * emote.length)];
-              acharacter.setAttribute('animation-mixer', `clip: CharacterArmature|${randomEmote}; loop: once; timeScale: 1`); 
-              
-              acharacter.setAttribute('animation', 'property: position; to: 0 0 -8; dur: 2000; easing: linear');
-              acharacter.setAttribute('rotation', '0 35 0');
-  
-              setTimeout(function () {
-                acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Walk; loop: repeat; timeScale: 1');
-                acharacter.setAttribute('animation', 'property: position; to: -2 0 -8; dur: 1000; easing: linear');
-                acharacter.setAttribute('rotation', '0 -90 0');
-  
-                setTimeout(function () {
-                  acharacter.setAttribute('animation-mixer', 'clip: CharacterArmature|Idle; loop: repeat; timeScale: 1');
-                  acharacter.setAttribute('rotation', '0 0 0');
-                }, 1000);
-              }, 2000);
-            }, 1000);
-          }, 1000);
-        }, 2000);
-      }, 1000);
-    });
-  };
   let characters = [
     {
       url: "models/teacher/Astronaut.glb",
