@@ -38,10 +38,11 @@ let renderButton = function () {
   buttonCommande.setAttribute("position", "0 2 -3");
   buttonCommande.setAttribute(
     "text",
-    "value: COMMANDE; align: center; color: white; width: 3; font: ./ClassTrouble/assets/font/Gloria-msdf.json; font-image: ./ClassTrouble/assets/font/Gloria-msdf.png; negate:false"
+    "value: CONTROLS; align: center; color: white; width: 3; font: ./ClassTrouble/assets/font/Gloria-msdf.json; font-image: ./ClassTrouble/assets/font/Gloria-msdf.png; negate:false"
   );
 
   // Create the input field
+  let ascene = document.querySelector("a-scene");
   let input = document.createElement("a-input");
   input.setAttribute("id", "userInput");
   input.setAttribute("placeholder", "Enter text here");

@@ -62,21 +62,10 @@
             position="-11.66809 4.066 5.08364">
         </a-entity>
 
-        <!-- Button -->
-        <script>
-            console.log("Render Button");
-            let ascene = document.querySelector("a-scene");
-            let text = document.createElement("a-text");
-            text.setAttribute("value", "Welcome to Class Trouble VR !");
-            text.setAttribute("position", "0 4 -3");
-            text.setAttribute("align", "center");
-            text.setAttribute("color", "black");
-            text.setAttribute("font", "./assets/font/Gloria-msdf.json");
-            text.setAttribute("font-image", "./assets/font/Gloria-msdf.png");
-            text.setAttribute("negate", "false");
-            text.setAttribute("scale", "1.75 1.75 1.75");
-            ascene.appendChild(text);
-        </script>
+        <a-text value="Welcome to Class Trouble VR !" position="0 4 -3" align="center" color="black"
+            font="./ClassTrouble/assets/font/Gloria-msdf.json" font-image="./ClassTrouble/assets/font/Gloria-msdf.png"
+            negate="false" scale="1.75 1.75 1.75"></a-text>
+
         <script type="module" src="loading2.js"></script>
         <script type="module" src="data.js"></script>
     </a-scene>

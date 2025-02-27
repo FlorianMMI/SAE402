@@ -23,6 +23,9 @@
         <a-assets>
             <audio id="suii" src="assets/sound/siuu.mp3"></audio>
             <audio id="grab" src="assets/sound/grab.mp3"></audio>
+            <audio id="ambiant" src="assets/sound/ambiant-sound.mp3"></audio>
+            <audio id="interaction-completed" src="assets/sound/interaction-completed.mp3"></audio>
+            <audio id="wrong-answer" src="assets/sound/wrong-answer.mp3"></audio>
 
             <a-asset-item id="navmesh" src="models/navmesh.gltf"></a-asset-item>
             <a-asset-item id="shelf" src="models/Wall Shelf.glb"></a-asset-item>
@@ -107,7 +110,7 @@
                     material="color: #202020; shader: flat">
                 </a-entity>
             </a-entity>
-            <a-box static-body position="0 1 0" scale="0.5 2 0.5" opacity="0"></a-box>
+            <a-box static-body position="0 1 0" scale="0.5 3 0.5" opacity="0"></a-box>
             <a-sphere id="launcher" position="0 2.5 0" radius="1.7" opacity="0"></a-sphere>
             <a-entity id="rightController" laser-controls="hand:right" oculus-touch-controls="hand: right" cursor
                 thumbstick-move>
@@ -117,9 +120,12 @@
         </a-entity>
 
         <!-- Sound -->
-        <a-entity id="clickSound" sound="src: #grab; autoplay: false ; positional: false; volume: 5"></a-entity>
+        <a-entity id="clickSound" sound="src: #grab; autoplay: false ; positional: false; volume: 0.5"></a-entity>
         <a-entity id="releaseSound" sound="src: #suii; autoplay: false ; positional: false; volume: 0.2"></a-entity>
-        <!-- <a-entity sound="src: #fallguys; autoplay: true; positional: false; loop: true; volume: 0.2"></a-entity> -->
+        <a-entity id="correct"
+            sound="src: #interaction-completed; autoplay: false ; positional: false; volume: 1"></a-entity>
+        <a-entity id="wrong" sound="src: #wrong-answer; autoplay: false ; positional: false; volume: 1"></a-entity>
+        <a-entity sound="src: #ambiant; autoplay: true; positional: false; loop: true; volume: 0.5"></a-entity>
 
         <!-- LIGHT -->
         <a-entity
@@ -364,9 +370,11 @@
         </a-entity>
 
         <!-- OBJECTS -->
+        <!-- <a-entity id="object-interaction-sound"
+            sound="src: #interaction-ambiant; autoplay: true; loop: true; volume: 0.5"></a-entity> -->
         <!-- Book -->
         <a-entity id="book" obj-model="obj: #notebook-obj; mtl: #notebook-materiaux" position="2.2 1.443 -3"
-            scale="0.5 0.5 0.5" rotation="0 45 0" class="collidable">
+            scale="0.5 0.5 0.5" rotation="0 45 0" class="collidable" sound="src: #interaction-ambiant; on: click">
         </a-entity>
 
         <!-- Computer -->
@@ -396,9 +404,10 @@
             shadow="cast: true; receive: true" static-body></a-box>
 
         <!-- Price -->
-        <a-text id="money" value="10" position="0 2 9.5" scale="1.25 1.25 1.25" rotation="0 180 0"
+        <a-text id="money" value="10" position="0 2 9.45" scale="1.25 1.25 1.25" rotation="0 180 0"
             color="#00ff00"></a-text>
-        <a-text id="dollar" value="$" position="-.5 2 9.5" scale="1.25 1.25 1.25" rotation="0 180 0"
+        <a-box position="-.35 2 9.5" scale="1.25 0.5 0.01" color="#093e2e"></a-box>
+        <a-text id="dollar" value="$" position="-.5 2 9.45" scale="1.25 1.25 1.25" rotation="0 180 0"
             color="#00ff00"></a-text>
 
         <!-- Playground -->
@@ -475,6 +484,7 @@
         <a-box position="3 2.7 -9.455" scale="0.1 2.5 0.05" color="#885f32"></a-box>
         <a-box position="0 4 -9.455" scale="6.1 0.1 0.05" color="#885f32"></a-box>
         <a-box position="0 1.4 -9.455" scale="6.1 0.1 0.05" color="#885f32"></a-box>
+        <a-box position="0 2.7 -9.48" scale="0.01 2 0.01" color="#FFFFFF"></a-box>
 
         <!-- Teacher -->
         <a-entity gltf-model="#character" scale="1.75 1.75 1.75" position="-2 0 -8" id="characters"

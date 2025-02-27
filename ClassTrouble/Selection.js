@@ -23,8 +23,12 @@ var scene = document.querySelector("a-scene");
 // Initialize counter for collected vocabulary objects
 let cpt_obj = 0;
 
+const objectclickedsound = document.querySelector("#correct");
+const clicsound = document.querySelector("#clickSound");
+
 // Function to create and append vocabulary text
 function createVocabText(id, obj, position) {
+  objectclickedsound.components.sound.playSound();
   const textElement = document.createElement("a-text");
   let lines = [];
   for (let key in obj) {
@@ -44,25 +48,51 @@ function createVocabText(id, obj, position) {
 
 // Function to create and append the test prompt
 function createTestPrompt() {
+  clicsound.components.sound.playSound();
   const foundText = document.createElement("a-text");
   foundText.setAttribute("id", "found-text");
   foundText.setAttribute("value", "Proceed to the test");
-  foundText.setAttribute("position", "1.2 2.5 -9.47");
+  foundText.setAttribute("position", "-2.1 2.15 -9.47");
   foundText.setAttribute("scale", "0.5 0.5 0.5");
   foundText.setAttribute("font", "./assets/font/Gloria-msdf.json");
   foundText.setAttribute("font-image", "./assets/font/Gloria-msdf.png");
   foundText.setAttribute("negate", "false");
   foundText.setAttribute("class", "clickable");
 
+  const testBoxBorder1 = document.createElement("a-box");
+  testBoxBorder1.setAttribute("position", "-1.55 2.25 -9.48");
+  testBoxBorder1.setAttribute("scale", "1.7 0.01 0.01");
+  testBoxBorder1.setAttribute("color", "#FFFFFF");
+  scene.appendChild(testBoxBorder1);
+
+  const testBoxBorder2 = document.createElement("a-box");
+  testBoxBorder2.setAttribute("position", "-1.55 1.95 -9.48");
+  testBoxBorder2.setAttribute("scale", "1.7 0.01 0.01");
+  testBoxBorder2.setAttribute("color", "#FFFFFF");
+  scene.appendChild(testBoxBorder2);
+
+  const testBoxBorder3 = document.createElement("a-box");
+  testBoxBorder3.setAttribute("position", "-2.4 2.1 -9.48");
+  testBoxBorder3.setAttribute("scale", "0.01 0.3 0.01");
+  testBoxBorder3.setAttribute("color", "#FFFFFF");
+  scene.appendChild(testBoxBorder3);
+
+  const testBoxBorder4 = document.createElement("a-box");
+  testBoxBorder4.setAttribute("position", "-0.7 2.1 -9.48");
+  testBoxBorder4.setAttribute("scale", "0.01 0.3 0.01");
+  testBoxBorder4.setAttribute("color", "#FFFFFF");
+  scene.appendChild(testBoxBorder4);
+
   const testBox = document.createElement("a-box");
   testBox.setAttribute("id", "test-button");
   testBox.setAttribute("visible", "false");
-  testBox.setAttribute("position", "1.2 2.5 -9.47");
-  testBox.setAttribute("width", "2");
-  testBox.setAttribute("height", "0.5");
+  testBox.setAttribute("position", "-1.55 2.1 -9.47");
+  testBox.setAttribute("scale", "1.7 0.3 0.01");
 
   testBox.addEventListener("click", function () {
-    ["vocab-comp", "vocab-book", "vocab-paint", "vocab-car"].forEach(function (id) {
+    ["vocab-comp", "vocab-book", "vocab-paint", "vocab-car"].forEach(function (
+      id
+    ) {
       let el = document.getElementById(id);
       if (el) {
         scene.removeChild(el);
@@ -89,7 +119,14 @@ function handleObjectClick(id, obj, position) {
 }
 
 // Function to handle mouse enter and leave events
-function handleMouseEvents(element, iconId, scaleEnter, scaleLeave, iconPosition, iconScale) {
+function handleMouseEvents(
+  element,
+  iconId,
+  scaleEnter,
+  scaleLeave,
+  iconPosition,
+  iconScale
+) {
   element.addEventListener("mouseenter", function () {
     element.setAttribute("animation", {
       property: "scale",
@@ -138,43 +175,71 @@ if (userData[0].round > 0) {
 // Create and append counter text (displays how many objects have been found)
 const counterText = document.createElement("a-text");
 counterText.setAttribute("id", "counter-text");
-counterText.setAttribute("value", "Object " + cpt_obj + "/4");
+counterText.setAttribute("value", "Objects " + cpt_obj + "/4");
 counterText.setAttribute("align", "center");
-counterText.setAttribute("position", "2.5 3.3 -9.47");
+counterText.setAttribute("position", "1.35 3.7 -9.47");
 counterText.setAttribute("font", "./assets/font/Gloria-msdf.json");
 counterText.setAttribute("font-image", "./assets/font/Gloria-msdf.png");
 counterText.setAttribute("negate", "false");
-counterText.setAttribute("scale", "0.5 0.5 0.5");
+counterText.setAttribute("scale", "0.7 0.7 0.7");
 scene.appendChild(counterText);
 
 // Event listeners for objects
 var computer = document.getElementById("computer-");
-handleMouseEvents(computer, "computer-icon", "0.07 0.07 0.07", "0.05 0.05 0.05", "0 4 0", "10 10 10");
+handleMouseEvents(
+  computer,
+  "computer-icon",
+  "0.07 0.07 0.07",
+  "0.05 0.05 0.05",
+  "0 4 0",
+  "10 10 10"
+);
 computer.addEventListener("click", function () {
-  //son au click
-  handleObjectClick("vocab-comp", data[0].computerdata[0], "-1.2 2.1 -9.47");
+  objectclickedsound.components.sound.playSound();
+  handleObjectClick("vocab-comp", data[0].computerdata[0], "0.3 2.1 -9.47");
 });
 
 var book = document.getElementById("book");
 book.setAttribute("position", "5.950 2.00 0.650");
-handleMouseEvents(book, "eye-icon", "0.4 0.4 0.4", "0.3 0.3 0.3", "0 0.5 0", "1 1 1");
+handleMouseEvents(
+  book,
+  "eye-icon",
+  "0.4 0.4 0.4",
+  "0.3 0.3 0.3",
+  "0 0.5 0",
+  "1 1 1"
+);
 book.addEventListener("click", function () {
-  //son au click
-  handleObjectClick("vocab-book", data[0].bookdata[0], "-1.2 3 -9.47");
+  objectclickedsound.components.sound.playSound();
+  handleObjectClick("vocab-book", data[0].bookdata[0], "0.3 3 -9.47");
 });
 
 var paint = document.getElementById("paint-");
-handleMouseEvents(paint, "brush-icon", "0.11 0.11 0.11", "0.1 0.1 0.1", "0 5 -5", "5 5 5");
+handleMouseEvents(
+  paint,
+  "brush-icon",
+  "0.11 0.11 0.11",
+  "0.1 0.1 0.1",
+  "0 5 -5",
+  "5 5 5"
+);
 paint.addEventListener("click", function () {
-  //son au click
-  handleObjectClick("vocab-paint", data[0].paintData[0], "-2.5 2.1 -9.47");
+  objectclickedsound.components.sound.playSound();
+  handleObjectClick("vocab-paint", data[0].paintData[0], "1.6 2.1 -9.47");
 });
 
 let car = document.getElementById("car-");
-handleMouseEvents(car, "car-icon", "0.6 0.6 0.6", "0.5 0.5 0.5", "0 0.8 0", "1 1 1");
+handleMouseEvents(
+  car,
+  "car-icon",
+  "0.6 0.6 0.6",
+  "0.5 0.5 0.5",
+  "0 0.8 0",
+  "1 1 1"
+);
 car.addEventListener("click", function () {
-  //son au click
-  handleObjectClick("vocab-car", data[0].car[0], "-2.5 3 -9.47");
+  objectclickedsound.components.sound.playSound();
+  handleObjectClick("vocab-car", data[0].car[0], "1.6 3 -9.47");
 });
 
 // Exit door event

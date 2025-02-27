@@ -22,28 +22,39 @@ let rounds = [2, 6, 10];
 let round = parseInt(userData[0].round);
 let questionIndex = 0;
 
+const titleText = document.createElement("a-text");
+titleText.setAttribute("position", "-1.5 3.7 -9.47");
+titleText.setAttribute("value", "Class Trouble VR");
+titleText.setAttribute("color", "#FFF");
+titleText.setAttribute("align", "center");
+titleText.setAttribute("width", "6");
+titleText.setAttribute("font", "./assets/font/Gloria-msdf.json");
+titleText.setAttribute("font-image", "./assets/font/Gloria-msdf.png");
+titleText.setAttribute("negate", "false");
+scene.appendChild(titleText);
+
 const userText = document.createElement("a-text");
-userText.setAttribute("position", "2.5 3.5 -9.47");
+userText.setAttribute("position", "-1.5 3.2 -9.47");
 userText.setAttribute("value", "Name : " + (storedUserInput || "Guest"));
 userText.setAttribute("color", "#FFF");
 userText.setAttribute("align", "center");
-userText.setAttribute("width", "2.5");
+userText.setAttribute("width", "3.5");
 userText.setAttribute("font", "./assets/font/Gloria-msdf.json");
 userText.setAttribute("font-image", "./assets/font/Gloria-msdf.png");
 userText.setAttribute("negate", "false");
+scene.appendChild(userText);
 
 const roundText = document.createElement("a-text");
-roundText.setAttribute("position", "2.5 3.0 -9.47");
+roundText.setAttribute("position", "-1.5 2.7 -9.47");
 roundText.setAttribute("value", "Round: " + (round + 1));
 roundText.setAttribute("color", "#FFF");
 roundText.setAttribute("align", "center");
-roundText.setAttribute("width", "2.5");
+roundText.setAttribute("width", "3.5");
 roundText.setAttribute("font", "./assets/font/Gloria-msdf.json");
 roundText.setAttribute("font-image", "./assets/font/Gloria-msdf.png");
 roundText.setAttribute("negate", "false");
-
-scene.appendChild(userText);
 scene.appendChild(roundText);
+
 const tempQuestion = await getRequest("question");
 const tempreponses = await getRequest("reponse");
 let temp = tempQuestion.map((question, index) => {
@@ -94,7 +105,12 @@ console.log("Correct Answers", correctAnswers);
 
 let cpt_resp = 0;
 
+const correct_answer = document.querySelector("#correct");
+const wrong_answer = document.querySelector("#wrong");
+const clickSound = document.querySelector("#clickSound");
+
 async function StartTest() {
+  clickSound.components.sound.playSound();
   // Set the initial position and movement controls for the camera
   const camera = document.querySelector("#rig");
   camera.setAttribute("position", "1.8 0 2.3");
@@ -193,7 +209,7 @@ async function StartTest() {
     hitBoxRep1.setAttribute("material", "color: #f00; opacity: 0;");
     hitBoxRep1.addEventListener("click", () => {
       if (isCorrect(currentQuestion.reponses[0].texte_reponse)) {
-        //son juste
+        correct_answer.components.sound.playSound();
         let money = document.querySelector("#money");
         let temp = money.getAttribute("value");
         money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
@@ -226,7 +242,7 @@ async function StartTest() {
         nextQuestion(questionIndex + 1);
       } else {
         textElement.setAttribute("value", "Wrong !");
-        // son wrong
+        wrong_answer.components.sound.playSound();
         document.querySelector("#reponse1").setAttribute("value", "");
         document.querySelector("#reponse2").setAttribute("value", "");
         if (Math.random() < 0.5) {
@@ -255,7 +271,7 @@ async function StartTest() {
     hitBoxRep2.setAttribute("material", "opacity: 0;");
     hitBoxRep2.addEventListener("click", () => {
       if (isCorrect(currentQuestion.reponses[1].texte_reponse)) {
-        //son juste
+        correct_answer.components.sound.playSound();
         let money = document.querySelector("#money");
         let temp = money.getAttribute("value");
         money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
@@ -288,7 +304,7 @@ async function StartTest() {
         nextQuestion(questionIndex + 1);
       } else {
         textElement.setAttribute("value", "Wrong !");
-        // son wrong
+        wrong_answer.components.sound.playSound();
         document.querySelector("#reponse1").setAttribute("value", "");
         document.querySelector("#reponse2").setAttribute("value", "");
         if (Math.random() < 0.5) {
@@ -406,7 +422,7 @@ function updateQuestion(infoBox) {
   hitBoxRep1.setAttribute("material", "color: #f00; opacity: 0;");
   hitBoxRep1.addEventListener("click", () => {
     if (isCorrect(currentQuestion.reponses[0].texte_reponse)) {
-      //son juste
+      correct_answer.components.sound.playSound();
       let money = document.querySelector("#money");
       let temp = money.getAttribute("value");
       money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
@@ -434,7 +450,7 @@ function updateQuestion(infoBox) {
       nextQuestion(questionIndex + 1);
     } else {
       questionElem.setAttribute("value", "Wrong !");
-      // son wrong
+      wrong_answer.components.sound.playSound();
       document.querySelector("#reponse1").setAttribute("value", "");
       document.querySelector("#reponse2").setAttribute("value", "");
       if (Math.random() < 0.5) {
@@ -463,7 +479,7 @@ function updateQuestion(infoBox) {
   hitBoxRep2.setAttribute("material", "opacity: 0;");
   hitBoxRep2.addEventListener("click", () => {
     if (isCorrect(currentQuestion.reponses[1].texte_reponse)) {
-      //son juste
+      correct_answer.components.sound.playSound();
       let money = document.querySelector("#money");
       let temp = money.getAttribute("value");
       money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
@@ -491,7 +507,7 @@ function updateQuestion(infoBox) {
       nextQuestion(questionIndex + 1);
     } else {
       questionElem.setAttribute("value", "Wrong !");
-      // son wrong
+      wrong_answer.components.sound.playSound();
       document.querySelector("#reponse1").setAttribute("value", "");
       document.querySelector("#reponse2").setAttribute("value", "");
       if (Math.random() < 0.5) {
