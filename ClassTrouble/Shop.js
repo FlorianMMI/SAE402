@@ -5,25 +5,25 @@ let storedUserInput = JSON.parse(localStorage.getItem("currentUserInput"));
 console.log("Render", storedUserInput);
 
 const userData = await getRequest("user?name=" + storedUserInput);
-console.log("User Data: ", userData);
-
-document.addEventListener("DOMContentLoaded", () => {
-  if (userData) {
-    const userMoney = userData[0].money;
-    console.log("userMoney: ", userMoney);
-    if (userData && userMoney !== undefined) {
-      document.querySelector("#money").setAttribute("value", userMoney);
-      console.log("Données enregistrées: ", userData);
-      console.log("Thunes dans la pocket ", userMoney);
-    }
-  }
-});
 
 
+// document.addEventListener("DOMContentLoaded", () => {
+//   if (userData) {
+//     const userMoney = userData[0].money;
+//     console.log("userMoney: ", userMoney);
+//     if (userData && userMoney !== undefined) {
+//       document.querySelector("#money").setAttribute("value", userMoney);
+//       console.log("Données enregistrées: ", userData);
+//       console.log("Thunes dans la pocket ", userMoney);
+//     }
+//   }
+// });
 
 
 
 
+
+// Shop characters and colors
 
   let characters = [
     {
@@ -83,6 +83,8 @@ document.addEventListener("DOMContentLoaded", () => {
       description: "Worker",
     },
   ];
+
+
   
   let colors = [
     { normal: "#8B5A2B", dark: "#654321", price: 5 }, // Chêne
@@ -97,9 +99,14 @@ document.addEventListener("DOMContentLoaded", () => {
     { normal: "#3F301D", dark: "#22150C", price: 1 }  // Bois foncé
   ];
   
+
+
+
+
   
   let renderMarket = function () {
     let ascene = document.querySelector('a-scene');
+//merchant
     let merchant = document.createElement('a-entity');
     merchant.setAttribute('gltf-model', '#Snorlax');
     merchant.setAttribute('scale', '3 3 1.5');
@@ -110,13 +117,14 @@ document.addEventListener("DOMContentLoaded", () => {
     merchant.addEventListener("click", function () {
       renderTableInFrontOfMerchant();
     });
-  
+  // listening to the click event on the table 
     let atable = document.getElementById("Table-shop");
     atable.addEventListener("click", function () {
       let otherboxes = document.querySelectorAll("#character-list");
       let othertext = document.querySelectorAll("#text-product");
       let money = document.getElementById("money");
       let moneyvalue = money.getAttribute("value");
+      // delete the previous boxes and text if thhe shop has already been opened
       if (otherboxes) {
         otherboxes.forEach((box) => {
           box.parentNode.removeChild(box);
@@ -128,7 +136,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
       colors.forEach((color, index) => {
-        if (userData.id_shop.includes(color.normal)) {
+        //verification if the user has already bought the color
+        if (userData.id_shop.includes(color.normal)) { // Recherche BDD 
           color.price = 0;
         }
         const aBox = document.createElement("a-box");
@@ -156,7 +165,6 @@ document.addEventListener("DOMContentLoaded", () => {
         aBox.addEventListener("click", function () {
           if (Number(color.price) > Number(moneyvalue)){
             renderBoard();
-  
           }
           else{
             let tabletops = document.querySelectorAll("#table-top");
@@ -170,13 +178,14 @@ document.addEventListener("DOMContentLoaded", () => {
           atext.setAttribute("value","");
           
           moneyvalue = moneyvalue - color.price;
+          //update bdd money
           money.setAttribute("value", moneyvalue);
           color.price = 0;
           if (!userData.id_shop.includes(color.normal)) {
-            userData.id_shop.push(color.normal);
-            players = players.map(player => player.player_name === storedUserInput ? userData : player);
-            localStorage.setItem("players", JSON.stringify(players));
-            console.log("Données enregistrées: ", userData);
+            userData.id_shop.push(color.normal); // Insert bdd
+            // players = players.map(player => player.player_name === storedUserInput ? userData : player);
+            // localStorage.setItem("players", JSON.stringify(players));
+            // console.log("Données enregistrées: ", userData);
           }
           }
   
@@ -184,13 +193,14 @@ document.addEventListener("DOMContentLoaded", () => {
   
       });
     });
-  
+    //listening of the event on the character
     let acharacter = document.getElementById("Character-shop");
     acharacter.addEventListener("click", function () {
       let money = document.getElementById("money");
       let moneyvalue = money.getAttribute("value");
       let otherboxes = document.querySelectorAll("#box-color");
       let othertext = document.querySelectorAll("#text-product");
+      //Delete the previous boxes and text if the shop has already been opened
       if (otherboxes) {
         otherboxes.forEach((box) => {
           box.parentNode.removeChild(box);
@@ -203,6 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   
       characters.forEach((character, index) => {
+        //verification if the user has already bought the character
         console.log(userData);
         if (userData.id_shop.includes(character.name)) {
           character.price = 0;
@@ -235,14 +246,16 @@ document.addEventListener("DOMContentLoaded", () => {
             let characters = document.getElementById("characters");
             characters.setAttribute("gltf-model", character.url);
             moneyvalue = moneyvalue - character.price;
+            //update bdd money
             money.setAttribute("value", moneyvalue);
             character.price = 0;
             atext.setAttribute("value","");
             if (!userData.id_shop.includes(character.name)) {
               userData.id_shop.push(character.name);
-              players = players.map(player => player.player_name === storedUserInput ? userData : player);
-              localStorage.setItem("players", JSON.stringify(players));
-              console.log("Données enregistrées: ", userData);
+              //insert BDD
+              // players = players.map(player => player.player_name === storedUserInput ? userData : player);
+              // localStorage.setItem("players", JSON.stringify(players));
+              // console.log("Données enregistrées: ", userData);
             }
           } else{
               renderBoard();
