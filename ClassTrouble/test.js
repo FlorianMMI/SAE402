@@ -1,6 +1,6 @@
 
 const scene = document.querySelector("a-scene");
-const response = await fetch('./question.json');
+const response = await fetch('./Json/question.json');
 const temp = await response.json();
 console.log(temp);
 

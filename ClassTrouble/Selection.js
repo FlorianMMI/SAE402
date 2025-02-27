@@ -14,7 +14,7 @@ if (storedUserInput) {
 const userData = await getRequest("user?name=" + storedUserInput);
 
 // Fetch local JSON data containing vocabulary info
-const response = await fetch("./data.json");
+const response = await fetch("./Json/data.json");
 const data = await response.json();
 
 // Get the A-Frame scene element from the DOM

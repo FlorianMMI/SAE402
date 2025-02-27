@@ -23,41 +23,7 @@ AFRAME.registerComponent("adjust-camera-height", {
 });
 document.querySelector("a-scene").setAttribute("adjust-camera-height", "");
 
-// Joystick VR
-AFRAME.registerComponent("thumbstick-move", {
-  init: function () {
-    let rig = document.getElementById("rig");
-    let camera = document.getElementById("camera");
-
-    this.el.addEventListener("thumbstickmoved", function (evt) {
-      let x = evt.detail.x;
-      let y = evt.detail.y;
-
-      if (Math.abs(x) < 0.1 && Math.abs(y) < 0.1) return;
-
-      let speed = 0.06;
-
-      let direction = new THREE.Vector3();
-      camera.object3D.getWorldDirection(direction);
-      direction.y = 0;
-      direction.normalize();
-
-      let strafe = new THREE.Vector3()
-        .crossVectors(new THREE.Vector3(0, 1, 0), direction)
-        .multiplyScalar(x);
-      let move = direction.multiplyScalar(y);
-
-      let finalMove = new THREE.Vector3()
-        .addVectors(strafe, move)
-        .multiplyScalar(speed);
-
-      rig.object3D.position.add(finalMove);
-    });
-  },
-});
-
 // Grab
-
 AFRAME.registerComponent("click-grab", {
   init: function () {
     let el = this.el;
@@ -157,8 +123,7 @@ AFRAME.registerComponent("click-grab", {
   },
 });
 
-// DRAWER
-
+// DRAWER ANIMATION
 document.querySelector("#drawer1").addEventListener("click", function () {
   var drawer1 = document.querySelector("#drawer1");
   if (
