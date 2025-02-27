@@ -12,7 +12,8 @@
         src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.4/dist/aframe-extras.min.js"></script>
     <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/aframevr/user-input-textarea/dist/aframe-user-input-textarea-component.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/gh/aframevr/user-input-textarea/dist/aframe-user-input-textarea-component.min.js"></script>
 
 
 </head>
@@ -24,35 +25,33 @@
 
         <a-light type="ambient" color="#FFF" intensity="1"></a-light>
 
-    
+
         <!-- Controller -->
 
-        <a-entity id="rig" position="0 1 0" movement-controls="constrainToNavMesh: true; speed: 0.05">
-            <a-camera id="camera" wasd-controls="acceleration: 15" look-controls="pointerLockEnabled: true;"
+        <a-entity id="rig" position="0 1 0">
+            <a-camera id="camera" wasd-controls="enabled: false" look-controls="pointerLockEnabled: true;"
                 position="0 1.5 0">
                 <a-entity cursor position="0 0 -0.01" geometry="primitive: sphere; radius: 0.00005"
                     material="color: #202020; shader: flat">
                 </a-entity>
             </a-camera>
-            <a-entity id="rightController" laser-controls="hand:right" oculus-touch-controls="hand: right" cursor thumbstick-move>
+            <a-entity id="rightController" laser-controls="hand:right" oculus-touch-controls="hand: right" cursor>
             </a-entity>
-            <a-entity id="leftController"  oculus-touch-controls="hand: left" >
+            <a-entity id="leftController" oculus-touch-controls="hand: left">
             </a-entity>
         </a-entity>
 
 
 
-      <!-- Interactive Input -->
-      <a-entity id="textDisplay" position="0 1.5 -2" 
-                geometry="primitive: plane; width: 1.5; height: 0.3" 
-                material="color: #CCC" 
-                text="value: Cliquez ici pour entrer votre nom; align: center; color: black"
-                clickable></a-entity>
+        <!-- Interactive Input -->
+        <a-entity id="textDisplay" position="0 1.5 -2" geometry="primitive: plane; width: 1.5; height: 0.3"
+            material="color: #CCC" text="value: Cliquez ici pour entrer votre nom; align: center; color: black"
+            clickable></a-entity>
 
-      <!-- Virtual KeyBoard -->
-      <a-entity id="keyboard" position="0 0.5 -2">
-        <a-entity id="keysContainer"></a-entity>
-      </a-entity>
+        <!-- Virtual KeyBoard -->
+        <a-entity id="keyboard" position="0 0.5 -2">
+            <a-entity id="keysContainer"></a-entity>
+        </a-entity>
 
 
         <!-- SKY -->

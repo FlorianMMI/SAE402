@@ -23,7 +23,7 @@ function updateTextDisplay(textDisplay) {
     "text",
     "value: " +
       (userInput || "Enter your name") +
-      "; align: center; color: black",
+      "; align: center; color: black"
   );
   textDisplay.setAttribute("position", "0 3 -3");
 }
@@ -55,7 +55,7 @@ function handleKeyClick(key, textDisplay, keysContainer) {
       let startButton = document.getElementById("startButton");
       startButton.setAttribute(
         "text",
-        "value: CONTINUE; align: center; color: white; width: 3; font: ./assets/font/Gloria-msdf.json; font-image: ./assets/font/Gloria-msdf.png; negate:false"
+        "value: CONTINUE; align: center; color: white; width: 3; font: ./ClassTrouble/assets/font/Gloria-msdf.json; font-image: ./ClassTrouble/assets/font/Gloria-msdf.png; negate:false"
       );
       console.log("Existe déjà");
 
@@ -65,26 +65,26 @@ function handleKeyClick(key, textDisplay, keysContainer) {
     } else {
       // If the player does not exist, create a new player entry
       console.log("Nom: ", userInput);
-      fetch('https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user', {
-        method: 'POST',
+      fetch("https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           name: String(userInput),
           money: 0,
           round: 0,
-          id_questions: []
+          id_questions: [],
+        }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Erreur réseau : " + response.status);
+          }
+          return response.json();
         })
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Erreur réseau : ' + response.status);
-        }
-        return response.json();
-      })
-      .then(data => console.log(data))
-      .catch(error => console.error('Erreur :', error));
+        .then((data) => console.log(data))
+        .catch((error) => console.error("Erreur :", error));
     }
     if (localStorage.getItem("currentUserInput")) {
       localStorage.removeItem("currentUserInput");

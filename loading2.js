@@ -1,8 +1,7 @@
-import { initializeKeyboard } from './data.js';
+import { initializeKeyboard } from "./data.js";
 
 // Function to render the buttons and input field
 let renderButton = function () {
-
   // Create the start button
   let button = document.createElement("a-entity");
   button.setAttribute("id", "startButton");
@@ -11,7 +10,7 @@ let renderButton = function () {
   button.setAttribute("position", "0 3 -3");
   button.setAttribute(
     "text",
-    "value: START; align: center; color: white; width: 3; font: ./assets/font/Gloria-msdf.json; font-image: ./assets/font/Gloria-msdf.png; negate:false"
+    "value: START; align: center; color: white; width: 3; font: ./ClassTrouble/assets/font/Gloria-msdf.json; font-image: ./ClassTrouble/assets/font/Gloria-msdf.png; negate:false"
   );
 
   // Create the rules button
@@ -25,7 +24,7 @@ let renderButton = function () {
   buttonRules.setAttribute("position", "0 2.5 -3");
   buttonRules.setAttribute(
     "text",
-    "value: RULES; align: center; color: white; width: 3; font: ./assets/font/Gloria-msdf.json; font-image: ./assets/font/Gloria-msdf.png; negate:false"
+    "value: RULES; align: center; color: white; width: 3; font: ./ClassTrouble/assets/font/Gloria-msdf.json; font-image: ./ClassTrouble/assets/font/Gloria-msdf.png; negate:false"
   );
 
   // Create the command button
@@ -39,7 +38,7 @@ let renderButton = function () {
   buttonCommande.setAttribute("position", "0 2 -3");
   buttonCommande.setAttribute(
     "text",
-    "value: COMMANDE; align: center; color: white; width: 3; font: ./assets/font/Gloria-msdf.json; font-image: ./assets/font/Gloria-msdf.png; negate:false"
+    "value: COMMANDE; align: center; color: white; width: 3; font: ./ClassTrouble/assets/font/Gloria-msdf.json; font-image: ./ClassTrouble/assets/font/Gloria-msdf.png; negate:false"
   );
 
   // Create the input field
@@ -86,8 +85,11 @@ let renderButton = function () {
     aText.setAttribute("scale", ".5 .5 .5");
     aText.setAttribute("position", `0 2.35 -1.80`);
     aText.setAttribute("rotation", "0 0 0");
-    aText.setAttribute("font", "./assets/font/Gloria-msdf.json");
-    aText.setAttribute("font-image", "./assets/font/Gloria-msdf.png");
+    aText.setAttribute("font", "./ClassTrouble/assets/font/Gloria-msdf.json");
+    aText.setAttribute(
+      "font-image",
+      "./ClassTrouble/assets/font/Gloria-msdf.png"
+    );
     aText.setAttribute("negate", "false");
     aText.setAttribute("align", "center");
     aText.setAttribute("color", "#FFF");
@@ -101,7 +103,7 @@ let renderButton = function () {
     arrow.setAttribute("position", `1.35 1.42 -1.80`);
     arrow.setAttribute(
       "text",
-      "value: Exit ->; align: center; color: white; width: 3; font: ./assets/font/Gloria-msdf.json; font-image: ./assets/font/Gloria-msdf.png; negate:false"
+      "value: Exit ->; align: center; color: white; width: 3; font: ./ClassTrouble/assets/font/Gloria-msdf.json; font-image: ./ClassTrouble/assets/font/Gloria-msdf.png; negate:false"
     );
     ascene.appendChild(arrow);
 
@@ -137,8 +139,11 @@ let renderButton = function () {
     aText.setAttribute("scale", ".5 .5 .5");
     aText.setAttribute("position", `0 2.35 -1.80`);
     aText.setAttribute("rotation", "0 0 0");
-    aText.setAttribute("font", "./assets/font/Gloria-msdf.json");
-    aText.setAttribute("font-image", "./assets/font/Gloria-msdf.png");
+    aText.setAttribute("font", "./ClassTrouble/assets/font/Gloria-msdf.json");
+    aText.setAttribute(
+      "font-image",
+      "./ClassTrouble/assets/font/Gloria-msdf.png"
+    );
     aText.setAttribute("negate", "false");
     aText.setAttribute("align", "center");
     aText.setAttribute("color", "#FFF");
@@ -152,7 +157,7 @@ let renderButton = function () {
     arrow.setAttribute("position", `1.35 1.42 -1.80`);
     arrow.setAttribute(
       "text",
-      "value: Exit ->; align: center; color: white; width: 3; font: ./assets/font/Gloria-msdf.json; font-image: ./assets/font/Gloria-msdf.png; negate:false"
+      "value: Exit ->; align: center; color: white; width: 3; font: ./ClassTrouble/assets/font/Gloria-msdf.json; font-image: ./ClassTrouble/assets/font/Gloria-msdf.png; negate:false"
     );
     ascene.appendChild(arrow);
 
@@ -222,7 +227,7 @@ let renderBoard = function (ascene) {
       ascene.removeChild(text);
       ascene.removeChild(arrow);
     });
-    
+
     boards.forEach((board) => {
       board.addEventListener("click", function () {
         boards.forEach((b) => ascene.removeChild(b));
