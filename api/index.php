@@ -3,7 +3,7 @@ require_once "class/HttpRequest.php";
 require_once "Controller/UserController.php";
 require_once "Controller/ShopController.php";
 require_once "Controller/QuestionController.php";
-
+require_once "Controller/ReponseController.php";
 
 /** IMPORTANT
  * 
@@ -30,6 +30,7 @@ $router = [
     "user" => new UserController(),
     "shop" => new ShopController(),
     "question" => new QuestionController(),
+    "reponse" => new ReponseController()
     
 
     
