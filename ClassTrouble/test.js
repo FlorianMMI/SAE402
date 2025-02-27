@@ -192,7 +192,7 @@ async function StartTest() {
                 let add = parseInt(temp) + 2
                 money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
                 console.log(storedUserInput, add, round);
-                fetch('https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user', {
+                fetch(`https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user?players_name=${storedUserInput}`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
@@ -250,7 +250,7 @@ async function StartTest() {
                 let add = parseInt(temp) + 2
                 money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
                 console.log(storedUserInput, add, round);
-                fetch('https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user', {
+                fetch(`https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user?players_name=${storedUserInput}`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
@@ -383,7 +383,7 @@ function updateQuestion(infoBox) {
                 let add = parseInt(temp) + 2
                 money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
                 console.log(storedUserInput, add, round);
-                fetch('https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user', {
+                fetch(`https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user?players_name=${storedUserInput}`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
@@ -444,7 +444,7 @@ function updateQuestion(infoBox) {
                 console.log(storedUserInput, add, round);
                 money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
                 
-                fetch('https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user', {
+                fetch(`https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user?players_name=${storedUserInput}`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'

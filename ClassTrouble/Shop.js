@@ -181,7 +181,7 @@ let renderMarket = function () {
           atext.setAttribute("value", "");
 
           
-          fetch(`${API_URL}`, {
+          fetch(`https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user?players_name=${storedUserInput}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -208,7 +208,7 @@ let renderMarket = function () {
 
           color.price = 0;
           if (!store[0].achat.includes(color.normal)) {
-            fetch(`${API_URL}`, {
+            fetch(`https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/shop`, {
                     method: 'POST',
                     headers: {
                       'Content-Type': 'application/json'
@@ -293,7 +293,7 @@ let renderMarket = function () {
           let characters = document.getElementById("characters");
           characters.setAttribute("gltf-model", character.url);
 
-          fetch(`${API_URL}` + "Shop", {
+          fetch(`https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user?players_name=${storedUserInput}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -318,23 +318,7 @@ let renderMarket = function () {
           atext.setAttribute("value", "");
           if (!store[0].achat.includes(character.name)) {
             
-            fetch(`${API_URL}`, {
-              method: 'PATCH',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                  name: storedUserInput,
-                  money: moneyvalue - character.price,
-                  round: userData[0].round,
-              })
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok: ' + response.status);
-                }
-                return response.json();
-            })
+            
           }
         } else {
           renderBoard();
