@@ -129,4 +129,4 @@ let patchRequest = async function(uri, data){
 }
 
 
-export {getRequest, postRequest, deleteRequest }
+export {API_URL, getRequest, postRequest, deleteRequest }

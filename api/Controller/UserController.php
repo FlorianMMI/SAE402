@@ -54,7 +54,7 @@ require_once("class/User.php");
         }
 
         protected function processPatchRequest(HttpRequest $request){
-            return null;
+            
         }
     }
 

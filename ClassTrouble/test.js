@@ -2,7 +2,7 @@
 // The test is composed of a series of questions with two possible answers
 // The user must select the correct answer to progress to the next question
 // If the user selects the wrong answer, a random event will occur
-import { getRequest } from "./api-request.js";
+import { getRequest, API_URL } from "./api-request.js";
 
 const scene = document.querySelector("a-scene");
 
@@ -124,7 +124,7 @@ async function StartTest() {
     infoBox.setAttribute("width", "1.4");
     infoBox.setAttribute("height", "1.2");
     infoBox.setAttribute("depth", "0.01");
-    infoBox.setAttribute("material", "color: #fff; opacity: 1");
+    infoBox.setAttribute("material", "color:rgba(163, 163, 163, 0.75); opacity: 1");
 
     // Create a text element to display the start of the test
     const textElement = document.createElement("a-text");

@@ -1,4 +1,4 @@
-import { getRequest } from "./api-request.js";
+import { getRequest, API_URL } from "./api-request.js";
 
 let storedUserInput = JSON.parse(localStorage.getItem("currentUserInput"));
 console.log("Render", storedUserInput);
@@ -6,7 +6,7 @@ console.log("Render", storedUserInput);
 const userData = await getRequest("user?name=" + storedUserInput);
 const store = await getRequest("user?name=" + storedUserInput + "&items=''");
 
-console.log(store.achat)
+console.log(userData[0].id_user);
 // Shop characters and colors
 
 let characters = [
@@ -115,7 +115,6 @@ let renderMarket = function () {
     colors.forEach((color, index) => {
       //verification if the user has already bought the color
       if (store[0].achat.includes(color.normal)) {
-        
         color.price = 0;
       }
       const aBox = document.createElement("a-box");
@@ -181,15 +180,54 @@ let renderMarket = function () {
           });
           atext.setAttribute("value", "");
 
+          
+          fetch(`${API_URL}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: storedUserInput,
+                money: moneyvalue - color.price,
+                round: userData[0].round,
+            })
+          })
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error('Network response was not ok: ' + response.status);
+              }
+              return response.json();
+          })
+        
+
+
+
           moneyvalue = moneyvalue - color.price;
-          //update bdd money
+          
           money.setAttribute("value", moneyvalue);
+
           color.price = 0;
-          if (!userData.id_shop.includes(color.normal)) {
-            userData.id_shop.push(color.normal); // Insert bdd
-            // players = players.map(player => player.player_name === storedUserInput ? userData : player);
-            // localStorage.setItem("players", JSON.stringify(players));
-            // console.log("Données enregistrées: ", userData);
+          if (!store[0].achat.includes(color.normal)) {
+            fetch(`${API_URL}`, {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+
+                      achat: toString(color.normal),
+                      id_user: userData[0].id_user
+                    })
+                  })
+                  .then(response => {
+                    if (!response.ok) {
+                      throw new Error('Erreur réseau : ' + response.status);
+                    }
+                    return response.json();
+                  })
+                  .then(data => console.log(data))
+                  .catch(error => console.error('Erreur :', error));
+            
           }
         }
       });
@@ -216,9 +254,10 @@ let renderMarket = function () {
 
     characters.forEach((character, index) => {
       //verification if the user has already bought the character
-      console.log(userData);
-      if (userData.id_shop.includes(character.name)) {
+      
+      if (store[0].achat.includes(character.name)) {
         character.price = 0;
+        
       }
       const characterEntity = document.createElement("a-image");
       characterEntity.setAttribute("src", character.img);
@@ -253,17 +292,49 @@ let renderMarket = function () {
         if (Number(character.price) <= Number(moneyvalue)) {
           let characters = document.getElementById("characters");
           characters.setAttribute("gltf-model", character.url);
+
+          fetch(`${API_URL}` + "Shop", {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: storedUserInput,
+                money: moneyvalue - character.price,
+                round: userData[0].round,
+            })
+          })
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error('Network response was not ok: ' + response.status);
+              }
+              return response.json();
+          })
+
           moneyvalue = moneyvalue - character.price;
           //update bdd money
           money.setAttribute("value", moneyvalue);
           character.price = 0;
           atext.setAttribute("value", "");
-          if (!userData.id_shop.includes(character.name)) {
-            userData.id_shop.push(character.name);
-            //insert BDD
-            // players = players.map(player => player.player_name === storedUserInput ? userData : player);
-            // localStorage.setItem("players", JSON.stringify(players));
-            // console.log("Données enregistrées: ", userData);
+          if (!store[0].achat.includes(character.name)) {
+            
+            fetch(`${API_URL}`, {
+              method: 'PATCH',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                  name: storedUserInput,
+                  money: moneyvalue - character.price,
+                  round: userData[0].round,
+              })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok: ' + response.status);
+                }
+                return response.json();
+            })
           }
         } else {
           renderBoard();
