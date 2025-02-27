@@ -3,16 +3,11 @@
 AFRAME.registerComponent("adjust-camera-height", {
   init: function () {
     let rig = document.querySelector("#rig");
-    let vrcursor = document.querySelector("#vrcursor");
     let scene = this.el;
 
     scene.addEventListener("enter-vr", function () {
       if (scene.is("vr-mode")) {
         rig.setAttribute("scale", { x: 1.5, y: 1.5, z: 1.5 });
-        vrcursor.setAttribute("raycaster", {
-          showLine: true,
-          objects: ".collidable",
-        });
       }
     });
 
