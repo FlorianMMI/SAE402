@@ -125,7 +125,7 @@ async function StartTest() {
     textElement.appendChild(progressText);
     scene.appendChild(infoBox);
 
-    // after a short timeout, load the first question of the current round
+    // After a short timeout, load the first question of the current round
     setTimeout(() => {
         // Use data[round][questionIndex]
         const currentQuestion = data[round][questionIndex];
@@ -188,6 +188,8 @@ async function StartTest() {
                 nextQuestion(questionIndex + 1);
             } else {
                 textElement.setAttribute("value", "Wrong !");
+                document.querySelector("#reponse1").setAttribute("value", "");
+                document.querySelector("#reponse2").setAttribute("value", "");
                 if (Math.random() < 0.5) {
                     characterAnimation();
                     setTimeout(() => {
@@ -241,6 +243,8 @@ async function StartTest() {
                 nextQuestion(questionIndex + 1);
             } else {
                 textElement.setAttribute("value", "Wrong !");
+                document.querySelector("#reponse1").setAttribute("value", "");
+                document.querySelector("#reponse2").setAttribute("value", "");
                 if (Math.random() < 0.5) {
                     characterAnimation();
                     setTimeout(() => {
@@ -364,6 +368,8 @@ function updateQuestion(infoBox) {
                 nextQuestion(questionIndex + 1);
         } else {
             questionElem.setAttribute("value", "Wrong !");
+            document.querySelector("#reponse1").setAttribute("value", "");
+            document.querySelector("#reponse2").setAttribute("value", "");
             if (Math.random() < 0.5) {
                 characterAnimation();
                 setTimeout(() => {
@@ -417,6 +423,8 @@ function updateQuestion(infoBox) {
                 nextQuestion(questionIndex + 1);
         } else {
             questionElem.setAttribute("value", "Wrong !");
+            document.querySelector("#reponse1").setAttribute("value", "");
+            document.querySelector("#reponse2").setAttribute("value", "");
             if (Math.random() < 0.5) {
                 characterAnimation();
                 setTimeout(() => {

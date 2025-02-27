@@ -1,7 +1,9 @@
 import { initializeKeyboard } from './data.js';
 
+// Function to render the buttons and input field
 let renderButton = function () {
 
+  // Create the start button
   let button = document.createElement("a-entity");
   button.setAttribute("id", "startButton");
   button.setAttribute("geometry", "primitive: plane; height: 0.5; width: 2");
@@ -12,6 +14,7 @@ let renderButton = function () {
     "value: START; align: center; color: white; width: 3; font: ./assets/font/Gloria-msdf.json; font-image: ./assets/font/Gloria-msdf.png; negate:false"
   );
 
+  // Create the rules button
   let buttonRules = document.createElement("a-entity");
   buttonRules.setAttribute("id", "buttonRules");
   buttonRules.setAttribute(
@@ -25,6 +28,7 @@ let renderButton = function () {
     "value: RULES; align: center; color: white; width: 3; font: ./assets/font/Gloria-msdf.json; font-image: ./assets/font/Gloria-msdf.png; negate:false"
   );
 
+  // Create the command button
   let buttonCommande = document.createElement("a-entity");
   buttonCommande.setAttribute("id", "buttonCommande");
   buttonCommande.setAttribute(
@@ -38,6 +42,7 @@ let renderButton = function () {
     "value: COMMANDE; align: center; color: white; width: 3; font: ./assets/font/Gloria-msdf.json; font-image: ./assets/font/Gloria-msdf.png; negate:false"
   );
 
+  // Create the input field
   let input = document.createElement("a-input");
   input.setAttribute("id", "userInput");
   input.setAttribute("placeholder", "Enter text here");
@@ -47,17 +52,23 @@ let renderButton = function () {
   input.setAttribute("background", "black");
   ascene.appendChild(input);
 
+  // Event listener for input change
   input.addEventListener("change", function (event) {
     console.log("User Input: ", event.target.value);
   });
 
+  // Append buttons to the scene
   ascene.appendChild(button);
   ascene.appendChild(buttonRules);
   ascene.appendChild(buttonCommande);
+
+  // Event listener for start button click
   button.addEventListener("click", function () {
     console.log("Button Clicked");
     window.location.href = "./ClassTrouble/index.html";
   });
+
+  // Event listener for rules button click
   buttonRules.addEventListener("click", function () {
     console.log("Button Rules Clicked");
     let txt = document.getElementById("text");
@@ -81,6 +92,8 @@ let renderButton = function () {
     aText.setAttribute("align", "center");
     aText.setAttribute("color", "#FFF");
     ascene.appendChild(aText);
+
+    // Create the exit arrow
     let arrow = document.createElement("a-entity");
     arrow.setAttribute("id", "arrow");
     arrow.setAttribute("geometry", "primitive: plane; height: 0.25; width: .5");
@@ -91,6 +104,8 @@ let renderButton = function () {
       "value: Exit ->; align: center; color: white; width: 3; font: ./assets/font/Gloria-msdf.json; font-image: ./assets/font/Gloria-msdf.png; negate:false"
     );
     ascene.appendChild(arrow);
+
+    // Event listener for arrow click
     arrow.addEventListener("click", function () {
       console.log("Arrow Clicked");
       let text = document.getElementById("text");
@@ -102,6 +117,8 @@ let renderButton = function () {
       boards.forEach((board) => ascene.removeChild(board));
     });
   });
+
+  // Event listener for command button click
   buttonCommande.addEventListener("click", function () {
     let txt = document.getElementById("text");
     if (txt) {
@@ -126,6 +143,8 @@ let renderButton = function () {
     aText.setAttribute("align", "center");
     aText.setAttribute("color", "#FFF");
     ascene.appendChild(aText);
+
+    // Create the exit arrow
     let arrow = document.createElement("a-entity");
     arrow.setAttribute("id", "arrow");
     arrow.setAttribute("geometry", "primitive: plane; height: 0.20; width: .5");
@@ -136,6 +155,8 @@ let renderButton = function () {
       "value: Exit ->; align: center; color: white; width: 3; font: ./assets/font/Gloria-msdf.json; font-image: ./assets/font/Gloria-msdf.png; negate:false"
     );
     ascene.appendChild(arrow);
+
+    // Event listener for arrow click
     arrow.addEventListener("click", function () {
       console.log("Arrow Clicked");
       let text = document.getElementById("text");
@@ -149,6 +170,7 @@ let renderButton = function () {
   });
 };
 
+// Function to render the board
 let renderBoard = function (ascene) {
   const box1 = document.createElement("a-box");
   box1.setAttribute("id", "board");
@@ -190,15 +212,17 @@ let renderBoard = function (ascene) {
   box5.setAttribute("color", "#885f32");
   ascene.appendChild(box5);
 
+  // Add event listeners to remove the board and text on click
   setTimeout(() => {
-    let boards = document.querySelectorAll("#board");
     let text = document.getElementById("text");
     let arrow = document.getElementById("arrow");
+    let boards = document.querySelectorAll("#board");
     text.addEventListener("click", function () {
       boards.forEach((b) => ascene.removeChild(b));
       ascene.removeChild(text);
       ascene.removeChild(arrow);
     });
+    
     boards.forEach((board) => {
       board.addEventListener("click", function () {
         boards.forEach((b) => ascene.removeChild(b));
@@ -209,8 +233,7 @@ let renderBoard = function (ascene) {
   }, 0);
 };
 
-
-
+// Initialize the keyboard
 let textDisplay = document.querySelector("#textDisplay");
 let keysContainer = document.querySelector("#keysContainer");
 

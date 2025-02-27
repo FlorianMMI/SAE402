@@ -24,6 +24,9 @@
 
         <a-light type="ambient" color="#FFF" intensity="1"></a-light>
 
+    
+        <!-- Controller -->
+
         <a-entity id="rig" position="0 1 0" movement-controls="constrainToNavMesh: true; speed: 0.05">
             <a-camera id="camera" wasd-controls="acceleration: 15" look-controls="pointerLockEnabled: true;"
                 position="0 1.5 0">
@@ -37,14 +40,16 @@
             </a-entity>
         </a-entity>
 
-      <!-- Champ de texte interactif -->
+        
+
+      <!-- Interactive Input -->
       <a-entity id="textDisplay" position="0 1.5 -2" 
                 geometry="primitive: plane; width: 1.5; height: 0.3" 
                 material="color: #CCC" 
                 text="value: Cliquez ici pour entrer votre nom; align: center; color: black"
                 clickable></a-entity>
 
-      <!-- Clavier virtuel -->
+      <!-- Virtual KeyBoard -->
       <a-entity id="keyboard" position="0 0.5 -2">
         <a-entity id="keysContainer"></a-entity>
       </a-entity>
@@ -57,6 +62,8 @@
             light="intensity: 1.5; castShadow: true; shadowCameraTop: 8.97; shadowCameraRight: 13.66; shadowCameraLeft: -12.71"
             position="-11.66809 4.066 5.08364">
         </a-entity>
+
+        <!-- Button -->
         <script>
             console.log("Render Button");
             let ascene = document.querySelector("a-scene");
