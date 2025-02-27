@@ -20,6 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+
+
+
+
+
   let characters = [
     {
       url: "models/teacher/Astronaut.glb",
@@ -347,7 +352,7 @@ document.addEventListener("DOMContentLoaded", () => {
 }
   });
 renderMarket();
-renderCharacter ();
+
 
 let renderTableInFrontOfMerchant = function () {
   let ascene = document.querySelector('a-scene');

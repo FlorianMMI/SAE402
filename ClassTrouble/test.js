@@ -1,3 +1,8 @@
+// Everything in this file is used to create the test scene and the test itself
+// The test is composed of a series of questions with two possible answers
+// The user must select the correct answer to progress to the next question
+// If the user selects the wrong answer, a random event will occur
+
 
 const scene = document.querySelector("a-scene");
 const response = await fetch('./Json/question.json');
@@ -52,7 +57,7 @@ scene.appendChild(roundText);
 
 
 
-//mise en place des réponses correctes et questions pour chaque round
+// Setting up correct answers and questions for each round
 let data = [];
 
 for (let i = 0; i < rounds.length; i++) {
@@ -86,15 +91,18 @@ console.log(correctAnswers);
 let cpt_resp = 0;
 
 async function StartTest() {
+    // Set the initial position and movement controls for the camera
     const camera = document.querySelector("#rig");
     camera.setAttribute("position", "1.8 0 2.3");
     camera.setAttribute("movement-controls", "constrainToNavMesh: true; controls: checkpoint;");
 
+    // Remove dynamic body attribute from the chair
     let chair = document.querySelector("#cr-chair");
     chair.removeAttribute("dynamic-body");
 
     const scene = document.querySelector("a-scene");
 
+    // Create an info box to display the test information
     const infoBox = document.createElement("a-box");
     infoBox.setAttribute("id", "infoBox");
     infoBox.setAttribute("position", "1.8 1.5 1.3");
@@ -104,6 +112,7 @@ async function StartTest() {
     infoBox.setAttribute("depth", "0.01");
     infoBox.setAttribute("material", "color: #fff; opacity: 1");
 
+    // Create a text element to display the start of the test
     const textElement = document.createElement("a-text");
     textElement.setAttribute("value", "Start of the test...");
     textElement.setAttribute("color", "#000");
@@ -112,7 +121,7 @@ async function StartTest() {
     textElement.setAttribute("wrapCount", "15");
     textElement.setAttribute("position", "0 0 0.01");
 
-    // Création d'un élément de progress indiquant le round et le nombre de questions restantes
+    // Create a progress element indicating the round and the number of remaining questions
     const progressText = document.createElement("a-text");
     progressText.setAttribute("id", "progress");
     progressText.setAttribute("value", `Round ${round + 1}: ${data[round].length - questionIndex} questions remaining`);
@@ -132,6 +141,7 @@ async function StartTest() {
         textElement.setAttribute("value", currentQuestion.texte_question);
         textElement.setAttribute("id", "question");
 
+        // Create text elements for the responses
         const textReponse1 = document.createElement("a-text");
         textReponse1.setAttribute("value", currentQuestion.reponses[0].texte_reponse);
         textReponse1.setAttribute("id", "reponse1");
@@ -152,6 +162,7 @@ async function StartTest() {
         textReponse2.setAttribute("scale", "0.4 0.4 0.4");
         infoBox.appendChild(textReponse2);
 
+        // Create hit boxes for the responses
         const hitBoxRep1 = document.createElement("a-box");
         hitBoxRep1.setAttribute("position", "0 0 -0.01");
         hitBoxRep1.setAttribute("id", "HitBoxRep1");
@@ -264,6 +275,8 @@ async function StartTest() {
     }, 2000);
 }
 
+
+// Function to move to the next question in the test
 function nextQuestion(newIndex) {
     questionIndex = newIndex;
     const infoBox = document.querySelector("#infoBox");
@@ -306,12 +319,15 @@ function nextQuestion(newIndex) {
     updateQuestion(infoBox);
 }
 
+
+// Function to update the question and responses during the test
+
 function updateQuestion(infoBox) {
     const currentQuestion = data[round][questionIndex];
     const questionElem = document.querySelector("#question");
     questionElem.setAttribute("value", currentQuestion.texte_question);
 
-    // Mise à jour du texte de progression
+    // Update of the text display
     let progressText = document.querySelector("#progress");
     if (progressText) {
       progressText.setAttribute("value", `Round ${round + 1}: ${data[round].length - questionIndex} questions remaining`);
@@ -450,10 +466,9 @@ function isCorrect(value) {
 
 
 
-
-
-
-
+//-------------------------------------------------------------//
+//Following function will touche the character and make it move//
+//-------------------------------------------------------------//
 
 
 
@@ -508,6 +523,7 @@ let characterAnimation = function () {
 };
 
 
+// Ball shooting function for the character
 function shootBall() {
     let character = document.getElementById("characters");
     character.removeAttribute("animation-mixer");
@@ -522,7 +538,7 @@ function shootBall() {
     let ascene = document.querySelector("a-scene");
     ascene.appendChild(ball);
     
-    ball.setAttribute("animation", "property: position; to: 1.8 2 2.6; dur: 500; easing: linear");
+    ball.setAttribute("animation", "property: position; to: 2 2 2.7; dur: 500; easing: linear");
     character.setAttribute("animation-mixer", "clip: CharacterArmature|Gun_Shoot; loop: once; timeScale: 1");
     
     setTimeout(() => {
