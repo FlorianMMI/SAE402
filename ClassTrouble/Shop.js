@@ -6,7 +6,7 @@ console.log("Render", storedUserInput);
 const userData = await getRequest("user?name=" + storedUserInput);
 const store = await getRequest("user?name=" + storedUserInput + "&items=''");
 
-console.log(store)
+console.log(store.achat)
 // Shop characters and colors
 
 let characters = [
@@ -114,8 +114,8 @@ let renderMarket = function () {
     }
     colors.forEach((color, index) => {
       //verification if the user has already bought the color
-      if (userData.id_shop.includes(color.normal)) {
-        // Recherche BDD
+      if (store[0].achat.includes(color.normal)) {
+        
         color.price = 0;
       }
       const aBox = document.createElement("a-box");
