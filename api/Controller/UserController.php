@@ -54,7 +54,25 @@ require_once("class/User.php");
         }
 
         protected function processPatchRequest(HttpRequest $request){
-            
+            $json = $request->getJson();
+            $obj = json_decode($json);
+            $name = $request->getParam("name");
+
+            if (isset($name)) {
+                $money = $obj->money;
+                $round = $obj->round;
+                $ok = $this->UserRepository->update($name, $money, $round);
+
+                if ($ok) {
+                    return ["status" => "success"];
+                } else {
+                    error_log("Failed to update user: $name with money: $money and round: $round");
+                    return ["status" => "error", "message" => "Failed to update user"];
+                }
+            } else {
+                error_log("Name parameter is missing in patch request");
+                return ["status" => "error", "message" => "Name parameter is missing"];
+            }
         }
     }
 

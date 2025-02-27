@@ -45,18 +45,20 @@ class UserRepository extends EntityRepository {
         }
     }
 
-    public function updateUser($user, $money, $round) {
-        $stmt = $this->cnx->prepare("UPDATE User SET money = :money, round = :round WHERE players_name = :user");
-        $stmt->bindParam(':money', $money);
-        $stmt->bindParam(':round', $round);
-        $stmt->bindParam(':user', $user);
-        return $stmt->execute();
+    public function update($user, $money, $round) {
+        try {
+            $stmt = $this->cnx->prepare("UPDATE User SET money = :money, round = :round WHERE players_name = :user");
+            $stmt->bindParam(':money', $money, PDO::PARAM_INT);
+            $stmt->bindParam(':round', $round, PDO::PARAM_INT);
+            $stmt->bindParam(':user', $user, PDO::PARAM_STR);
+            $stmt->execute();
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            error_log("Error updating user: " . $e->getMessage());
+            return false;
+        }
     }
 
 }
-
-
-
-
 
 ?>

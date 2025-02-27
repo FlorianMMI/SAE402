@@ -189,16 +189,17 @@ async function StartTest() {
                 //son juste
                 let money = document.querySelector("#money");
                 let temp = money.getAttribute("value");
+                let add = parseInt(temp) + 2
                 money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
-                
+                console.log(storedUserInput, add, round);
                 fetch('https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user', {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        name: storedUserInput,
-                        money: parseInt(temp) + 2,
+                        players_name: storedUserInput,
+                        money: parseInt(add),
                         round: round,
                     })
                 })
@@ -246,16 +247,17 @@ async function StartTest() {
                 //son juste
                 let money = document.querySelector("#money");
                 let temp = money.getAttribute("value");
+                let add = parseInt(temp) + 2
                 money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
-                
+                console.log(storedUserInput, add, round);
                 fetch('https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user', {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        name: storedUserInput,
-                        money: parseInt(temp) + 2,
+                        players_name: storedUserInput,
+                        money: parseInt(add),
                         round: round,
                     })
                 })
@@ -378,16 +380,17 @@ function updateQuestion(infoBox) {
             //son juste
             let money = document.querySelector("#money");
                 let temp = money.getAttribute("value");
+                let add = parseInt(temp) + 2
                 money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
-                
+                console.log(storedUserInput, add, round);
                 fetch('https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user', {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        name: storedUserInput,
-                        money: parseInt(temp) + 2,
+                        players_name: storedUserInput,
+                        money: parseInt(add),
                         round: round,
                     })
                 })
@@ -434,7 +437,11 @@ function updateQuestion(infoBox) {
         if (isCorrect(currentQuestion.reponses[1].texte_reponse)) {
             //son juste
             let money = document.querySelector("#money");
+                
                 let temp = money.getAttribute("value");
+                let add = parseInt(temp) + 2
+
+                console.log(storedUserInput, add, round);
                 money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
                 
                 fetch('https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user', {
@@ -443,8 +450,8 @@ function updateQuestion(infoBox) {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        name: storedUserInput,
-                        money: parseInt(temp) + 2,
+                        players_name: storedUserInput,
+                        money: parseInt(add),
                         round: round,
                     })
                 })
