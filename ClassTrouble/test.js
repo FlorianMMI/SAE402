@@ -19,7 +19,7 @@ if (storedUserInput) {
 
 import { getRequest } from "./api-request.js";
 const userData = await getRequest("user?name=" + storedUserInput);
-
+console.log("ceci est userData", userData);
 let money = document.querySelector("#money");
 money.setAttribute("value", parseInt(userData[0].money));
 
