@@ -172,6 +172,7 @@ async function StartTest() {
         hitBoxRep1.setAttribute("material", "color: #f00; opacity: 0;");
         hitBoxRep1.addEventListener("click", () => {
             if (isCorrect(currentQuestion.reponses[0].texte_reponse)) {
+                //son juste
                 let money = document.querySelector("#money");
                 let temp = money.getAttribute("value");
                 money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
@@ -199,6 +200,7 @@ async function StartTest() {
                 nextQuestion(questionIndex + 1);
             } else {
                 textElement.setAttribute("value", "Wrong !");
+                // son wrong
                 document.querySelector("#reponse1").setAttribute("value", "");
                 document.querySelector("#reponse2").setAttribute("value", "");
                 if (Math.random() < 0.5) {
@@ -227,6 +229,7 @@ async function StartTest() {
         hitBoxRep2.setAttribute("material", "opacity: 0;");
         hitBoxRep2.addEventListener("click", () => {
             if (isCorrect(currentQuestion.reponses[1].texte_reponse)) {
+                //son juste
                 let money = document.querySelector("#money");
                 let temp = money.getAttribute("value");
                 money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
@@ -254,6 +257,7 @@ async function StartTest() {
                 nextQuestion(questionIndex + 1);
             } else {
                 textElement.setAttribute("value", "Wrong !");
+                // son wrong
                 document.querySelector("#reponse1").setAttribute("value", "");
                 document.querySelector("#reponse2").setAttribute("value", "");
                 if (Math.random() < 0.5) {
@@ -357,6 +361,7 @@ function updateQuestion(infoBox) {
     hitBoxRep1.setAttribute("material", "color: #f00; opacity: 0;");
     hitBoxRep1.addEventListener("click", () => {
         if (isCorrect(currentQuestion.reponses[0].texte_reponse)) {
+            //son juste
             let money = document.querySelector("#money");
                 let temp = money.getAttribute("value");
                 money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
@@ -384,6 +389,7 @@ function updateQuestion(infoBox) {
                 nextQuestion(questionIndex + 1);
         } else {
             questionElem.setAttribute("value", "Wrong !");
+            // son wrong
             document.querySelector("#reponse1").setAttribute("value", "");
             document.querySelector("#reponse2").setAttribute("value", "");
             if (Math.random() < 0.5) {
@@ -412,6 +418,7 @@ function updateQuestion(infoBox) {
     hitBoxRep2.setAttribute("material", "opacity: 0;");
     hitBoxRep2.addEventListener("click", () => {
         if (isCorrect(currentQuestion.reponses[1].texte_reponse)) {
+            //son juste
             let money = document.querySelector("#money");
                 let temp = money.getAttribute("value");
                 money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
@@ -439,6 +446,7 @@ function updateQuestion(infoBox) {
                 nextQuestion(questionIndex + 1);
         } else {
             questionElem.setAttribute("value", "Wrong !");
+            // son wrong
             document.querySelector("#reponse1").setAttribute("value", "");
             document.querySelector("#reponse2").setAttribute("value", "");
             if (Math.random() < 0.5) {

@@ -151,6 +151,7 @@ scene.appendChild(counterText);
 var computer = document.getElementById("computer-");
 handleMouseEvents(computer, "computer-icon", "0.07 0.07 0.07", "0.05 0.05 0.05", "0 4 0", "10 10 10");
 computer.addEventListener("click", function () {
+  //son au click
   handleObjectClick("vocab-comp", data[0].computerdata[0], "-1.2 2.1 -9.47");
 });
 
@@ -158,18 +159,21 @@ var book = document.getElementById("book");
 book.setAttribute("position", "5.950 2.00 0.650");
 handleMouseEvents(book, "eye-icon", "0.4 0.4 0.4", "0.3 0.3 0.3", "0 0.5 0", "1 1 1");
 book.addEventListener("click", function () {
+  //son au click
   handleObjectClick("vocab-book", data[0].bookdata[0], "-1.2 3 -9.47");
 });
 
 var paint = document.getElementById("paint-");
 handleMouseEvents(paint, "brush-icon", "0.11 0.11 0.11", "0.1 0.1 0.1", "0 5 -5", "5 5 5");
 paint.addEventListener("click", function () {
+  //son au click
   handleObjectClick("vocab-paint", data[0].paintData[0], "-2.5 2.1 -9.47");
 });
 
 let car = document.getElementById("car-");
 handleMouseEvents(car, "car-icon", "0.6 0.6 0.6", "0.5 0.5 0.5", "0 0.8 0", "1 1 1");
 car.addEventListener("click", function () {
+  //son au click
   handleObjectClick("vocab-car", data[0].car[0], "-2.5 3 -9.47");
 });
 
