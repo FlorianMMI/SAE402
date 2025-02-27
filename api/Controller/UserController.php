@@ -21,9 +21,9 @@ require_once("class/User.php");
             
            
             if (isset ($name)){
-                // if ($request->getParam("items")){
-                //     return $this->UserRepository->finditems($name);
-                // }
+                if ($request->getParam("items")){
+                    return $this->UserRepository->finditems($name);
+                }
                 
                     return $this->UserRepository->finduser($name);
                 

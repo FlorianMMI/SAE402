@@ -178,11 +178,14 @@ const userData = await getRequest("user?name=" + storedUserInput);
           atext.setAttribute("value","");
           
           moneyvalue = moneyvalue - color.price;
-          //update bdd money
           money.setAttribute("value", moneyvalue);
           color.price = 0;
           if (!userData.id_shop.includes(color.normal)) {
             userData.id_shop.push(color.normal); // Insert bdd
+
+            
+
+
             // players = players.map(player => player.player_name === storedUserInput ? userData : player);
             // localStorage.setItem("players", JSON.stringify(players));
             // console.log("Données enregistrées: ", userData);
