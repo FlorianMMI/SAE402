@@ -177,7 +177,7 @@ async function StartTest() {
                 let temp = money.getAttribute("value");
                 money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
                 
-                fetch('https://florian-bounissou.fr/ClassTrouble/api/user', {
+                fetch('https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user', {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
@@ -234,7 +234,7 @@ async function StartTest() {
                 let temp = money.getAttribute("value");
                 money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
                 
-                fetch('https://florian-bounissou.fr/ClassTrouble/api/user', {
+                fetch('https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user', {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
@@ -366,7 +366,7 @@ function updateQuestion(infoBox) {
                 let temp = money.getAttribute("value");
                 money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
                 
-                fetch('https://florian-bounissou.fr/ClassTrouble/api/user', {
+                fetch('https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user', {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
@@ -423,7 +423,7 @@ function updateQuestion(infoBox) {
                 let temp = money.getAttribute("value");
                 money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
                 
-                fetch('https://florian-bounissou.fr/ClassTrouble/api/user', {
+                fetch('https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user', {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
