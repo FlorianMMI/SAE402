@@ -22,7 +22,7 @@ require_once("class/User.php");
            
             if (isset ($name)){
                 if ($request->getParam("items")){
-                    return $this->UserRepository->findItems($name);
+                    return $this->UserRepository->finditems($name);
                 }
                 
                     return $this->UserRepository->finduser($name);
@@ -62,9 +62,11 @@ require_once("class/User.php");
                 $money = $obj->money;
                 $round = $obj->round;
                 $ok = $this->UserRepository->update($name, $money, $round);
+                return $ok ? ["status" => "success", $ok] : ["status" => "error"];
+            } else {
+                return ["status" => "error", "message" => "Name parameter is missing"];
             }
         }
-        }
-    
+    }
 
 ?>
