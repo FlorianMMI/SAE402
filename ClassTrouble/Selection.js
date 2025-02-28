@@ -2,6 +2,27 @@
 import { StartTest } from "./test.js";
 import { getRequest } from "./api-request.js";
 
+// DRAWER ANIMATION
+function toggleDrawer(drawerId, positionY) {
+  const drawer = document.querySelector(drawerId);
+  const isOpen = drawer.getAttribute("position").z === -5;
+  const newPositionZ = isOpen ? -4.35 : -5;
+  drawer.setAttribute(
+    "animation",
+    `property: position; to: -2.6 ${positionY} ${newPositionZ}; dur: 1000; easing: linear`
+  );
+}
+
+document
+  .querySelector("#drawer1")
+  .addEventListener("click", () => toggleDrawer("#drawer1", 0));
+document
+  .querySelector("#drawer2")
+  .addEventListener("click", () => toggleDrawer("#drawer2", 0.5));
+document
+  .querySelector("#drawer3")
+  .addEventListener("click", () => toggleDrawer("#drawer3", 1));
+
 // Retrieve saved user input from localStorage
 let storedUserInput = JSON.parse(localStorage.getItem("currentUserInput"));
 if (storedUserInput) {
