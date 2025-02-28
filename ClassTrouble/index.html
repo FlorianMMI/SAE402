@@ -21,7 +21,7 @@
         <a-light type="ambient" color="#FFF" intensity="1"></a-light>
 
         <a-assets>
-            <audio id="suii" src="assets/sound/siuu.mp3"></audio>
+            <audio id="throw" src="assets/sound/throw.mp3"></audio>
             <audio id="grab" src="assets/sound/grab.mp3"></audio>
             <audio id="ambiant" src="assets/sound/ambiant-sound.mp3"></audio>
             <audio id="interaction-completed" src="assets/sound/interaction-completed.mp3"></audio>
@@ -121,10 +121,11 @@
 
         <!-- Sound -->
         <a-entity id="clickSound" sound="src: #grab; autoplay: false ; positional: false; volume: 0.5"></a-entity>
-        <a-entity id="releaseSound" sound="src: #suii; autoplay: false ; positional: false; volume: 0.2"></a-entity>
+        <a-entity id="punchSound" sound="src: #grab; autoplay: false ; positional: false; volume: 5"></a-entity>
+        <a-entity id="releaseSound" sound="src: #throw; autoplay: false ; positional: false; volume: 0.8"></a-entity>
         <a-entity id="correct"
-            sound="src: #interaction-completed; autoplay: false ; positional: false; volume: 1"></a-entity>
-        <a-entity id="wrong" sound="src: #wrong-answer; autoplay: false ; positional: false; volume: 1"></a-entity>
+            sound="src: #interaction-completed; autoplay: false ; positional: false; volume: 0.2"></a-entity>
+        <a-entity id="wrong" sound="src: #wrong-answer; autoplay: false ; positional: false; volume: 0.3"></a-entity>
         <a-entity sound="src: #ambiant; autoplay: true; positional: false; loop: true; volume: 0.5"></a-entity>
 
         <!-- LIGHT -->
@@ -416,7 +417,7 @@
 
         <!-- Deskchair -->
         <a-entity id="deskchairobject" gltf-model="#deskchair" position="-3.5 0 -7" scale="4 4 4" rotation="0 230 0"
-            shadow="cast: true; receive: true" dynamic-body sound="src: #suii; on: click">
+            shadow="cast: true; receive: true" dynamic-body>
         </a-entity>
 
         <!-- Fence -->

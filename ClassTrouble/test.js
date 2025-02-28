@@ -108,6 +108,7 @@ let cpt_resp = 0;
 const correct_answer = document.querySelector("#correct");
 const wrong_answer = document.querySelector("#wrong");
 const clickSound = document.querySelector("#clickSound");
+const punchSound = document.querySelector("#punchSound");
 
 async function StartTest() {
   clickSound.components.sound.playSound();
@@ -533,7 +534,7 @@ function isCorrect(value) {
 }
 
 //-------------------------------------------------------------//
-//Following function will touche the character and make it move//
+//Following function will touch the character and make it move//
 //-------------------------------------------------------------//
 
 // Character animation function
@@ -569,6 +570,9 @@ let characterAnimation = function () {
       acharacter.setAttribute("rotation", "0 90 0");
       let randomAnimation =
         animations[Math.floor(Math.random() * animations.length)];
+      setTimeout(function () {
+        punchSound.components.sound.playSound();
+      }, 500);
       acharacter.setAttribute(
         "animation-mixer",
         `clip: CharacterArmature|${randomAnimation}; loop: once; timeScale: 1`
@@ -624,6 +628,7 @@ let characterAnimation = function () {
 
 // Ball shooting function for the character
 function shootBall() {
+  punchSound.components.sound.playSound();
   let character = document.getElementById("characters");
   character.removeAttribute("animation-mixer");
 
