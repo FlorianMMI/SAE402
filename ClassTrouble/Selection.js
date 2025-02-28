@@ -2,6 +2,10 @@
 import { StartTest } from "./test.js";
 import { getRequest } from "./api-request.js";
 
+
+
+
+
 // Retrieve saved user input from localStorage
 let storedUserInput = JSON.parse(localStorage.getItem("currentUserInput"));
 if (storedUserInput) {
@@ -9,6 +13,29 @@ if (storedUserInput) {
 } else {
   console.log("No stored user input found");
 }
+
+
+// DRAWER ANIMATION
+function toggleDrawer(drawerId, positionY) {
+  const drawer = document.querySelector(drawerId);
+  const isOpen = drawer.getAttribute("position").z === -5;
+  const newPositionZ = isOpen ? -4.35 : -5;
+  drawer.setAttribute(
+    "animation",
+    `property: position; to: -2.6 ${positionY} ${newPositionZ}; dur: 1000; easing: linear`
+  );
+}
+
+document
+  .querySelector("#drawer1")
+  .addEventListener("click", () => toggleDrawer("#drawer1", 0));
+document
+  .querySelector("#drawer2")
+  .addEventListener("click", () => toggleDrawer("#drawer2", 0.5));
+document
+  .querySelector("#drawer3")
+  .addEventListener("click", () => toggleDrawer("#drawer3", 1));
+
 
 // Fetch user data from API using the stored input
 const userData = await getRequest("user?name=" + storedUserInput);
@@ -165,10 +192,10 @@ function handleMouseEvents(
 // If the user round is greater than 0, display all vocabulary texts and the test prompt
 if (userData[0].round > 0) {
   cpt_obj = 4;
-  createVocabText("vocab-comp", data[0].computerdata[0], "-1.2 2.1 -9.47");
-  createVocabText("vocab-book", data[0].bookdata[0], "-1.2 3 -9.47");
-  createVocabText("vocab-paint", data[0].paintData[0], "-2.5 2.1 -9.47");
-  createVocabText("vocab-car", data[0].car[0], "-2.5 3 -9.47");
+  createVocabText("vocab-comp", data[0].computerdata[0], "0.3 2.1 -9.47");
+  createVocabText("vocab-book", data[0].bookdata[0], "0.3 3 -9.47");
+  createVocabText("vocab-paint", data[0].paintData[0], "1.6 2.1 -9.47");
+  createVocabText("vocab-car", data[0].car[0], "1.6 3 -9.47");
   createTestPrompt();
 }
 

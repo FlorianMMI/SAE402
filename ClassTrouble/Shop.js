@@ -322,29 +322,34 @@ let renderMarket = function () {
           money.setAttribute("value", moneyvalue);
           character.price = 0;
           atext.setAttribute("value", "");
+          let cpt = 0;
             for (let i = 0; i < store.length; i++) {
             if (!store[i].achat.includes(character.name)) {
-              fetch(`https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/shop`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                achat: String(character.name),
-                id_user: parseInt(userData[0].id_user)
-              })
-              })
-              .then(response => {
-              if (!response.ok) {
-                throw new Error('Erreur réseau : ' + response.status);
-              }
-              return response.json();
-              })
-              .then(data => console.log(data))
-              .catch(error => console.error('Erreur :', error));
+              cpt = cpt + 1;
+        } }
+        if (cpt > 0) {
+          fetch(`https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/shop`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              achat: String(character.name),
+              id_user: parseInt(userData[0].id_user)
+            })
+            })
+            .then(response => {
+            if (!response.ok) {
+              throw new Error('Erreur réseau : ' + response.status);
             }
-            }
-        } else {
+            return response.json();
+            })
+            .then(data => console.log(data))
+            .catch(error => console.error('Erreur :', error));
+          }
+        }
+    
+        else {
           renderBoard();
           console.log(character.price, moneyvalue);
         }

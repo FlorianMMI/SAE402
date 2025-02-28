@@ -1,4 +1,4 @@
-import { renderButton } from "./loading2.js";
+import { renderButton } from "./loading.js";
 import { getRequest, postRequest } from "./ClassTrouble/api-request.js";
 
 // Retrieve the current user input from local storage
