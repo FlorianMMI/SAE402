@@ -83,8 +83,8 @@ let renderButton = function () {
       "value",
       "In this game, the objective is to learn english vocabulary.\n\nThere are 2 stages:\n o WORD FINDING find objects to interact with, in order to make the words appear on the board and learn them.\nOnce all the objects are clicked, you can start a test whenever you want.\n o THE TEST a vocabulary test begins, you have to click on the correct answer or the teacher will be mad at you...\n\nAt the end of the test, you earn money according to the number of correct answers, which you can use in the store to personalize the classroom or the teacher.\n\nNow the teacher is waiting for you - hurry up, you're going to be late!"
     );
-    aText.setAttribute("scale", ".4 .2 .3");
-    aText.setAttribute("position", `-1 2.35 -2.80`);
+    aText.setAttribute("scale", ".45 .23 .3");
+    aText.setAttribute("position", `-1.5 2.3 -2.80`);
     aText.setAttribute("rotation", "0 0 0");
     aText.setAttribute("font", "./ClassTrouble/assets/font/Gloria-msdf.json");
     aText.setAttribute(
