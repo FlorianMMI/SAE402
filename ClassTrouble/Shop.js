@@ -113,9 +113,11 @@ let renderMarket = function () {
       });
     }
     colors.forEach((color, index) => {
-      //verification if the user has already bought the color
-      if (store[0].achat.includes(color.normal)) {
-        color.price = 0;
+      for (let i = 0; i < store.length; i++) {
+        if (store[i].achat.includes(color.normal)) {
+          color.price = 0;
+          break;
+        }
       }
       const aBox = document.createElement("a-box");
       aBox.setAttribute("color", color.normal);
@@ -209,28 +211,28 @@ let renderMarket = function () {
           color.price = 0;
 
           console.log(userData[0].id_user);
-          if (!store[0].achat.includes(color.normal)) {
-            fetch(`https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/shop`, {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-
-                      achat: String(color.normal),
-                      id_user: parseInt(userData[0].id_user)
-                    })
-                  })
-                  .then(response => {
-                    if (!response.ok) {
-                      throw new Error('Erreur réseau : ' + response.status);
-                    }
-                    return response.json();
-                  })
-                  .then(data => console.log(data))
-                  .catch(error => console.error('Erreur :', error));
-            
-          }
+            for (let i = 0; i < store.length; i++) {
+            if (!store[i].achat.includes(color.normal)) {
+              fetch(`https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/shop`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                achat: String(color.normal),
+                id_user: parseInt(userData[0].id_user)
+              })
+              })
+              .then(response => {
+              if (!response.ok) {
+                throw new Error('Erreur réseau : ' + response.status);
+              }
+              return response.json();
+              })
+              .then(data => console.log(data))
+              .catch(error => console.error('Erreur :', error));
+            }
+            }
         }
       });
     });
@@ -257,9 +259,11 @@ let renderMarket = function () {
     characters.forEach((character, index) => {
       //verification if the user has already bought the character
       
-      if (store[0].achat.includes(character.name)) {
-        character.price = 0;
-        
+      for (let i = 0; i < store.length; i++) {
+        if (store[i].achat.includes(character.name)) {
+          character.price = 0;
+          break;
+        }
       }
       const characterEntity = document.createElement("a-image");
       characterEntity.setAttribute("src", character.img);
@@ -318,10 +322,28 @@ let renderMarket = function () {
           money.setAttribute("value", moneyvalue);
           character.price = 0;
           atext.setAttribute("value", "");
-          if (!store[0].achat.includes(character.name)) {
-            
-            
-          }
+            for (let i = 0; i < store.length; i++) {
+            if (!store[i].achat.includes(character.name)) {
+              fetch(`https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/shop`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                achat: String(character.name),
+                id_user: parseInt(userData[0].id_user)
+              })
+              })
+              .then(response => {
+              if (!response.ok) {
+                throw new Error('Erreur réseau : ' + response.status);
+              }
+              return response.json();
+              })
+              .then(data => console.log(data))
+              .catch(error => console.error('Erreur :', error));
+            }
+            }
         } else {
           renderBoard();
           console.log(character.price, moneyvalue);
