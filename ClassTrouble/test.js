@@ -2,9 +2,14 @@
 // The test is composed of a series of questions with two possible answers
 // The user must select the correct answer to progress to the next question
 // If the user selects the wrong answer, a random event will occur
-import { getRequest } from "./api-request.js";
+import { getRequest, API_URL } from "./api-request.js";
 
 const scene = document.querySelector("a-scene");
+
+
+
+
+
 
 let storedUserInput = JSON.parse(localStorage.getItem("currentUserInput"));
 if (storedUserInput) {
@@ -55,20 +60,20 @@ roundText.setAttribute("font-image", "./assets/font/Gloria-msdf.png");
 roundText.setAttribute("negate", "false");
 scene.appendChild(roundText);
 
+
+
 const tempQuestion = await getRequest("question");
 const tempreponses = await getRequest("reponse");
 let temp = tempQuestion.map((question, index) => {
-  return {
-    ...question,
-    reponses: tempreponses
-      .filter((reponse) => reponse.id_question === question.id_question)
-      .map((reponse) => {
-        return {
-          ...reponse,
-          est_correcte: reponse.est_correcte === "1" ? true : false,
-        };
-      }),
-  };
+    return {
+        ...question,
+        reponses: tempreponses.filter(reponse => reponse.id_question === question.id_question).map(reponse => {
+            return {
+                ...reponse,
+                est_correcte: reponse.est_correcte === "1" ? true : false
+            };
+        })
+    };
 });
 
 // Setting up correct answers and questions for each round
@@ -94,14 +99,15 @@ for (let i = 0; i < rounds.length; i++) {
 console.log(data);
 
 let correctAnswers = data.flat().reduce((acc, question) => {
-  question.reponses.forEach((reponse) => {
-    if (reponse.est_correcte === true) {
-      acc.push(reponse.texte_reponse);
-    }
-  });
-  return acc;
+    question.reponses.forEach(reponse => {
+        if (reponse.est_correcte === true) {
+            acc.push(reponse.texte_reponse);
+        }
+    });
+    return acc;
 }, []);
 console.log("Correct Answers", correctAnswers);
+
 
 let cpt_resp = 0;
 
@@ -166,9 +172,201 @@ async function StartTest() {
   textElement.appendChild(progressText);
   scene.appendChild(infoBox);
 
-  // After a short timeout, load the first question of the current round
-  setTimeout(() => {
-    // Use data[round][questionIndex]
+    // After a short timeout, load the first question of the current round
+    setTimeout(() => {
+        // Use data[round][questionIndex]
+        const currentQuestion = data[round][questionIndex];
+        textElement.setAttribute("value", currentQuestion.texte_question);
+        textElement.setAttribute("id", "question");
+
+        // Create text elements for the responses
+        const textReponse1 = document.createElement("a-text");
+        textReponse1.setAttribute("value", currentQuestion.reponses[0].texte_reponse);
+        textReponse1.setAttribute("id", "reponse1");
+        textReponse1.setAttribute("color", "#000");
+        textReponse1.setAttribute("align", "center");
+        textReponse1.setAttribute("wrapCount", "20");
+        textReponse1.setAttribute("position", "0 -0.2 0.01");
+        textReponse1.setAttribute("scale", "0.4 0.4 0.4");
+        infoBox.appendChild(textReponse1);
+
+        const textReponse2 = document.createElement("a-text");
+        textReponse2.setAttribute("value", currentQuestion.reponses[1].texte_reponse);
+        textReponse2.setAttribute("id", "reponse2");
+        textReponse2.setAttribute("color", "#000");
+        textReponse2.setAttribute("align", "center");
+        textReponse2.setAttribute("wrapCount", "25");
+        textReponse2.setAttribute("position", "0 -0.4 0.01");
+        textReponse2.setAttribute("scale", "0.4 0.4 0.4");
+        infoBox.appendChild(textReponse2);
+
+        // Create hit boxes for the responses
+        const hitBoxRep1 = document.createElement("a-box");
+        hitBoxRep1.setAttribute("position", "0 0 -0.01");
+        hitBoxRep1.setAttribute("id", "HitBoxRep1");
+        hitBoxRep1.setAttribute("width", "2");
+        hitBoxRep1.setAttribute("height", "0.2");
+        hitBoxRep1.setAttribute("depth", "0.01");
+        hitBoxRep1.setAttribute("material", "color: #f00; opacity: 0;");
+        hitBoxRep1.addEventListener("click", () => {
+            if (isCorrect(currentQuestion.reponses[0].texte_reponse)) {
+                //son juste
+                let money = document.querySelector("#money");
+                let temp = money.getAttribute("value");
+                let add = parseInt(temp) + 2
+                money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
+                console.log(storedUserInput, add, round);
+                fetch(`https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user?players_name=${storedUserInput}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        players_name: storedUserInput,
+                        money: parseInt(add),
+                        round: round,
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => console.log(data))
+                .catch(error => console.error('Erreur :', error));
+                cpt_resp += 1;
+                nextQuestion(questionIndex + 1);
+            } else {
+                textElement.setAttribute("value", "Wrong !");
+                // son wrong
+                document.querySelector("#reponse1").setAttribute("value", "");
+                document.querySelector("#reponse2").setAttribute("value", "");
+                if (Math.random() < 0.5) {
+                    characterAnimation();
+                    setTimeout(() => {
+                        nextQuestion(questionIndex + 1);
+                    }, 10000);
+                } else {
+                    setTimeout(() => {
+                        shootBall();
+                    }, 1000);
+                    setTimeout(() => {
+                        nextQuestion(questionIndex + 1);
+                    }, 3000);
+                }
+            }
+        });
+        textReponse1.appendChild(hitBoxRep1);
+
+        const hitBoxRep2 = document.createElement("a-box");
+        hitBoxRep2.setAttribute("position", "0 0 -0.01");
+        hitBoxRep2.setAttribute("id", "HitBoxRep2");
+        hitBoxRep2.setAttribute("width", "2");
+        hitBoxRep2.setAttribute("height", "0.2");
+        hitBoxRep2.setAttribute("depth", "0.01");
+        hitBoxRep2.setAttribute("material", "opacity: 0;");
+        hitBoxRep2.addEventListener("click", () => {
+            if (isCorrect(currentQuestion.reponses[1].texte_reponse)) {
+                //son juste
+                let money = document.querySelector("#money");
+                let temp = money.getAttribute("value");
+                let add = parseInt(temp) + 2
+                money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
+                console.log(storedUserInput, add, round);
+                fetch(`https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user?players_name=${storedUserInput}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        players_name: storedUserInput,
+                        money: parseInt(add),
+                        round: round,
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => console.log(data))
+                .catch(error => console.error('Erreur :', error));
+                cpt_resp += 1;
+                nextQuestion(questionIndex + 1);
+            } else {
+                textElement.setAttribute("value", "Wrong !");
+                // son wrong
+                document.querySelector("#reponse1").setAttribute("value", "");
+                document.querySelector("#reponse2").setAttribute("value", "");
+                if (Math.random() < 0.5) {
+                    characterAnimation();
+                    setTimeout(() => {
+                        nextQuestion(questionIndex + 1);
+                    }, 10000);
+                } else {
+                    setTimeout(() => {
+                        shootBall();
+                    }, 1000);
+                    setTimeout(() => {
+                        nextQuestion(questionIndex + 1);
+                    }, 3000);
+                }
+            }
+        });
+        textReponse2.appendChild(hitBoxRep2);
+    }, 2000);
+}
+
+
+// Function to move to the next question in the test
+function nextQuestion(newIndex) {
+    questionIndex = newIndex;
+    const infoBox = document.querySelector("#infoBox");
+    const questionElem = document.querySelector("#question");
+
+    // If current round is finished then increment round
+    if (questionIndex >= data[round].length) {
+        // If there is a next round, increment round and reset questionIndex.
+        if (round < data.length - 1) {
+            round++;
+            questionIndex = 0;
+            questionElem.setAttribute("value", "Round " + (round + 1) + " begins...");
+
+            // Brief pause before next round questions load
+            setTimeout(() => {
+                updateQuestion(infoBox);
+            }, 2000);
+        } else {
+            // End of the entire test
+            questionElem.setAttribute("value", "End of the test, you got " + cpt_resp + "/" + (data.flat().length) +
+                " And you got " + cpt_resp * 2 + " shop credits");
+            document.querySelector("#reponse1").setAttribute("value", "");
+            document.querySelector("#reponse2").setAttribute("value", "");
+            
+            setTimeout(() => {
+                const camera = document.querySelector("#rig");
+                camera.setAttribute("position", "1.8 0 2.3");
+                camera.setAttribute("movement-controls", "constrainToNavMesh: true; controls: checkpoint, gamepad, trackpad, keyboard, nipple;");
+                const chair = document.querySelector("#cr-chair");
+                chair.setAttribute("dynamic-body", "");
+                const infoBox = document.querySelector("#infoBox");
+                if (infoBox) {
+                    infoBox.parentNode.removeChild(infoBox);
+                }
+            }, 5000);
+        }
+        return;
+    }
+
+    updateQuestion(infoBox);
+}
+
+
+// Function to update the question and responses during the test
+
+function updateQuestion(infoBox) {
     const currentQuestion = data[round][questionIndex];
     textElement.setAttribute("value", currentQuestion.texte_question);
     textElement.setAttribute("id", "question");
@@ -209,31 +407,51 @@ async function StartTest() {
     hitBoxRep1.setAttribute("depth", "0.01");
     hitBoxRep1.setAttribute("material", "color: #f00; opacity: 0;");
     hitBoxRep1.addEventListener("click", () => {
-      if (isCorrect(currentQuestion.reponses[0].texte_reponse)) {
-        correct_answer.components.sound.playSound();
-        let money = document.querySelector("#money");
-        let temp = money.getAttribute("value");
-        money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
-
-        fetch(
-          "https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user",
-          {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              name: storedUserInput,
-              money: parseInt(temp) + 2,
-              round: round,
-            }),
-          }
-        )
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error(
-                "Network response was not ok: " + response.status
-              );
+        if (isCorrect(currentQuestion.reponses[0].texte_reponse)) {
+            //son juste
+            let money = document.querySelector("#money");
+                let temp = money.getAttribute("value");
+                let add = parseInt(temp) + 2
+                money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
+                console.log(storedUserInput, add, round);
+                fetch(`https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user?players_name=${storedUserInput}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        players_name: storedUserInput,
+                        money: parseInt(add),
+                        round: round,
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => console.log(data))
+                .catch(error => console.error('Erreur :', error));
+                cpt_resp += 1;
+                nextQuestion(questionIndex + 1);
+        } else {
+            questionElem.setAttribute("value", "Wrong !");
+            // son wrong
+            document.querySelector("#reponse1").setAttribute("value", "");
+            document.querySelector("#reponse2").setAttribute("value", "");
+            if (Math.random() < 0.5) {
+                characterAnimation();
+                setTimeout(() => {
+                    nextQuestion(questionIndex + 1);
+                }, 10000);
+            } else {
+                setTimeout(() => {
+                    shootBall();
+                }, 1000);
+                setTimeout(() => {
+                    nextQuestion(questionIndex + 1);
+                }, 3000);
             }
             return response.json();
           })
@@ -271,31 +489,54 @@ async function StartTest() {
     hitBoxRep2.setAttribute("depth", "0.01");
     hitBoxRep2.setAttribute("material", "opacity: 0;");
     hitBoxRep2.addEventListener("click", () => {
-      if (isCorrect(currentQuestion.reponses[1].texte_reponse)) {
-        correct_answer.components.sound.playSound();
-        let money = document.querySelector("#money");
-        let temp = money.getAttribute("value");
-        money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
+        if (isCorrect(currentQuestion.reponses[1].texte_reponse)) {
+            //son juste
+            let money = document.querySelector("#money");
+                
+                let temp = money.getAttribute("value");
+                let add = parseInt(temp) + 2
 
-        fetch(
-          "https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user",
-          {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              name: storedUserInput,
-              money: parseInt(temp) + 2,
-              round: round,
-            }),
-          }
-        )
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error(
-                "Network response was not ok: " + response.status
-              );
+                console.log(storedUserInput, add, round);
+                money.setAttribute("value", parseInt(money.getAttribute("value")) + 2);
+                
+                fetch(`https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user?players_name=${storedUserInput}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        players_name: storedUserInput,
+                        money: parseInt(add),
+                        round: round,
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => console.log(data))
+                .catch(error => console.error('Erreur :', error));
+                cpt_resp += 1;
+                nextQuestion(questionIndex + 1);
+        } else {
+            questionElem.setAttribute("value", "Wrong !");
+            // son wrong
+            document.querySelector("#reponse1").setAttribute("value", "");
+            document.querySelector("#reponse2").setAttribute("value", "");
+            if (Math.random() < 0.5) {
+                characterAnimation();
+                setTimeout(() => {
+                    nextQuestion(questionIndex + 1);
+                }, 10000);
+            } else {
+                setTimeout(() => {
+                    shootBall();
+                }, 1000);
+                setTimeout(() => {
+                    nextQuestion(questionIndex + 1);
+                }, 3000);
             }
             return response.json();
           })

@@ -25,7 +25,9 @@ class Client implements JsonSerializable {
 
     
     
-    
+    public function getid(): int {
+        return $this->id_user;
+    }
 
     public function getName(): string {
         return $this->name;

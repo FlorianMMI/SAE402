@@ -1,22 +1,12 @@
-import { getRequest } from "./api-request.js";
+import { getRequest, API_URL } from "./api-request.js";
 
 let storedUserInput = JSON.parse(localStorage.getItem("currentUserInput"));
 console.log("Render", storedUserInput);
 
 const userData = await getRequest("user?name=" + storedUserInput);
+const store = await getRequest("user?name=" + storedUserInput + "&items=''");
 
-// document.addEventListener("DOMContentLoaded", () => {
-//   if (userData) {
-//     const userMoney = userData[0].money;
-//     console.log("userMoney: ", userMoney);
-//     if (userData && userMoney !== undefined) {
-//       document.querySelector("#money").setAttribute("value", userMoney);
-//       console.log("Données enregistrées: ", userData);
-//       console.log("Thunes dans la pocket ", userMoney);
-//     }
-//   }
-// });
-
+console.log(userData[0].id_user);
 // Shop characters and colors
 
 let characters = [
@@ -123,10 +113,11 @@ let renderMarket = function () {
       });
     }
     colors.forEach((color, index) => {
-      //verification if the user has already bought the color
-      if (userData.id_shop.includes(color.normal)) {
-        // Recherche BDD
-        color.price = 0;
+      for (let i = 0; i < store.length; i++) {
+        if (store[i].achat.includes(color.normal)) {
+          color.price = 0;
+          break;
+        }
       }
       const aBox = document.createElement("a-box");
       aBox.setAttribute("color", color.normal);
@@ -191,16 +182,57 @@ let renderMarket = function () {
           });
           atext.setAttribute("value", "");
 
+          
+          fetch(`https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user?players_name=${storedUserInput}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: storedUserInput,
+                money: moneyvalue - color.price,
+                round: userData[0].round,
+            })
+          })
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error('Network response was not ok: ' + response.status);
+              }
+              return response.json();
+          })
+        
+
+
+
           moneyvalue = moneyvalue - color.price;
-          //update bdd money
+          
           money.setAttribute("value", moneyvalue);
+
           color.price = 0;
-          if (!userData.id_shop.includes(color.normal)) {
-            userData.id_shop.push(color.normal); // Insert bdd
-            // players = players.map(player => player.player_name === storedUserInput ? userData : player);
-            // localStorage.setItem("players", JSON.stringify(players));
-            // console.log("Données enregistrées: ", userData);
-          }
+
+          console.log(userData[0].id_user);
+            for (let i = 0; i < store.length; i++) {
+            if (!store[i].achat.includes(color.normal)) {
+              fetch(`https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/shop`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                achat: String(color.normal),
+                id_user: parseInt(userData[0].id_user)
+              })
+              })
+              .then(response => {
+              if (!response.ok) {
+                throw new Error('Erreur réseau : ' + response.status);
+              }
+              return response.json();
+              })
+              .then(data => console.log(data))
+              .catch(error => console.error('Erreur :', error));
+            }
+            }
         }
       });
     });
@@ -226,9 +258,12 @@ let renderMarket = function () {
 
     characters.forEach((character, index) => {
       //verification if the user has already bought the character
-      console.log(userData);
-      if (userData.id_shop.includes(character.name)) {
-        character.price = 0;
+      
+      for (let i = 0; i < store.length; i++) {
+        if (store[i].achat.includes(character.name)) {
+          character.price = 0;
+          break;
+        }
       }
       const characterEntity = document.createElement("a-image");
       characterEntity.setAttribute("src", character.img);
@@ -263,18 +298,52 @@ let renderMarket = function () {
         if (Number(character.price) <= Number(moneyvalue)) {
           let characters = document.getElementById("characters");
           characters.setAttribute("gltf-model", character.url);
+
+          fetch(`https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user?players_name=${storedUserInput}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: storedUserInput,
+                money: moneyvalue - character.price,
+                round: userData[0].round,
+            })
+          })
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error('Network response was not ok: ' + response.status);
+              }
+              return response.json();
+          })
+
           moneyvalue = moneyvalue - character.price;
           //update bdd money
           money.setAttribute("value", moneyvalue);
           character.price = 0;
           atext.setAttribute("value", "");
-          if (!userData.id_shop.includes(character.name)) {
-            userData.id_shop.push(character.name);
-            //insert BDD
-            // players = players.map(player => player.player_name === storedUserInput ? userData : player);
-            // localStorage.setItem("players", JSON.stringify(players));
-            // console.log("Données enregistrées: ", userData);
-          }
+            for (let i = 0; i < store.length; i++) {
+            if (!store[i].achat.includes(character.name)) {
+              fetch(`https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/shop`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                achat: String(character.name),
+                id_user: parseInt(userData[0].id_user)
+              })
+              })
+              .then(response => {
+              if (!response.ok) {
+                throw new Error('Erreur réseau : ' + response.status);
+              }
+              return response.json();
+              })
+              .then(data => console.log(data))
+              .catch(error => console.error('Erreur :', error));
+            }
+            }
         } else {
           renderBoard();
           console.log(character.price, moneyvalue);

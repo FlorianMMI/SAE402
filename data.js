@@ -65,8 +65,8 @@ function handleKeyClick(key, textDisplay, keysContainer) {
     } else {
       // If the player does not exist, create a new player entry
       console.log("Nom: ", userInput);
-      fetch("https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user", {
-        method: "POST",
+      fetch('https://florian-bounissou.fr/ClassTrouble/SAE402-4-api/api/user', {
+        method: 'POST',
         headers: {
           "Content-Type": "application/json",
         },

@@ -19,7 +19,7 @@ class ShopRepository extends EntityRepository {
     }
 
     public function findShop($shopId) {
-        $requete = $this->cnx->prepare("SELECT * FROM Shop WHERE id_shop = :shopId");
+        $requete = $this->cnx->prepare("SELECT * FROM shop WHERE id_shop = :shopId");
         $requete->bindParam(':shopId', $shopId);
         $requete->execute();
         $answer = $requete->fetchAll(PDO::FETCH_CLASS);
@@ -27,7 +27,7 @@ class ShopRepository extends EntityRepository {
     }
 
     public function save($shop) {
-        $stmt = $this->cnx->prepare("INSERT INTO Shop (achat, id_user) VALUES (:achat, :id_user)");
+        $stmt = $this->cnx->prepare("INSERT INTO shop (achat, id_user) VALUES (:achat, :id_user)");
         $achat = $shop->getAchat();
         $idUser = $shop->getIdUser();
         $stmt->bindParam(':achat', $achat);
@@ -40,7 +40,7 @@ class ShopRepository extends EntityRepository {
     }
 
     public function updateUser($id_shop, $achat, $id_user) {
-        $stmt = $this->cnx->prepare("UPDATE Shop SET achat = :achat, id_user = :id_user WHERE id_shop = :id_shop");
+        $stmt = $this->cnx->prepare("UPDATE shop SET achat = :achat, id_user = :id_user WHERE id_shop = :id_shop");
         $stmt->bindParam(':achat', $achat);
         $stmt->bindParam(':id_user', $id_user);
         $stmt->bindParam(':id_shop', $id_shop);

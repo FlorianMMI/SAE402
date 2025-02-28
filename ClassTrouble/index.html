@@ -143,8 +143,8 @@
         <a-sky color="#ADD8E6"></a-sky>
 
         <!-- GROUND -->
-        <!-- a-box (plutot que a-plane) évite que les objets "flottent" un peu au dessus du sol -->
-        <a-box src="#ground" position="-0.02" scale="14 20 0.04" repeat="7 7 0" rotation="-90 0 0"
+        <!-- a-box (plutot que a-plane) Ã©vite que les objets "flottent" un peu au dessus du sol -->
+        <a-box src="#ground" position="-0.02" scale="14 20 0.04" repeat="7 7 0" rotation="-90 0 0" id="desklight"
             shadow="receive: true" material="roughness: 1" static-body></a-box>
         <a-plane src="#grass" position="-20 -.25 0" scale="50 80 1" repeat="15 15 2" rotation="-90 0 0"
             shadow="receive: true" material="roughness: 1"></a-plane>
@@ -152,7 +152,7 @@
 
         <!-- CEILING -->
         <a-box src="#ceiling" shadow="cast: true; receive: true" position="1.15 4.5 0" scale="17.2 19 0.1"
-            repeat="1.5 1.5 1" rotation="-90 0 0" color="#DDDDDD" material="shader: flat" static-body></a-box>
+            repeat="1.5 1.5 1" rotation="-90 0 0" color="#DDDDDD" id="desklight" material="shader: flat" static-body></a-box>
         <!-- lights -->
         <!-- right back -->
         <a-box position="1.70 4.4 3.5" material="shader: flat" shadow="cast: true; receive: true" scale="0.5 0.05 2.8"
